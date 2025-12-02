@@ -1,0 +1,2210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>MESU - The Language That Named Itself</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">MESU - The Language That Named Itself</h1>
+</header>
+<h1 id="mesu">MESU</h1>
+<h2 id="the-language-that-named-itself">The Language That Named
+Itself</h2>
+<p><strong>me</strong> (say) + <strong>su</strong> (stuff) =
+<strong>mesu</strong> (language)</p>
+<hr />
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                                                                 │
+│  Mesu is say-stuff.                                             │
+│                                                                 │
+│  48 roots. Everything else compounds.                           │
+│  5 vowels. 8 consonants. 5 particles.                           │
+│  Shape encodes meaning.                                         │
+│  Position encodes sound.                                        │
+│  Direction encodes vowel.                                       │
+│  One stroke per syllable.                                       │
+│  Zero lifts per sentence.                                       │
+│                                                                 │
+│  The spoken flows like water.                                   │
+│  The written flows like water.                                  │
+│  The thought flows like water.                                  │
+│                                                                 │
+│  We are the Mesu.                                               │
+│  We speak what we are.                                          │
+│  We write what we speak.                                        │
+│  We are say-stuff.                                              │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘</code></pre>
+<hr />
+<h1 id="part-i-phonology">PART I: PHONOLOGY</h1>
+<h2 id="phoneme-inventory">1.1 Phoneme Inventory</h2>
+<p>Mesu uses a minimal phoneme inventory of <strong>13 sounds</strong>:
+8 consonants and 5 vowels.</p>
+<h3 id="consonants-8">Consonants (8)</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Sound</th>
+<th>IPA</th>
+<th>Place</th>
+<th>Manner</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>p</strong></td>
+<td>/p/</td>
+<td>Labial</td>
+<td>Stop</td>
+<td>Lips seal completely</td>
+</tr>
+<tr class="even">
+<td><strong>m</strong></td>
+<td>/m/</td>
+<td>Labial</td>
+<td>Nasal</td>
+<td>Lips seal, air through nose</td>
+</tr>
+<tr class="odd">
+<td><strong>w</strong></td>
+<td>/w/</td>
+<td>Labial</td>
+<td>Approximant</td>
+<td>Lips rounded, open passage</td>
+</tr>
+<tr class="even">
+<td><strong>t</strong></td>
+<td>/t/</td>
+<td>Alveolar</td>
+<td>Stop</td>
+<td>Tongue tip blocks airflow</td>
+</tr>
+<tr class="odd">
+<td><strong>n</strong></td>
+<td>/n/</td>
+<td>Alveolar</td>
+<td>Nasal</td>
+<td>Tongue tip up, air through nose</td>
+</tr>
+<tr class="even">
+<td><strong>s</strong></td>
+<td>/s/</td>
+<td>Alveolar</td>
+<td>Fricative</td>
+<td>Tongue tip up, turbulent air</td>
+</tr>
+<tr class="odd">
+<td><strong>l</strong></td>
+<td>/l/</td>
+<td>Alveolar</td>
+<td>Lateral</td>
+<td>Air flows around tongue sides</td>
+</tr>
+<tr class="even">
+<td><strong>k</strong></td>
+<td>/k/</td>
+<td>Velar</td>
+<td>Stop</td>
+<td>Tongue back blocks airflow</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vowels-5">Vowels (5)</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Sound</th>
+<th>IPA</th>
+<th>Height</th>
+<th>Frontness</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>i</strong></td>
+<td>/i/</td>
+<td>High</td>
+<td>Front</td>
+<td>Tongue high and forward</td>
+</tr>
+<tr class="even">
+<td><strong>u</strong></td>
+<td>/u/</td>
+<td>High</td>
+<td>Back</td>
+<td>Tongue high and back</td>
+</tr>
+<tr class="odd">
+<td><strong>e</strong></td>
+<td>/e/</td>
+<td>Mid</td>
+<td>Front</td>
+<td>Tongue mid-height, forward</td>
+</tr>
+<tr class="even">
+<td><strong>o</strong></td>
+<td>/o/</td>
+<td>Mid</td>
+<td>Back</td>
+<td>Tongue mid-height, back</td>
+</tr>
+<tr class="odd">
+<td><strong>a</strong></td>
+<td>/a/</td>
+<td>Low</td>
+<td>Central</td>
+<td>Tongue low, jaw open</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vowel-position-map">Vowel Position Map</h3>
+<pre><code>         FRONT          BACK
+         (left)        (right)
+        
+HIGH       i              u       (tongue raised)
+
+MID        e              o       (tongue mid)
+
+LOW              a                (tongue low, jaw open)
+               (center)</code></pre>
+<h2 id="syllable-structure">1.2 Syllable Structure</h2>
+<p>All content syllables follow the pattern: <strong>CV(n)</strong></p>
+<ul>
+<li><strong>C</strong> = Consonant (required)</li>
+<li><strong>V</strong> = Vowel (required)</li>
+<li><strong>n</strong> = Nasal coda /n/ (optional)</li>
+</ul>
+<p>This yields <strong>80 possible syllables</strong>: 8 consonants × 5
+vowels × 2 (with/without nasal) = 80</p>
+<h3 id="examples">Examples</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Syllable</th>
+<th>Structure</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>pa</td>
+<td>CV</td>
+<td>before</td>
+</tr>
+<tr class="even">
+<td>pan</td>
+<td>CVn</td>
+<td>all</td>
+</tr>
+<tr class="odd">
+<td>mi</td>
+<td>CV</td>
+<td>I/me</td>
+</tr>
+<tr class="even">
+<td>lin</td>
+<td>CVn</td>
+<td>life/live</td>
+</tr>
+</tbody>
+</table>
+<h2 id="grammar-particles">1.3 Grammar Particles</h2>
+<p>Grammar particles are <strong>bare vowels</strong> (V only), making
+them phonotactically distinct from all content words.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Particle</th>
+<th>Sound</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>i</strong></td>
+<td>/i/</td>
+<td>Marks verb (action follows)</td>
+</tr>
+<tr class="even">
+<td><strong>a</strong></td>
+<td>/a/</td>
+<td>Marks object / noun-predicate</td>
+</tr>
+<tr class="odd">
+<td><strong>e</strong></td>
+<td>/e/</td>
+<td>Marks quality-predicate</td>
+</tr>
+<tr class="even">
+<td><strong>o</strong></td>
+<td>/o/</td>
+<td>Marks question (sentence-final)</td>
+</tr>
+<tr class="odd">
+<td><strong>u</strong></td>
+<td>/u/</td>
+<td>Marks command (imperative)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parsing Rule:</strong> A bare vowel can NEVER be part of a
+compound. It MUST be a grammatical marker. This creates an unbreakable
+phonotactic firewall between grammar and content.</p>
+<hr />
+<h1 id="part-ii-the-48-roots">PART II: THE 48 ROOTS</h1>
+<p>All meaning in Mesu derives from 48 atomic roots. These represent
+<strong>experiential primitives</strong> — concepts that can be
+understood through direct sensory experience without prior cultural
+knowledge.</p>
+<h2 id="existence-substance-3">2.1 Existence &amp; Substance (3)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Root</th>
+<th>Meaning</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ta</strong></td>
+<td>be, exist</td>
+<td>Stative existence</td>
+</tr>
+<tr class="even">
+<td><strong>to</strong></td>
+<td>thing</td>
+<td>Discrete, countable entity</td>
+</tr>
+<tr class="odd">
+<td><strong>su</strong></td>
+<td>stuff</td>
+<td>Mass, substance, material</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pronouns-deictics-5">2.2 Pronouns &amp; Deictics (5)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Root</th>
+<th>Meaning</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>mi</strong></td>
+<td>I, me</td>
+<td>First person (speaker)</td>
+</tr>
+<tr class="even">
+<td><strong>tu</strong></td>
+<td>you</td>
+<td>Second person (listener)</td>
+</tr>
+<tr class="odd">
+<td><strong>si</strong></td>
+<td>it, he, she</td>
+<td>Third person</td>
+</tr>
+<tr class="even">
+<td><strong>ni</strong></td>
+<td>this</td>
+<td>Proximal demonstrative</td>
+</tr>
+<tr class="odd">
+<td><strong>ka</strong></td>
+<td>what</td>
+<td>Question particle / unknown</td>
+</tr>
+</tbody>
+</table>
+<h2 id="qualities-primary-poles-8">2.3 Qualities — Primary Poles
+(8)</h2>
+<p>Each quality represents one pole of a spectrum. The opposite is
+derived via negation (no-).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Root</th>
+<th>Meaning</th>
+<th>Negation →</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>wo</strong></td>
+<td>big, large, much</td>
+<td>no-wo → small</td>
+</tr>
+<tr class="even">
+<td><strong>pi</strong></td>
+<td>hot, warm</td>
+<td>no-pi → cold</td>
+</tr>
+<tr class="odd">
+<td><strong>wa</strong></td>
+<td>wet, moist, liquid</td>
+<td>no-wa → dry</td>
+</tr>
+<tr class="even">
+<td><strong>ko</strong></td>
+<td>hard, solid, firm</td>
+<td>no-ko → soft</td>
+</tr>
+<tr class="odd">
+<td><strong>lo</strong></td>
+<td>bright, light</td>
+<td>no-lo → dark</td>
+</tr>
+<tr class="even">
+<td><strong>ma</strong></td>
+<td>good, positive</td>
+<td>no-ma → bad</td>
+</tr>
+<tr class="odd">
+<td><strong>nu</strong></td>
+<td>new, fresh, recent</td>
+<td>no-nu → old</td>
+</tr>
+<tr class="even">
+<td><strong>sa</strong></td>
+<td>fast, quick, soon</td>
+<td>no-sa → slow</td>
+</tr>
+</tbody>
+</table>
+<h2 id="spatial-primary-poles-4">2.4 Spatial — Primary Poles (4)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Root</th>
+<th>Meaning</th>
+<th>Negation →</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>so</strong></td>
+<td>up, above, high</td>
+<td>no-so → down</td>
+</tr>
+<tr class="even">
+<td><strong>na</strong></td>
+<td>in, inside, within</td>
+<td>no-na → out</td>
+</tr>
+<tr class="odd">
+<td><strong>pe</strong></td>
+<td>front, ahead, forward</td>
+<td>no-pe → back</td>
+</tr>
+<tr class="even">
+<td><strong>ti</strong></td>
+<td>near, close, proximal</td>
+<td>no-ti → far</td>
+</tr>
+</tbody>
+</table>
+<h2 id="temporal-3">2.5 Temporal (3)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Root</th>
+<th>Meaning</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>pa</strong></td>
+<td>before, prior, past</td>
+<td>no-pa → after</td>
+</tr>
+<tr class="even">
+<td><strong>ne</strong></td>
+<td>now, present, current</td>
+<td>The immediate moment</td>
+</tr>
+<tr class="odd">
+<td><strong>lon</strong></td>
+<td>long, duration, extended</td>
+<td>no-lon → brief</td>
+</tr>
+</tbody>
+</table>
+<h2 id="quantity-4">2.6 Quantity (4)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Root</th>
+<th>Meaning</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>wen</strong></td>
+<td>one, single</td>
+<td>Individual unit</td>
+</tr>
+<tr class="even">
+<td><strong>le</strong></td>
+<td>two, pair</td>
+<td>Duality</td>
+</tr>
+<tr class="odd">
+<td><strong>mu</strong></td>
+<td>many, much, plural</td>
+<td>Multiplicity</td>
+</tr>
+<tr class="even">
+<td><strong>pan</strong></td>
+<td>all, every, total</td>
+<td>Completeness</td>
+</tr>
+</tbody>
+</table>
+<h2 id="core-actions-12">2.7 Core Actions (12)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Root</th>
+<th>Meaning</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ke</strong></td>
+<td>do, make, cause</td>
+<td>General action/causation</td>
+</tr>
+<tr class="even">
+<td><strong>mo</strong></td>
+<td>move, go, motion</td>
+<td>Change of position</td>
+</tr>
+<tr class="odd">
+<td><strong>ki</strong></td>
+<td>have, possess, contain</td>
+<td>Possession/containment</td>
+</tr>
+<tr class="even">
+<td><strong>se</strong></td>
+<td>give, send, emit</td>
+<td>Outward transfer</td>
+</tr>
+<tr class="odd">
+<td><strong>ku</strong></td>
+<td>take, receive, acquire</td>
+<td>Inward transfer</td>
+</tr>
+<tr class="even">
+<td><strong>li</strong></td>
+<td>see, perceive visually</td>
+<td>Visual perception</td>
+</tr>
+<tr class="odd">
+<td><strong>te</strong></td>
+<td>hear, listen</td>
+<td>Auditory perception</td>
+</tr>
+<tr class="even">
+<td><strong>wi</strong></td>
+<td>feel, sense, emotion</td>
+<td>Touch and internal sensation</td>
+</tr>
+<tr class="odd">
+<td><strong>lu</strong></td>
+<td>know, cognize, understand</td>
+<td>Mental awareness</td>
+</tr>
+<tr class="even">
+<td><strong>pu</strong></td>
+<td>want, desire, intend</td>
+<td>Volition</td>
+</tr>
+<tr class="odd">
+<td><strong>me</strong></td>
+<td>say, speak, express</td>
+<td>Communication</td>
+</tr>
+<tr class="even">
+<td><strong>lin</strong></td>
+<td>live, be alive, animate</td>
+<td>Biological existence</td>
+</tr>
+</tbody>
+</table>
+<h2 id="logical-operators-4">2.8 Logical Operators (4)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Root</th>
+<th>Meaning</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>no</strong></td>
+<td>not</td>
+<td>Negation</td>
+</tr>
+<tr class="even">
+<td><strong>kan</strong></td>
+<td>and</td>
+<td>Conjunction</td>
+</tr>
+<tr class="odd">
+<td><strong>kon</strong></td>
+<td>or</td>
+<td>Disjunction</td>
+</tr>
+<tr class="even">
+<td><strong>sin</strong></td>
+<td>if</td>
+<td>Conditional</td>
+</tr>
+</tbody>
+</table>
+<h2 id="relational-5">2.9 Relational (5)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Root</th>
+<th>Meaning</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>we</strong></td>
+<td>of, from, origin</td>
+<td>Genitive/source</td>
+</tr>
+<tr class="even">
+<td><strong>la</strong></td>
+<td>to, toward, destination</td>
+<td>Dative/goal</td>
+</tr>
+<tr class="odd">
+<td><strong>win</strong></td>
+<td>with, accompanied by</td>
+<td>Comitative</td>
+</tr>
+<tr class="even">
+<td><strong>san</strong></td>
+<td>same, like, similar, as</td>
+<td>Comparison</td>
+</tr>
+<tr class="odd">
+<td><strong>pen</strong></td>
+<td>part, portion, piece</td>
+<td>Mereological</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="part-iii-contracted-fossils">PART III: CONTRACTED FOSSILS</h1>
+<p>Frequently used compounds contract over time. These contractions
+embed evolutionary history into the language — evidence of countless
+mouths wearing down complex forms into smooth pebbles.</p>
+<h2 id="contraction-rules">3.1 Contraction Rules</h2>
+<ol type="1">
+<li><strong>Vowel Elision:</strong> First vowel may drop if result is
+pronounceable</li>
+<li><strong>Nasal Absorption:</strong> Nasal codas get absorbed into
+following consonants</li>
+<li><strong>Syllable Compression:</strong> Long compounds compress to
+single syllables</li>
+<li><strong>Frequency Pressure:</strong> More common = more
+contracted</li>
+</ol>
+<h2 id="negated-qualities-8">3.2 Negated Qualities (~8)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Contraction</th>
+<th>Full Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>now</strong></td>
+<td>no-wo</td>
+<td>small, little</td>
+</tr>
+<tr class="even">
+<td><strong>nip</strong></td>
+<td>no-pi</td>
+<td>cold, cool</td>
+</tr>
+<tr class="odd">
+<td><strong>naw</strong></td>
+<td>no-wa</td>
+<td>dry</td>
+</tr>
+<tr class="even">
+<td><strong>nok</strong></td>
+<td>no-ko</td>
+<td>soft, flexible</td>
+</tr>
+<tr class="odd">
+<td><strong>nul</strong></td>
+<td>no-lo</td>
+<td>dark</td>
+</tr>
+<tr class="even">
+<td><strong>nam</strong></td>
+<td>no-ma</td>
+<td>bad, harmful</td>
+</tr>
+<tr class="odd">
+<td><strong>nun</strong></td>
+<td>no-nu</td>
+<td>old, ancient</td>
+</tr>
+<tr class="even">
+<td><strong>nas</strong></td>
+<td>no-sa</td>
+<td>slow, late</td>
+</tr>
+</tbody>
+</table>
+<h2 id="negated-spatials-5">3.3 Negated Spatials (~5)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Contraction</th>
+<th>Full Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>nus</strong></td>
+<td>no-so</td>
+<td>down, below, low</td>
+</tr>
+<tr class="even">
+<td><strong>nan</strong></td>
+<td>no-na</td>
+<td>out, outside</td>
+</tr>
+<tr class="odd">
+<td><strong>nep</strong></td>
+<td>no-pe</td>
+<td>back, behind</td>
+</tr>
+<tr class="even">
+<td><strong>nit</strong></td>
+<td>no-ti</td>
+<td>far, distant</td>
+</tr>
+<tr class="odd">
+<td><strong>nap</strong></td>
+<td>no-pa</td>
+<td>after, later</td>
+</tr>
+</tbody>
+</table>
+<h2 id="elements-5">3.4 Elements (~5)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Contraction</th>
+<th>Full Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>was</strong></td>
+<td>wa-su</td>
+<td>water (wet-stuff)</td>
+</tr>
+<tr class="even">
+<td><strong>pis</strong></td>
+<td>pi-su</td>
+<td>fire (hot-stuff)</td>
+</tr>
+<tr class="odd">
+<td><strong>kos</strong></td>
+<td>ko-su</td>
+<td>stone, earth (hard-stuff)</td>
+</tr>
+<tr class="even">
+<td><strong>mos</strong></td>
+<td>mo-su</td>
+<td>air, wind (move-stuff)</td>
+</tr>
+<tr class="odd">
+<td><strong>los</strong></td>
+<td>lo-su</td>
+<td>light [noun] (bright-stuff)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="life-forms-3">3.5 Life Forms (~3)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Contraction</th>
+<th>Full Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>mol</strong></td>
+<td>mo-lin</td>
+<td>animal (move-life)</td>
+</tr>
+<tr class="even">
+<td><strong>num</strong></td>
+<td>no-mo-lin</td>
+<td>plant (not-move-life)</td>
+</tr>
+<tr class="odd">
+<td><strong>lum</strong></td>
+<td>lu-mo-lin</td>
+<td>person (know-move-life)</td>
+</tr>
+</tbody>
+</table>
+<p>Alternative: <strong>mem</strong> from me-mo-lin (say-move-life) —
+“the speaking animal”</p>
+<h2 id="body-parts-8">3.6 Body Parts (~8)</h2>
+<p>Derived from action/sense + <strong>pen</strong> (part).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Contraction</th>
+<th>Full Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>pap</strong></td>
+<td>pan-pen</td>
+<td>body (all-part)</td>
+</tr>
+<tr class="even">
+<td><strong>sop</strong></td>
+<td>so-pen</td>
+<td>head (up-part)</td>
+</tr>
+<tr class="odd">
+<td><strong>kep</strong></td>
+<td>ke-pen</td>
+<td>hand (do-part)</td>
+</tr>
+<tr class="even">
+<td><strong>lip</strong></td>
+<td>li-pen</td>
+<td>eye (see-part)</td>
+</tr>
+<tr class="odd">
+<td><strong>tep</strong></td>
+<td>te-pen</td>
+<td>ear (hear-part)</td>
+</tr>
+<tr class="even">
+<td><strong>mep</strong></td>
+<td>me-pen</td>
+<td>mouth (say-part)</td>
+</tr>
+<tr class="odd">
+<td><strong>mop</strong></td>
+<td>mo-pen</td>
+<td>foot (move-part)</td>
+</tr>
+<tr class="even">
+<td><strong>wip</strong></td>
+<td>wi-pen</td>
+<td>heart (feel-part)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="celestial-bodies-4">3.7 Celestial Bodies (~4)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Contraction</th>
+<th>Full Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>sos</strong></td>
+<td>so-su</td>
+<td>sky (up-stuff)</td>
+</tr>
+<tr class="even">
+<td><strong>pil</strong></td>
+<td>pi-los</td>
+<td>sun (hot-light)</td>
+</tr>
+<tr class="odd">
+<td><strong>nil</strong></td>
+<td>nip-los</td>
+<td>moon (cold-light)</td>
+</tr>
+<tr class="even">
+<td><strong>nol</strong></td>
+<td>now-los</td>
+<td>star (small-light)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="terrain-5">3.8 Terrain (~5)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Contraction</th>
+<th>Full Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>nus</strong></td>
+<td>nus</td>
+<td>ground (down-stuff)</td>
+</tr>
+<tr class="even">
+<td><strong>sok</strong></td>
+<td>so-kos</td>
+<td>mountain (up-stone)</td>
+</tr>
+<tr class="odd">
+<td><strong>waw</strong></td>
+<td>wo-was</td>
+<td>ocean (big-water)</td>
+</tr>
+<tr class="even">
+<td><strong>maw</strong></td>
+<td>mo-was</td>
+<td>river (move-water)</td>
+</tr>
+<tr class="odd">
+<td><strong>nuw</strong></td>
+<td>nus-was</td>
+<td>rain (down-water)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-actions-4">3.9 Common Actions (~4)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Contraction</th>
+<th>Full Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>nak</strong></td>
+<td>na-ku</td>
+<td>eat (in-take)</td>
+</tr>
+<tr class="even">
+<td><strong>wan</strong></td>
+<td>wa-na</td>
+<td>drink (wet-in)</td>
+</tr>
+<tr class="odd">
+<td><strong>nom</strong></td>
+<td>no-mo</td>
+<td>sleep (not-move)</td>
+</tr>
+<tr class="even">
+<td><strong>lup</strong></td>
+<td>lu-sop</td>
+<td>think (know-head)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="part-iv-grammar">PART IV: GRAMMAR</h1>
+<h2 id="the-five-particles">4.1 The Five Particles</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Particle</th>
+<th>Sound</th>
+<th>Function</th>
+<th>Print Glyph</th>
+<th>Cursive Glyph</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>i</strong></td>
+<td>/i/</td>
+<td>VERB</td>
+<td>─</td>
+<td>∞</td>
+</tr>
+<tr class="even">
+<td><strong>a</strong></td>
+<td>/a/</td>
+<td>OBJECT / NOUN-IS</td>
+<td>┈</td>
+<td>⊃</td>
+</tr>
+<tr class="odd">
+<td><strong>e</strong></td>
+<td>/e/</td>
+<td>QUALITY-IS</td>
+<td>┄</td>
+<td>~</td>
+</tr>
+<tr class="even">
+<td><strong>o</strong></td>
+<td>/o/</td>
+<td>QUESTION</td>
+<td>◠</td>
+<td>ꜛ</td>
+</tr>
+<tr class="odd">
+<td><strong>u</strong></td>
+<td>/u/</td>
+<td>COMMAND</td>
+<td>━</td>
+<td>⊥</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sentence-patterns">4.2 Sentence Patterns</h2>
+<h3 id="intransitive-subject-does-action">Intransitive (Subject does
+action)</h3>
+<pre><code>Subject  i  Verb
+
+mi i mo
+I [VERB] move
+&quot;I move&quot;</code></pre>
+<h3 id="transitive-subject-does-action-to-object">Transitive (Subject
+does action to Object)</h3>
+<pre><code>Subject  i  Verb  a  Object
+
+mi i wan a was
+I [VERB] drink [OBJ] water
+&quot;I drink water&quot;</code></pre>
+<h3 id="equative-subject-is-a-noun">Equative (Subject IS a noun)</h3>
+<pre><code>Subject  a  Noun
+
+lum a mol
+person [IS-NOUN] animal
+&quot;A person is an animal&quot;</code></pre>
+<h3 id="descriptive-subject-has-quality">Descriptive (Subject HAS
+quality)</h3>
+<pre><code>Subject  e  Quality
+
+was e nip
+water [IS-QUALITY] cold
+&quot;Water is cold&quot;</code></pre>
+<h3 id="existential-there-is-a-thing">Existential (There IS a
+thing)</h3>
+<pre><code>a  Noun
+
+a was
+[EXISTS] water
+&quot;There is water&quot;</code></pre>
+<h3 id="question-append-o">Question (append o)</h3>
+<pre><code>[any sentence]  o
+
+tu i mo o
+you [VERB] move [QUESTION]
+&quot;Do you move?&quot; / &quot;Are you moving?&quot;
+
+ka i mo o
+what [VERB] move [QUESTION]
+&quot;What moves?&quot;</code></pre>
+<h3 id="command-u-replaces-i-no-subject">Command (u replaces i, no
+subject)</h3>
+<pre><code>u  Verb  (a  Object)
+
+u mo
+[COMMAND] move
+&quot;Move!&quot;
+
+u wan a was
+[COMMAND] drink [OBJ] water
+&quot;Drink water!&quot;</code></pre>
+<h3 id="negation-no-before-negated-element">Negation (no before negated
+element)</h3>
+<pre><code>mi i no wan a was
+I [VERB] NOT drink [OBJ] water
+&quot;I don&#39;t drink water&quot;
+
+was e no nip
+water [IS-QUALITY] NOT cold
+&quot;Water is not cold&quot;</code></pre>
+<h2 id="word-order">4.3 Word Order</h2>
+<h3 id="compounds-modifier-head">Compounds: Modifier + Head</h3>
+<p>The final element (head) anchors meaning. Preceding elements modify
+it.</p>
+<pre><code>wo + lum = wo-lum (big-person = giant)
+pi + was = pi-was (hot-water = steam)
+nu + lum = nu-lum (new-person = child)</code></pre>
+<h3 id="possession-possessor-possessed">Possession: Possessor +
+Possessed</h3>
+<pre><code>mi was = my water
+tu kep = your hand
+lum lip = person&#39;s eye = human eye</code></pre>
+<h3 id="modifiers-precede-head-no-particle-needed">Modifiers: Precede
+head, no particle needed</h3>
+<pre><code>wo was = big water
+nip was = cold water
+
+mi i wan a nip was
+I [VERB] drink [OBJ] cold water
+&quot;I drink cold water&quot;</code></pre>
+<h2 id="additional-grammar">4.4 Additional Grammar</h2>
+<h3 id="conjunction">Conjunction</h3>
+<pre><code>kan = and
+kon = or
+
+mi kan tu i mo
+I and you [VERB] move
+&quot;I and you move&quot; / &quot;We move&quot;
+
+was kon pis
+water or fire</code></pre>
+<h3 id="relative-clauses-ka-as-relativizer">Relative Clauses (ka as
+relativizer)</h3>
+<pre><code>was ka mo = water that moves = river
+lum ka i lu a mu = person who knows much = scholar
+
+mi i li a was ka mo
+I [VERB] see [OBJ] water [WHICH] move
+&quot;I see water that moves&quot; / &quot;I see the river&quot;</code></pre>
+<h3 id="tense-optional-via-auxiliaries">Tense (optional, via
+auxiliaries)</h3>
+<p>Mesu is tenseless by default. Context usually suffices. When
+needed:</p>
+<pre><code>pa = before → past tense marker
+ne = now → present (usually unmarked)
+la = toward → future marker
+
+mi pa i wan a was
+I past [VERB] drink [OBJ] water
+&quot;I drank water&quot;
+
+mi la i wan a was
+I toward [VERB] drink [OBJ] water
+&quot;I will drink water&quot;</code></pre>
+<hr />
+<h1 id="part-v-the-writing-system">PART V: THE WRITING SYSTEM</h1>
+<p>Mesu has two registers: <strong>Print</strong> (for clarity) and
+<strong>Cursive</strong> (for flow).</p>
+<h2 id="design-principles">5.1 Design Principles</h2>
+<ol type="1">
+<li><strong>Shape encodes articulation</strong> — glyphs represent what
+the mouth does</li>
+<li><strong>Position encodes vowel</strong> — in Print: dot position; in
+Cursive: exit direction</li>
+<li><strong>Horizontal = Grammar</strong> — particles span column width,
+content is centered</li>
+<li><strong>Vertical flow</strong> — columns read top-to-bottom,
+left-to-right</li>
+</ol>
+<h2 id="consonant-glyphs">5.2 Consonant Glyphs</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Sound</th>
+<th>Place/Manner</th>
+<th>Print</th>
+<th>Cursive</th>
+<th>Stroke Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>/p/</td>
+<td>labial stop</td>
+<td>●</td>
+<td>ρ</td>
+<td>Closed loop (lips seal)</td>
+</tr>
+<tr class="even">
+<td>/m/</td>
+<td>labial nasal</td>
+<td>◎</td>
+<td>ɔ̃</td>
+<td>Open loop + uptick (nasal escape)</td>
+</tr>
+<tr class="odd">
+<td>/w/</td>
+<td>labial approx</td>
+<td>○</td>
+<td>⌒</td>
+<td>Open arc (lips round, open)</td>
+</tr>
+<tr class="even">
+<td>/t/</td>
+<td>alveolar stop</td>
+<td>│</td>
+<td>│</td>
+<td>Straight down (direct block)</td>
+</tr>
+<tr class="odd">
+<td>/n/</td>
+<td>alveolar nasal</td>
+<td>╎</td>
+<td>η</td>
+<td>Down + hook (nasal escape)</td>
+</tr>
+<tr class="even">
+<td>/s/</td>
+<td>alveolar fric</td>
+<td>┆</td>
+<td>∫</td>
+<td>Wavy/S-curve (turbulent air)</td>
+</tr>
+<tr class="odd">
+<td>/l/</td>
+<td>alveolar lateral</td>
+<td>╰</td>
+<td>ʅ</td>
+<td>Down + curve out (air around)</td>
+</tr>
+<tr class="even">
+<td>/k/</td>
+<td>velar stop</td>
+<td>└</td>
+<td>Γ</td>
+<td>Down + angle back (tongue back)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vowel-encoding">5.3 Vowel Encoding</h2>
+<h3 id="print-register-dot-position">Print Register: Dot Position</h3>
+<p>The vowel is a dot (˙) positioned relative to the consonant:</p>
+<pre><code>         ┌─────────────┐
+         │ ˙i       u˙ │  ← HIGH (near palate)
+         │   ˙e   o˙   │  ← MID  
+         │      ˙a     │  ← LOW (jaw open)
+         └─────────────┘
+           FRONT  BACK</code></pre>
+<h3 id="cursive-register-exit-direction">Cursive Register: Exit
+Direction</h3>
+<p>After drawing the consonant, continue in the direction that encodes
+the vowel:</p>
+<pre><code>        ↖ /i/          /u/ ↗
+           high-front    high-back
+           
+       ← /e/              /o/ →
+          mid-front       mid-back
+          
+               ↓ /a/
+               low-center</code></pre>
+<h2 id="nasal-coda-n">5.4 Nasal Coda /n/</h2>
+<h3 id="print">Print</h3>
+<p>A descender stroke (│) below the vowel dot.</p>
+<h3 id="cursive">Cursive</h3>
+<p>A small clockwise loop before the vowel exit direction.</p>
+<pre><code>PLAIN:          NASAL:
+  [C]             [C]
+   │               │
+   ↓               ◯ (loop)
+                   │
+                   ↓</code></pre>
+<h2 id="grammar-particle-glyphs">5.5 Grammar Particle Glyphs</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Particle</th>
+<th>Function</th>
+<th>Print</th>
+<th>Cursive</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>i</td>
+<td>VERB</td>
+<td>─</td>
+<td>∞</td>
+<td>Solid thin line / tight loop</td>
+</tr>
+<tr class="even">
+<td>a</td>
+<td>OBJECT</td>
+<td>┈</td>
+<td>⊃</td>
+<td>Dashed / wide right swoop</td>
+</tr>
+<tr class="odd">
+<td>e</td>
+<td>QUALITY</td>
+<td>┄</td>
+<td>~</td>
+<td>Dotted / horizontal wave</td>
+</tr>
+<tr class="even">
+<td>o</td>
+<td>QUESTION</td>
+<td>◠</td>
+<td>ꜛ</td>
+<td>Arc / upward spiral</td>
+</tr>
+<tr class="odd">
+<td>u</td>
+<td>COMMAND</td>
+<td>━</td>
+<td>⊥</td>
+<td>Thick line / sharp jab</td>
+</tr>
+</tbody>
+</table>
+<p>Grammar particles <strong>span the full column width</strong>,
+creating visual separation from content glyphs which are
+<strong>centered</strong>.</p>
+<h2 id="print-examples">5.6 Print Examples</h2>
+<h3 id="mi-ime">“mi” (I/me)</h3>
+<pre><code>  ◎        ← /m/ (labial nasal)
+ ˙         ← /i/ (front-high dot)</code></pre>
+<h3 id="was-water">“was” (water)</h3>
+<pre><code>  ○        ← /w/ (labial approximant)
+   ˙       ← /a/ (low-center dot)
+  ┆        ← /s/ (alveolar fricative)</code></pre>
+<h3 id="pan-all">“pan” (all)</h3>
+<pre><code>  ●        ← /p/ (labial stop)
+   ˙       ← /a/ (low-center dot)
+   │       ← /n/ (nasal coda descender)</code></pre>
+<h3 id="mi-i-mo-i-move">“mi i mo” (I move)</h3>
+<pre><code>  ◎        ← /m/
+ ˙         ← /i/
+ 
+ ─         ← VERB particle
+ 
+  ◎        ← /m/
+     ˙     ← /o/</code></pre>
+<h3 id="tu-i-wan-a-was-you-drink-water">“tu i wan a was” (You drink
+water)</h3>
+<pre><code>  │        ← /t/
+    ˙      ← /u/
+ 
+ ─         ← VERB particle
+ 
+  ○        ← /w/
+   ˙       ← /a/
+   │       ← /n/ (nasal coda)
+ 
+ ┈         ← OBJECT particle
+ 
+  ○        ← /w/
+   ˙       ← /a/
+  ┆        ← /s/</code></pre>
+<h3 id="kiw-e-wo-the-lake-is-big">“kiw e wo” (The lake is big)</h3>
+<pre><code>  └        ← /k/
+ ˙         ← /i/
+  ○        ← /w/
+ 
+ ┄         ← QUALITY particle
+ 
+  ○        ← /w/
+     ˙     ← /o/</code></pre>
+<h3 id="tu-i-mo-o-do-you-move">“tu i mo o” (Do you move?)</h3>
+<pre><code>  │        ← /t/
+    ˙      ← /u/
+ 
+ ─         ← VERB particle
+ 
+  ◎        ← /m/
+     ˙     ← /o/
+ 
+ ◠         ← QUESTION particle</code></pre>
+<h2 id="cursive-examples">5.7 Cursive Examples</h2>
+<p>In cursive, the entire sentence becomes <strong>one continuous
+stroke</strong> with zero pen lifts.</p>
+<h3 id="mi-ime-1">“mi” (I/me)</h3>
+<pre><code>ɔ̃         ← /m/ open loop
+ ╲↖       ← exit up-left for /i/</code></pre>
+<h3 id="mi-i-mo-i-move-1">“mi i mo” (I move)</h3>
+<pre><code>START
+  │
+  ɔ̃╲      ← /m/ open loop
+    ↖     ← exit up-left for /i/
+     ∞    ← VERB connector (tight figure-8)
+     │
+     ɔ̃   ← /m/ open loop
+      →   ← exit right for /o/
+     END</code></pre>
+<h3 id="tu-i-wan-a-was-you-drink-water-1">“tu i wan a was” (You drink
+water)</h3>
+<pre><code>START
+  │
+  │╲↗     ← /t/ straight down, exit up-right for /u/
+    ∞     ← VERB connector
+    │
+   ⌒╲     ← /w/ open curve
+     ↓    ← exit down for /a/
+     ◯    ← nasal loop for /n/
+     │
+     ⊃    ← OBJECT connector (wide right swoop)
+     │
+    ⌒╲    ← /w/ open curve
+      ↓   ← exit down for /a/
+      ∫   ← /s/ wavy curve
+      │
+     END</code></pre>
+<p><strong>Stroke count: ONE. Lifts: ZERO.</strong></p>
+<hr />
+<h1 id="part-vi-vocabulary-derivations">PART VI: VOCABULARY
+DERIVATIONS</h1>
+<h2 id="elements">6.1 Elements</h2>
+<table>
+<thead>
+<tr class="header">
+<th>English</th>
+<th>Mesu</th>
+<th>Derivation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>water</td>
+<td>was</td>
+<td>wa (wet) + su (stuff)</td>
+</tr>
+<tr class="even">
+<td>fire</td>
+<td>pis</td>
+<td>pi (hot) + su (stuff)</td>
+</tr>
+<tr class="odd">
+<td>stone/earth</td>
+<td>kos</td>
+<td>ko (hard) + su (stuff)</td>
+</tr>
+<tr class="even">
+<td>air/wind</td>
+<td>mos</td>
+<td>mo (move) + su (stuff)</td>
+</tr>
+<tr class="odd">
+<td>light</td>
+<td>los</td>
+<td>lo (bright) + su (stuff)</td>
+</tr>
+<tr class="even">
+<td>ice</td>
+<td>ko-was</td>
+<td>ko (hard) + was (water)</td>
+</tr>
+<tr class="odd">
+<td>steam</td>
+<td>pi-was</td>
+<td>pi (hot) + was (water)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="life-forms">6.2 Life Forms</h2>
+<table>
+<thead>
+<tr class="header">
+<th>English</th>
+<th>Mesu</th>
+<th>Derivation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>animal</td>
+<td>mol</td>
+<td>mo (move) + lin (life)</td>
+</tr>
+<tr class="even">
+<td>plant</td>
+<td>num</td>
+<td>no (not) + mo (move) + lin (life)</td>
+</tr>
+<tr class="odd">
+<td>person</td>
+<td>lum</td>
+<td>lu (know) + mo (move) + lin (life)</td>
+</tr>
+<tr class="even">
+<td>bird</td>
+<td>so-mol</td>
+<td>so (up) + mol (animal)</td>
+</tr>
+<tr class="odd">
+<td>fish</td>
+<td>wa-mol</td>
+<td>wa (wet) + mol (animal)</td>
+</tr>
+<tr class="even">
+<td>child</td>
+<td>nu-lum</td>
+<td>nu (new) + lum (person)</td>
+</tr>
+<tr class="odd">
+<td>adult</td>
+<td>nun-lum</td>
+<td>nun (old) + lum (person)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="nature">6.3 Nature</h2>
+<table>
+<thead>
+<tr class="header">
+<th>English</th>
+<th>Mesu</th>
+<th>Derivation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sky</td>
+<td>sos</td>
+<td>so (up) + su (stuff)</td>
+</tr>
+<tr class="even">
+<td>sun</td>
+<td>pil</td>
+<td>pi (hot) + los (light)</td>
+</tr>
+<tr class="odd">
+<td>moon</td>
+<td>nil</td>
+<td>nip (cold) + los (light)</td>
+</tr>
+<tr class="even">
+<td>star</td>
+<td>nol</td>
+<td>now (small) + los (light)</td>
+</tr>
+<tr class="odd">
+<td>ground</td>
+<td>nus</td>
+<td>no-so (down) + su (stuff)</td>
+</tr>
+<tr class="even">
+<td>mountain</td>
+<td>sok</td>
+<td>so (up) + kos (stone)</td>
+</tr>
+<tr class="odd">
+<td>ocean</td>
+<td>waw</td>
+<td>wo (big) + was (water)</td>
+</tr>
+<tr class="even">
+<td>river</td>
+<td>maw</td>
+<td>mo (move) + was (water)</td>
+</tr>
+<tr class="odd">
+<td>rain</td>
+<td>nuw</td>
+<td>nus (down) + was (water)</td>
+</tr>
+<tr class="even">
+<td>tree</td>
+<td>wo-num</td>
+<td>wo (big) + num (plant)</td>
+</tr>
+<tr class="odd">
+<td>forest</td>
+<td>mu-wo-num</td>
+<td>mu (many) + wo (big) + num (plant)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="body">6.4 Body</h2>
+<table>
+<thead>
+<tr class="header">
+<th>English</th>
+<th>Mesu</th>
+<th>Derivation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>body</td>
+<td>pap</td>
+<td>pan (all) + pen (part)</td>
+</tr>
+<tr class="even">
+<td>head</td>
+<td>sop</td>
+<td>so (up) + pen (part)</td>
+</tr>
+<tr class="odd">
+<td>hand</td>
+<td>kep</td>
+<td>ke (do) + pen (part)</td>
+</tr>
+<tr class="even">
+<td>eye</td>
+<td>lip</td>
+<td>li (see) + pen (part)</td>
+</tr>
+<tr class="odd">
+<td>ear</td>
+<td>tep</td>
+<td>te (hear) + pen (part)</td>
+</tr>
+<tr class="even">
+<td>mouth</td>
+<td>mep</td>
+<td>me (say) + pen (part)</td>
+</tr>
+<tr class="odd">
+<td>foot</td>
+<td>mop</td>
+<td>mo (move) + pen (part)</td>
+</tr>
+<tr class="even">
+<td>heart</td>
+<td>wip</td>
+<td>wi (feel) + pen (part)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="abstract-concepts">6.5 Abstract Concepts</h2>
+<table>
+<thead>
+<tr class="header">
+<th>English</th>
+<th>Mesu</th>
+<th>Derivation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>language</td>
+<td>mesu</td>
+<td>me (say) + su (stuff)</td>
+</tr>
+<tr class="even">
+<td>knowledge</td>
+<td>lu-su</td>
+<td>lu (know) + su (stuff)</td>
+</tr>
+<tr class="odd">
+<td>thought</td>
+<td>lup</td>
+<td>lu (know) + sop (head)</td>
+</tr>
+<tr class="even">
+<td>feeling/emotion</td>
+<td>wi-su</td>
+<td>wi (feel) + su (stuff)</td>
+</tr>
+<tr class="odd">
+<td>word</td>
+<td>me-to</td>
+<td>me (say) + to (thing)</td>
+</tr>
+<tr class="even">
+<td>idea</td>
+<td>lu-to</td>
+<td>lu (know) + to (thing)</td>
+</tr>
+<tr class="odd">
+<td>truth</td>
+<td>ma-lu</td>
+<td>ma (good) + lu (know)</td>
+</tr>
+<tr class="even">
+<td>lie</td>
+<td>nam-me</td>
+<td>nam (bad) + me (say)</td>
+</tr>
+<tr class="odd">
+<td>life</td>
+<td>lin</td>
+<td>(root)</td>
+</tr>
+<tr class="even">
+<td>death</td>
+<td>no-lin</td>
+<td>no (not) + lin (life)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-phrases">6.6 Common Phrases</h2>
+<table>
+<thead>
+<tr class="header">
+<th>English</th>
+<th>Mesu</th>
+<th>Analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hello</td>
+<td>ma-ne</td>
+<td>good-now</td>
+</tr>
+<tr class="even">
+<td>Goodbye</td>
+<td>ma-la</td>
+<td>good-toward (good journey)</td>
+</tr>
+<tr class="odd">
+<td>Thank you</td>
+<td>ma-tu</td>
+<td>good-you</td>
+</tr>
+<tr class="even">
+<td>Please</td>
+<td>pu-tu</td>
+<td>want-you (I want you to…)</td>
+</tr>
+<tr class="odd">
+<td>Yes</td>
+<td>ma</td>
+<td>good (affirmative)</td>
+</tr>
+<tr class="even">
+<td>No</td>
+<td>no</td>
+<td>not</td>
+</tr>
+<tr class="odd">
+<td>What is this?</td>
+<td>ni a ka o</td>
+<td>this [IS-NOUN] what [QUESTION]</td>
+</tr>
+<tr class="even">
+<td>I don’t understand</td>
+<td>mi i no lu</td>
+<td>I [VERB] not know</td>
+</tr>
+<tr class="odd">
+<td>I love you</td>
+<td>mi i wo-wi a tu</td>
+<td>I [VERB] big-feel [OBJ] you</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="part-vii-sample-texts">PART VII: SAMPLE TEXTS</h1>
+<h2 id="the-mesu-manifesto-in-mesu">7.1 The Mesu Manifesto (in
+Mesu)</h2>
+<pre><code>mesu a me-su.
+Mesu [IS-NOUN] say-stuff.
+&quot;Mesu is say-stuff.&quot;
+
+mi-pan i me a mesu.
+we [VERB] speak [OBJ] Mesu.
+&quot;We speak Mesu.&quot;
+
+mi-pan a mesu.
+we [IS-NOUN] Mesu.
+&quot;We are the Mesu.&quot;
+
+me-su i mo san was.
+say-stuff [VERB] move like water.
+&quot;Language flows like water.&quot;</code></pre>
+<h2 id="simple-conversation">7.2 Simple Conversation</h2>
+<pre><code>A: ma-ne. tu a ka o
+   good-now. you [IS-NOUN] what [QUESTION]
+   &quot;Hello. Who are you?&quot;
+
+B: mi a Wofl. kan tu o
+   I [IS-NOUN] Wofl. and you [QUESTION]
+   &quot;I&#39;m Wofl. And you?&quot;
+
+A: mi a Mesu-lum.
+   I [IS-NOUN] Mesu-person.
+   &quot;I&#39;m a Mesu speaker.&quot;
+
+B: ma. mi la i lu a mesu.
+   good. I future [VERB] know [OBJ] Mesu.
+   &quot;Good. I will learn Mesu.&quot;</code></pre>
+<h2 id="description">7.3 Description</h2>
+<pre><code>pil e pi kan lo.
+sun [IS-QUALITY] hot and bright.
+&quot;The sun is hot and bright.&quot;
+
+was i mo nus we sok.
+water [VERB] move down from mountain.
+&quot;Water flows down from the mountain.&quot;
+
+mol ka i mo na was a wa-mol.
+animal [WHICH] [VERB] move in water [IS-NOUN] fish.
+&quot;An animal that moves in water is a fish.&quot;</code></pre>
+<hr />
+<h1 id="part-viii-unicode-reference">PART VIII: UNICODE REFERENCE</h1>
+<h2 id="print-glyphs">8.1 Print Glyphs</h2>
+<h3 id="consonants">Consonants</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Sound</th>
+<th>Glyph</th>
+<th>Unicode</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>/p/</td>
+<td>●</td>
+<td>U+25CF</td>
+<td>BLACK CIRCLE</td>
+</tr>
+<tr class="even">
+<td>/m/</td>
+<td>◎</td>
+<td>U+25CE</td>
+<td>BULLSEYE</td>
+</tr>
+<tr class="odd">
+<td>/w/</td>
+<td>○</td>
+<td>U+25CB</td>
+<td>WHITE CIRCLE</td>
+</tr>
+<tr class="even">
+<td>/t/</td>
+<td>│</td>
+<td>U+2502</td>
+<td>BOX DRAWINGS LIGHT VERTICAL</td>
+</tr>
+<tr class="odd">
+<td>/n/</td>
+<td>╎</td>
+<td>U+254E</td>
+<td>BOX DRAWINGS LIGHT DOUBLE DASH VERTICAL</td>
+</tr>
+<tr class="even">
+<td>/s/</td>
+<td>┆</td>
+<td>U+2506</td>
+<td>BOX DRAWINGS LIGHT TRIPLE DASH VERTICAL</td>
+</tr>
+<tr class="odd">
+<td>/l/</td>
+<td>╰</td>
+<td>U+2570</td>
+<td>BOX DRAWINGS LIGHT ARC UP AND RIGHT</td>
+</tr>
+<tr class="even">
+<td>/k/</td>
+<td>└</td>
+<td>U+2514</td>
+<td>BOX DRAWINGS LIGHT UP AND RIGHT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vowels">Vowels</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Sound</th>
+<th>Glyph</th>
+<th>Unicode</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(all)</td>
+<td>˙</td>
+<td>U+02D9</td>
+<td>DOT ABOVE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="grammar-particles-1">Grammar Particles</h3>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 21%" />
+<col style="width: 28%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Particle</th>
+<th>Glyph</th>
+<th>Unicode</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>i (VERB)</td>
+<td>─</td>
+<td>U+2500</td>
+<td>BOX DRAWINGS LIGHT HORIZONTAL</td>
+</tr>
+<tr class="even">
+<td>a (OBJECT)</td>
+<td>┈</td>
+<td>U+2508</td>
+<td>BOX DRAWINGS LIGHT QUADRUPLE DASH HORIZONTAL</td>
+</tr>
+<tr class="odd">
+<td>e (QUALITY)</td>
+<td>┄</td>
+<td>U+2504</td>
+<td>BOX DRAWINGS LIGHT TRIPLE DASH HORIZONTAL</td>
+</tr>
+<tr class="even">
+<td>o (QUESTION)</td>
+<td>◠</td>
+<td>U+25E0</td>
+<td>UPPER HALF CIRCLE</td>
+</tr>
+<tr class="odd">
+<td>u (COMMAND)</td>
+<td>━</td>
+<td>U+2501</td>
+<td>BOX DRAWINGS HEAVY HORIZONTAL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nasal-coda">Nasal Coda</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Glyph</th>
+<th>Unicode</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>/n/ coda</td>
+<td>│</td>
+<td>U+2502</td>
+<td>BOX DRAWINGS LIGHT VERTICAL</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="appendix-a-quick-reference-card">APPENDIX A: QUICK REFERENCE
+CARD</h1>
+<pre><code>╔═══════════════════════════════════════════════════════════════════╗
+║                        MESU QUICK REFERENCE                       ║
+╠═══════════════════════════════════════════════════════════════════╣
+║                                                                   ║
+║  CONSONANTS:  p ● ρ    m ◎ ɔ̃    w ○ ⌒    t │ │                  ║
+║               n ╎ η    s ┆ ∫    l ╰ ʅ    k └ Γ                  ║
+║                                                                   ║
+║  VOWELS:      i = front-high (↖)    u = back-high (↗)            ║
+║               e = front-mid  (←)    o = back-mid  (→)            ║
+║               a = low-center (↓)                                  ║
+║                                                                   ║
+║  PARTICLES:   i ─ ∞ = VERB       a ┈ ⊃ = OBJECT                 ║
+║               e ┄ ~ = QUALITY    o ◠ ꜛ = QUESTION               ║
+║               u ━ ⊥ = COMMAND                                    ║
+║                                                                   ║
+║  PATTERNS:    Subject i Verb a Object                            ║
+║               Subject a Noun                                      ║
+║               Subject e Quality                                   ║
+║               [sentence] o = question                             ║
+║               u Verb = command                                    ║
+║                                                                   ║
+║  COMPOUNDS:   Modifier + Head (big+person = giant)               ║
+║                                                                   ║
+║  NEGATION:    no + X = not-X                                     ║
+║                                                                   ║
+║  TENSE:       pa = past    ne = now    la = future               ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝</code></pre>
+<hr />
+<h1 id="appendix-b-the-48-roots-alphabetical">APPENDIX B: THE 48 ROOTS
+(Alphabetical)</h1>
+<table>
+<thead>
+<tr class="header">
+<th>Root</th>
+<th>Category</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ka</td>
+<td>Deictic</td>
+<td>what, which</td>
+</tr>
+<tr class="even">
+<td>kan</td>
+<td>Logical</td>
+<td>and</td>
+</tr>
+<tr class="odd">
+<td>ke</td>
+<td>Action</td>
+<td>do, make, cause</td>
+</tr>
+<tr class="even">
+<td>ki</td>
+<td>Action</td>
+<td>have, possess</td>
+</tr>
+<tr class="odd">
+<td>ko</td>
+<td>Quality</td>
+<td>hard, solid</td>
+</tr>
+<tr class="even">
+<td>kon</td>
+<td>Logical</td>
+<td>or</td>
+</tr>
+<tr class="odd">
+<td>ku</td>
+<td>Action</td>
+<td>take, receive</td>
+</tr>
+<tr class="even">
+<td>la</td>
+<td>Relational</td>
+<td>to, toward</td>
+</tr>
+<tr class="odd">
+<td>le</td>
+<td>Quantity</td>
+<td>two</td>
+</tr>
+<tr class="even">
+<td>li</td>
+<td>Action</td>
+<td>see, perceive</td>
+</tr>
+<tr class="odd">
+<td>lin</td>
+<td>Action</td>
+<td>live, be alive</td>
+</tr>
+<tr class="even">
+<td>lo</td>
+<td>Quality</td>
+<td>bright, light</td>
+</tr>
+<tr class="odd">
+<td>lon</td>
+<td>Temporal</td>
+<td>long, duration</td>
+</tr>
+<tr class="even">
+<td>lu</td>
+<td>Action</td>
+<td>know, understand</td>
+</tr>
+<tr class="odd">
+<td>ma</td>
+<td>Quality</td>
+<td>good, positive</td>
+</tr>
+<tr class="even">
+<td>me</td>
+<td>Action</td>
+<td>say, speak</td>
+</tr>
+<tr class="odd">
+<td>mi</td>
+<td>Pronoun</td>
+<td>I, me</td>
+</tr>
+<tr class="even">
+<td>mo</td>
+<td>Action</td>
+<td>move, go</td>
+</tr>
+<tr class="odd">
+<td>mu</td>
+<td>Quantity</td>
+<td>many, much</td>
+</tr>
+<tr class="even">
+<td>na</td>
+<td>Spatial</td>
+<td>in, inside</td>
+</tr>
+<tr class="odd">
+<td>ne</td>
+<td>Temporal</td>
+<td>now, present</td>
+</tr>
+<tr class="even">
+<td>ni</td>
+<td>Deictic</td>
+<td>this</td>
+</tr>
+<tr class="odd">
+<td>no</td>
+<td>Logical</td>
+<td>not</td>
+</tr>
+<tr class="even">
+<td>nu</td>
+<td>Quality</td>
+<td>new, fresh</td>
+</tr>
+<tr class="odd">
+<td>pa</td>
+<td>Temporal</td>
+<td>before, past</td>
+</tr>
+<tr class="even">
+<td>pan</td>
+<td>Quantity</td>
+<td>all, every</td>
+</tr>
+<tr class="odd">
+<td>pe</td>
+<td>Spatial</td>
+<td>front, ahead</td>
+</tr>
+<tr class="even">
+<td>pen</td>
+<td>Relational</td>
+<td>part, portion</td>
+</tr>
+<tr class="odd">
+<td>pi</td>
+<td>Quality</td>
+<td>hot, warm</td>
+</tr>
+<tr class="even">
+<td>pu</td>
+<td>Action</td>
+<td>want, desire</td>
+</tr>
+<tr class="odd">
+<td>sa</td>
+<td>Quality</td>
+<td>fast, quick</td>
+</tr>
+<tr class="even">
+<td>san</td>
+<td>Relational</td>
+<td>same, like</td>
+</tr>
+<tr class="odd">
+<td>se</td>
+<td>Action</td>
+<td>give, send</td>
+</tr>
+<tr class="even">
+<td>si</td>
+<td>Pronoun</td>
+<td>it, he, she</td>
+</tr>
+<tr class="odd">
+<td>sin</td>
+<td>Logical</td>
+<td>if</td>
+</tr>
+<tr class="even">
+<td>so</td>
+<td>Spatial</td>
+<td>up, above</td>
+</tr>
+<tr class="odd">
+<td>su</td>
+<td>Existence</td>
+<td>stuff, substance</td>
+</tr>
+<tr class="even">
+<td>ta</td>
+<td>Existence</td>
+<td>be, exist</td>
+</tr>
+<tr class="odd">
+<td>te</td>
+<td>Action</td>
+<td>hear, listen</td>
+</tr>
+<tr class="even">
+<td>ti</td>
+<td>Spatial</td>
+<td>near, close</td>
+</tr>
+<tr class="odd">
+<td>to</td>
+<td>Existence</td>
+<td>thing, entity</td>
+</tr>
+<tr class="even">
+<td>tu</td>
+<td>Pronoun</td>
+<td>you</td>
+</tr>
+<tr class="odd">
+<td>wa</td>
+<td>Quality</td>
+<td>wet, moist</td>
+</tr>
+<tr class="even">
+<td>we</td>
+<td>Relational</td>
+<td>of, from</td>
+</tr>
+<tr class="odd">
+<td>wen</td>
+<td>Quantity</td>
+<td>one, single</td>
+</tr>
+<tr class="even">
+<td>wi</td>
+<td>Action</td>
+<td>feel, sense</td>
+</tr>
+<tr class="odd">
+<td>win</td>
+<td>Relational</td>
+<td>with</td>
+</tr>
+<tr class="even">
+<td>wo</td>
+<td>Quality</td>
+<td>big, large</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Mesu: The language that named itself.</em></p>
+<p><em>48 roots. Infinite expression.</em></p>
+<p><em>We are say-stuff.</em></p>
+</body>
+</html>

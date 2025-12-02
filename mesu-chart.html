@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MESU - Syllable Chart</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --card: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --text: #eee;
+            --dim: #888;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--highlight);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--dim);
+            margin-bottom: 2rem;
+        }
+        
+        .chart-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section h2 {
+            color: var(--highlight);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .syllable-grid {
+            display: grid;
+            grid-template-columns: auto repeat(5, 1fr) repeat(5, 1fr);
+            gap: 4px;
+        }
+        
+        .header-cell {
+            background: var(--accent);
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .header-cell.vowel {
+            color: #7fdbff;
+        }
+        
+        .header-cell.nasal {
+            color: #ffdc00;
+        }
+        
+        .consonant-cell {
+            background: var(--accent);
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .syllable-cell {
+            background: rgba(255,255,255,0.05);
+            padding: 0.75rem 0.5rem;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .syllable-cell:hover {
+            background: var(--highlight);
+            transform: scale(1.05);
+        }
+        
+        .syllable-cell .glyph {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 0.25rem;
+            line-height: 1;
+        }
+        
+        .syllable-cell .romanization {
+            font-size: 0.75rem;
+            color: var(--dim);
+        }
+        
+        .syllable-cell:hover .romanization {
+            color: white;
+        }
+        
+        .particles-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+        
+        .particle-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .particle-card .glyph {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .particle-card .label {
+            font-size: 0.8rem;
+            color: var(--dim);
+            text-transform: uppercase;
+        }
+        
+        .particle-card .sound {
+            font-weight: bold;
+            color: var(--highlight);
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .legend-dot.cv { background: #7fdbff; }
+        .legend-dot.cvn { background: #ffdc00; }
+        
+        .vowel-map {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        
+        .vowel-diagram {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre;
+            line-height: 1.5;
+        }
+        
+        .glyph-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .print-glyph {
+            font-size: 2.5rem;
+        }
+        
+        .cursive-glyph {
+            font-size: 1.2rem;
+            color: var(--dim);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--dim);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>MESU</h1>
+    <p class="subtitle">me (say) + su (stuff) = mesu (language)</p>
+    
+    <div class="chart-container">
+        
+        <div class="section">
+            <h2>Grammar Particles</h2>
+            <div class="particles-grid">
+                <div class="particle-card">
+                    <div class="glyph">─</div>
+                    <div class="sound">/i/</div>
+                    <div class="label">verb</div>
+                </div>
+                <div class="particle-card">
+                    <div class="glyph">┈</div>
+                    <div class="sound">/a/</div>
+                    <div class="label">object</div>
+                </div>
+                <div class="particle-card">
+                    <div class="glyph">┄</div>
+                    <div class="sound">/e/</div>
+                    <div class="label">quality</div>
+                </div>
+                <div class="particle-card">
+                    <div class="glyph">◠</div>
+                    <div class="sound">/o/</div>
+                    <div class="label">question</div>
+                </div>
+                <div class="particle-card">
+                    <div class="glyph">━</div>
+                    <div class="sound">/u/</div>
+                    <div class="label">command</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Vowel Position Map</h2>
+            <div class="vowel-map">
+                <div class="vowel-diagram">        FRONT          BACK
+       (left)        (right)
+        
+HIGH     ˙i            u˙      (tongue raised)
+
+MID      ˙e            o˙      (tongue mid)
+
+LOW            ˙a              (tongue low)
+             (center)</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Consonant Glyphs</h2>
+            <div class="particles-grid" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="particle-card">
+                    <div class="glyph-display">
+                        <span class="print-glyph">●</span>
+                        <span class="cursive-glyph">ρ</span>
+                    </div>
+                    <div class="sound">/p/</div>
+                    <div class="label">labial stop</div>
+                </div>
+                <div class="particle-card">
+                    <div class="glyph-display">
+                        <span class="print-glyph">◎</span>
+                        <span class="cursive-glyph">ɔ̃</span>
+                    </div>
+                    <div class="sound">/m/</div>
+                    <div class="label">labial nasal</div>
+                </div>
+                <div class="particle-card">
+                    <div class="glyph-display">
+                        <span class="print-glyph">○</span>
+                        <span class="cursive-glyph">⌒</span>
+                    </div>
+                    <div class="sound">/w/</div>
+                    <div class="label">labial approx</div>
+                </div>
+                <div class="particle-card">
+                    <div class="glyph-display">
+                        <span class="print-glyph">│</span>
+                        <span class="cursive-glyph">│</span>
+                    </div>
+                    <div class="sound">/t/</div>
+                    <div class="label">alveolar stop</div>
+                </div>
+                <div class="particle-card">
+                    <div class="glyph-display">
+                        <span class="print-glyph">╎</span>
+                        <span class="cursive-glyph">η</span>
+                    </div>
+                    <div class="sound">/n/</div>
+                    <div class="label">alveolar nasal</div>
+                </div>
+                <div class="particle-card">
+                    <div class="glyph-display">
+                        <span class="print-glyph">┆</span>
+                        <span class="cursive-glyph">∫</span>
+                    </div>
+                    <div class="sound">/s/</div>
+                    <div class="label">alveolar fric</div>
+                </div>
+                <div class="particle-card">
+                    <div class="glyph-display">
+                        <span class="print-glyph">╰</span>
+                        <span class="cursive-glyph">ʅ</span>
+                    </div>
+                    <div class="sound">/l/</div>
+                    <div class="label">lateral</div>
+                </div>
+                <div class="particle-card">
+                    <div class="glyph-display">
+                        <span class="print-glyph">└</span>
+                        <span class="cursive-glyph">Γ</span>
+                    </div>
+                    <div class="sound">/k/</div>
+                    <div class="label">velar stop</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Complete Syllable Chart</h2>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-dot cv"></div>
+                    <span>CV (open syllable)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot cvn"></div>
+                    <span>CVn (nasal coda)</span>
+                </div>
+            </div>
+            <div class="syllable-grid">
+                <!-- Header row -->
+                <div class="header-cell"></div>
+                <div class="header-cell vowel">i</div>
+                <div class="header-cell vowel">e</div>
+                <div class="header-cell vowel">a</div>
+                <div class="header-cell vowel">o</div>
+                <div class="header-cell vowel">u</div>
+                <div class="header-cell nasal">in</div>
+                <div class="header-cell nasal">en</div>
+                <div class="header-cell nasal">an</div>
+                <div class="header-cell nasal">on</div>
+                <div class="header-cell nasal">un</div>
+                
+                <!-- p row -->
+                <div class="consonant-cell">p ●</div>
+                <div class="syllable-cell"><span class="glyph">●˙</span><span class="romanization">pi</span></div>
+                <div class="syllable-cell"><span class="glyph">●˙</span><span class="romanization">pe</span></div>
+                <div class="syllable-cell"><span class="glyph">●˙</span><span class="romanization">pa</span></div>
+                <div class="syllable-cell"><span class="glyph">●˙</span><span class="romanization">po</span></div>
+                <div class="syllable-cell"><span class="glyph">●˙</span><span class="romanization">pu</span></div>
+                <div class="syllable-cell"><span class="glyph">●˙│</span><span class="romanization">pin</span></div>
+                <div class="syllable-cell"><span class="glyph">●˙│</span><span class="romanization">pen</span></div>
+                <div class="syllable-cell"><span class="glyph">●˙│</span><span class="romanization">pan</span></div>
+                <div class="syllable-cell"><span class="glyph">●˙│</span><span class="romanization">pon</span></div>
+                <div class="syllable-cell"><span class="glyph">●˙│</span><span class="romanization">pun</span></div>
+                
+                <!-- m row -->
+                <div class="consonant-cell">m ◎</div>
+                <div class="syllable-cell"><span class="glyph">◎˙</span><span class="romanization">mi</span></div>
+                <div class="syllable-cell"><span class="glyph">◎˙</span><span class="romanization">me</span></div>
+                <div class="syllable-cell"><span class="glyph">◎˙</span><span class="romanization">ma</span></div>
+                <div class="syllable-cell"><span class="glyph">◎˙</span><span class="romanization">mo</span></div>
+                <div class="syllable-cell"><span class="glyph">◎˙</span><span class="romanization">mu</span></div>
+                <div class="syllable-cell"><span class="glyph">◎˙│</span><span class="romanization">min</span></div>
+                <div class="syllable-cell"><span class="glyph">◎˙│</span><span class="romanization">men</span></div>
+                <div class="syllable-cell"><span class="glyph">◎˙│</span><span class="romanization">man</span></div>
+                <div class="syllable-cell"><span class="glyph">◎˙│</span><span class="romanization">mon</span></div>
+                <div class="syllable-cell"><span class="glyph">◎˙│</span><span class="romanization">mun</span></div>
+                
+                <!-- w row -->
+                <div class="consonant-cell">w ○</div>
+                <div class="syllable-cell"><span class="glyph">○˙</span><span class="romanization">wi</span></div>
+                <div class="syllable-cell"><span class="glyph">○˙</span><span class="romanization">we</span></div>
+                <div class="syllable-cell"><span class="glyph">○˙</span><span class="romanization">wa</span></div>
+                <div class="syllable-cell"><span class="glyph">○˙</span><span class="romanization">wo</span></div>
+                <div class="syllable-cell"><span class="glyph">○˙</span><span class="romanization">wu</span></div>
+                <div class="syllable-cell"><span class="glyph">○˙│</span><span class="romanization">win</span></div>
+                <div class="syllable-cell"><span class="glyph">○˙│</span><span class="romanization">wen</span></div>
+                <div class="syllable-cell"><span class="glyph">○˙│</span><span class="romanization">wan</span></div>
+                <div class="syllable-cell"><span class="glyph">○˙│</span><span class="romanization">won</span></div>
+                <div class="syllable-cell"><span class="glyph">○˙│</span><span class="romanization">wun</span></div>
+                
+                <!-- t row -->
+                <div class="consonant-cell">t │</div>
+                <div class="syllable-cell"><span class="glyph">│˙</span><span class="romanization">ti</span></div>
+                <div class="syllable-cell"><span class="glyph">│˙</span><span class="romanization">te</span></div>
+                <div class="syllable-cell"><span class="glyph">│˙</span><span class="romanization">ta</span></div>
+                <div class="syllable-cell"><span class="glyph">│˙</span><span class="romanization">to</span></div>
+                <div class="syllable-cell"><span class="glyph">│˙</span><span class="romanization">tu</span></div>
+                <div class="syllable-cell"><span class="glyph">│˙│</span><span class="romanization">tin</span></div>
+                <div class="syllable-cell"><span class="glyph">│˙│</span><span class="romanization">ten</span></div>
+                <div class="syllable-cell"><span class="glyph">│˙│</span><span class="romanization">tan</span></div>
+                <div class="syllable-cell"><span class="glyph">│˙│</span><span class="romanization">ton</span></div>
+                <div class="syllable-cell"><span class="glyph">│˙│</span><span class="romanization">tun</span></div>
+                
+                <!-- n row -->
+                <div class="consonant-cell">n ╎</div>
+                <div class="syllable-cell"><span class="glyph">╎˙</span><span class="romanization">ni</span></div>
+                <div class="syllable-cell"><span class="glyph">╎˙</span><span class="romanization">ne</span></div>
+                <div class="syllable-cell"><span class="glyph">╎˙</span><span class="romanization">na</span></div>
+                <div class="syllable-cell"><span class="glyph">╎˙</span><span class="romanization">no</span></div>
+                <div class="syllable-cell"><span class="glyph">╎˙</span><span class="romanization">nu</span></div>
+                <div class="syllable-cell"><span class="glyph">╎˙│</span><span class="romanization">nin</span></div>
+                <div class="syllable-cell"><span class="glyph">╎˙│</span><span class="romanization">nen</span></div>
+                <div class="syllable-cell"><span class="glyph">╎˙│</span><span class="romanization">nan</span></div>
+                <div class="syllable-cell"><span class="glyph">╎˙│</span><span class="romanization">non</span></div>
+                <div class="syllable-cell"><span class="glyph">╎˙│</span><span class="romanization">nun</span></div>
+                
+                <!-- s row -->
+                <div class="consonant-cell">s ┆</div>
+                <div class="syllable-cell"><span class="glyph">┆˙</span><span class="romanization">si</span></div>
+                <div class="syllable-cell"><span class="glyph">┆˙</span><span class="romanization">se</span></div>
+                <div class="syllable-cell"><span class="glyph">┆˙</span><span class="romanization">sa</span></div>
+                <div class="syllable-cell"><span class="glyph">┆˙</span><span class="romanization">so</span></div>
+                <div class="syllable-cell"><span class="glyph">┆˙</span><span class="romanization">su</span></div>
+                <div class="syllable-cell"><span class="glyph">┆˙│</span><span class="romanization">sin</span></div>
+                <div class="syllable-cell"><span class="glyph">┆˙│</span><span class="romanization">sen</span></div>
+                <div class="syllable-cell"><span class="glyph">┆˙│</span><span class="romanization">san</span></div>
+                <div class="syllable-cell"><span class="glyph">┆˙│</span><span class="romanization">son</span></div>
+                <div class="syllable-cell"><span class="glyph">┆˙│</span><span class="romanization">sun</span></div>
+                
+                <!-- l row -->
+                <div class="consonant-cell">l ╰</div>
+                <div class="syllable-cell"><span class="glyph">╰˙</span><span class="romanization">li</span></div>
+                <div class="syllable-cell"><span class="glyph">╰˙</span><span class="romanization">le</span></div>
+                <div class="syllable-cell"><span class="glyph">╰˙</span><span class="romanization">la</span></div>
+                <div class="syllable-cell"><span class="glyph">╰˙</span><span class="romanization">lo</span></div>
+                <div class="syllable-cell"><span class="glyph">╰˙</span><span class="romanization">lu</span></div>
+                <div class="syllable-cell"><span class="glyph">╰˙│</span><span class="romanization">lin</span></div>
+                <div class="syllable-cell"><span class="glyph">╰˙│</span><span class="romanization">len</span></div>
+                <div class="syllable-cell"><span class="glyph">╰˙│</span><span class="romanization">lan</span></div>
+                <div class="syllable-cell"><span class="glyph">╰˙│</span><span class="romanization">lon</span></div>
+                <div class="syllable-cell"><span class="glyph">╰˙│</span><span class="romanization">lun</span></div>
+                
+                <!-- k row -->
+                <div class="consonant-cell">k └</div>
+                <div class="syllable-cell"><span class="glyph">└˙</span><span class="romanization">ki</span></div>
+                <div class="syllable-cell"><span class="glyph">└˙</span><span class="romanization">ke</span></div>
+                <div class="syllable-cell"><span class="glyph">└˙</span><span class="romanization">ka</span></div>
+                <div class="syllable-cell"><span class="glyph">└˙</span><span class="romanization">ko</span></div>
+                <div class="syllable-cell"><span class="glyph">└˙</span><span class="romanization">ku</span></div>
+                <div class="syllable-cell"><span class="glyph">└˙│</span><span class="romanization">kin</span></div>
+                <div class="syllable-cell"><span class="glyph">└˙│</span><span class="romanization">ken</span></div>
+                <div class="syllable-cell"><span class="glyph">└˙│</span><span class="romanization">kan</span></div>
+                <div class="syllable-cell"><span class="glyph">└˙│</span><span class="romanization">kon</span></div>
+                <div class="syllable-cell"><span class="glyph">└˙│</span><span class="romanization">kun</span></div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>mesu a me-su</p>
+            <p>48 roots · infinite expression · we are say-stuff</p>
+        </div>
+    </div>
+</body>
+</html>
