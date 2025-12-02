@@ -1,167 +1,122 @@
-# woflOS Changelog
+# Mesu Changelog
 
-## v0.4.0 - Layer 1: Privilege Transitions (2025-10-15) ✅
-**MILESTONE: First user mode execution!**
+## v1.0.0 — First Complete Release (2025-12-01) ✅
+**MILESTONE: Language that named itself**
 
-**Achievements:**
-- ✅ Process structure with PID, context, state tracking
-- ✅ CPU context switching (31 registers + PC + sstatus)
-- ✅ Syscall interface with 4 syscalls:
-  - SYS_PUTC (1): Write character to console
-  - SYS_EXIT (2): Exit process
-  - SYS_GETPID (3): Get process ID
-  - SYS_YIELD (4): Yield CPU to scheduler
-- ✅ User mode transitions (S-mode ↔ U-mode)
-- ✅ First userspace program (init process)
-- ✅ Trap handler syscall dispatcher
-- ✅ Context save/restore on every trap
-- ✅ PC advancement after syscalls
+**Core Language:**
+- ✅ 13-phoneme inventory (8 consonants, 5 vowels)
+- ✅ CV(n) syllable structure — 80 possible syllables
+- ✅ 48 experiential root primitives
+- ✅ 5 bare-vowel grammar particles (i/a/e/o/u)
+- ✅ Compositional word formation (modifier + head)
+- ✅ Tenseless by default, optional temporal markers
 
-**New Components:**
-- `src/process/mod.rs`: Process management
-- `src/process/context.rs`: CPU context structure
-- `src/syscall/mod.rs`: Syscall interface
-- `src/user/mod.rs`: User module wrapper
-- `src/user/init.rs`: First userspace program
-- `LAYER1_DEPLOYMENT.md`: Comprehensive guide
-- `SYSCALL_REFERENCE.md`: Syscall documentation
+**Writing Systems:**
+- ✅ Print Script (Unicode box-drawing glyphs)
+- ✅ Cursive Script (zero-lift continuous strokes)
+- ✅ Positional vowel encoding (dot position = vowel)
+- ✅ Full Unicode mapping tables
 
-**Technical Details:**
-- Context structure: 31 GP registers + 2 special (PC, sstatus)
-- User memory: 0x87000000-0x87010000 (64KB)
-- Syscall detection: scause == 8 (U-mode ecall)
-- Privilege: sstatus.SPP bit controls S/U mode
+**Documentation:**
+- ✅ Complete phonology specification
+- ✅ Root lexicon with semantic fields
+- ✅ Grammar reference with sentence patterns
+- ✅ Sample texts and conversations
+- ✅ Quick reference card
 
-**Bug Fixes:**
-- Fixed context conversion between stack and structure
-- Added PC advancement after syscall (4 bytes)
-- Cleared all registers on U-mode entry (security)
+**Artifacts:**
+- `mesu-good.zip` — Complete documentation package
+- `Mesu.md` — Core specification
+- `language.md` — Extended notes
 
 ---
 
-## v0.3.0 - Layer 0: Trap Handling (2025-10-15) ✅
-**MILESTONE: Interrupts working!**
+## v0.2.0 — Script Systems (2025-12-01)
+**MILESTONE: Two writing systems**
 
-**Achievements:**
-- ✅ Timer interrupts working (1Hz, stable)
-- ✅ Full trap handler with context switching
-- ✅ All 31 registers saved/restored on interrupt
-- ✅ Exception dispatcher (interrupt vs exception)
-- ✅ Hex number printing in interrupt context
-- ✅ SBI timer calls working correctly
+**Print Script:**
+- Consonant glyphs based on articulatory features
+- Labials: ● (p), ◎ (m), ○ (w)
+- Alveolars: │ (t), ╎ (n), ┆ (s), ╰ (l)
+- Velar: └ (k)
+- Vowel dots positioned spatially (5 positions)
+- Grammar particles as horizontal lines
 
-**Bug Fixes:**
-- Fixed trap handler register save/restore
-- Fixed stack alignment issues
-- Fixed SBI ecall clobber lists
-- Resolved file sync issues between VS Code and WSL
-
----
-
-## v0.2.0 - Memory Management (2025-10-13) ✅
-**MILESTONE: Dynamic allocation!**
-
-**Achievements:**
-- ✅ Frame allocator (bitmap-based, 4KB pages)
-- ✅ Kernel heap allocator (bump allocator, 64KB)
-- ✅ Memory initialization on boot
-- ✅ BSS section clearing
-- ✅ Rust `alloc` crate support (Vec, Box, etc.)
-
-**Technical Details:**
-- Physical memory: Bitmap allocator for 4KB frames
-- Heap: 64KB bump allocator (no deallocation)
-- Atomic operations for thread-safety (future SMP)
-- Memory layout: 0x80200000-0x88000000 (128MB)
+**Cursive Script:**
+- Zero-lift design for continuous writing
+- Exit direction encodes following vowel
+- Minimal stroke count per syllable
 
 ---
 
-## v0.1.0 - First Boot (2025-10-12) ✅
-**MILESTONE: Bare metal boot!**
+## v0.1.0 — Phonology & Roots (2025-12-01)
+**MILESTONE: Core language structure**
 
-**Achievements:**
-- ✅ Bare metal boot on RISC-V
-- ✅ UART driver (16550-compatible)
-- ✅ Serial console output
-- ✅ Basic panic handler
-- ✅ Power-efficient idle loop (wfi)
-- ✅ Linker script and memory layout
-- ✅ QEMU virt machine support
+**Phonology Decisions:**
+- Minimal inventory: only sounds distinguishable cross-linguistically
+- Labial/Alveolar/Velar consonant series
+- 5-vowel system (i/e/a/o/u)
+- Optional nasal coda only
+- Bare vowels reserved exclusively for grammar
 
-**Technical Details:**
-- Entry point: `_start` in `.text.boot` section
-- UART: 0x10000000 (QEMU virt machine)
-- Memory: 128MB at 0x80000000
-- Kernel load: 0x80200000 (after OpenSBI)
+**Root Selection (48 total):**
+- Existence & Substance (3): ta, to, su
+- Pronouns & Deictics (5): mi, tu, si, ni, ka
+- Primary Qualities (8): wo/now, pi/nip, lo/nun, ko/wa...
+- Actions (12): mo, ke, ku, se, li, te, wi, me, wan, pu, lu, lin
+- Spatial (6): na, pe, so, ti, we, la
+- Temporal (4): ne, pa, lon, nu
+- Quantity (4): wen, le, mu, pan
+- Logical (4): no, kan, kon, sin
+- Relational (2): san, pen
+
+---
+
+## v0.0.1 — Initial Concept (2025-12-01)
+**MILESTONE: "What if we built a language in 5 hours?"**
+
+The seed question that started it all. Constraints established:
+- Minimal phoneme inventory
+- Experiential semantics only
+- Unambiguous grammar
+- Writable by hand efficiently
+
+---
+
+## Development Notes
+
+**Total Development Time:** ~5 hours  
+**Collaboration:** Human (wofl) + AI (Claude Opus 4.5)  
+**Methodology:** Iterative constraint satisfaction  
+**Philosophy:** Inevitable rather than invented  
+
+**What Emerged Beyond Language:**
+
+This changelog documents the technical development of Mesu. But the repository also contains `insight-gained.md` — a document that captures something more personal that emerged during the creation process. The language became a vehicle for understanding something I'd carried for 40 years.
+
+That's not a version number. That's just... what happened.
 
 ---
 
 ## Roadmap
 
-### ✅ Layer 0: Trap Handling (COMPLETE)
-- Boot sequence ✓
-- Memory/heap allocation ✓
-- Timer interrupts ✓
-- Exception handling ✓
-- Dispatcher setup ✓
+### 🚧 Potential Future Work
+- [ ] IPA transcription tools
+- [ ] Mesu keyboard layout
+- [ ] Text-to-Print converter
+- [ ] Audio pronunciation guide
+- [ ] Expanded vocabulary (community-driven)
 
-### ✅ Layer 1: Privilege Transitions (COMPLETE)
-- Context switching ✓
-- Supervisor/user modes ✓
-- Syscall interface ✓
-- First user program ✓
-
-### 🚧 Layer 2: Process Isolation (NEXT)
-- [ ] PMP configuration
-- [ ] User memory isolation
-- [ ] Multiple processes
-- [ ] Process lifecycle management
-
-### 📋 Layer 3: Scheduling (PLANNED)
-- [ ] Round-robin scheduler
-- [ ] Timer-based preemption
-- [ ] Process priority
-- [ ] Context switch optimization
-
-### 📋 Layer 4: IPC Foundation (PLANNED)
-- [ ] Synchronous message passing
-- [ ] Kernel message buffers
-- [ ] Endpoint abstraction
-- [ ] Send/receive syscalls
-
-### 📋 Layer 5: Capabilities (PLANNED)
-- [ ] Capability structure
-- [ ] Ed25519 crypto signing
-- [ ] Syscall verification
-- [ ] Capability passing via IPC
-- [ ] Memory-as-capabilities model
+### 📋 Community Wishlist
+- [ ] Mesu font (proper glyph rendering)
+- [ ] Mobile learning app
+- [ ] Anki deck for roots
+- [ ] Discord/community space
 
 ---
 
-## Statistics
+**◎˙┆˙ ┈ ◎˙┆˙ · pan to i nu ne**
 
-**Total Development Time:** ~3 days  
-**Total Code:** ~2500 lines  
-**Languages:** Rust (95%), Assembly (5%)  
-**Architecture:** RISC-V 64-bit  
-**Target:** QEMU virt machine  
+*Mesu is say-stuff. All things are new now.*
 
-**Lines by Module:**
-- Memory: ~400 lines
-- Interrupts: ~200 lines
-- Process: ~400 lines
-- Syscall: ~150 lines
-- User: ~300 lines
-- Main/Boot: ~150 lines
-- Drivers (UART): ~100 lines
-
----
-
-**Architecture:** RISC-V 64-bit  
-**Kernel Type:** Microkernel  
-**Language:** Rust + Assembly  
-**Platform:** QEMU virt machine (128MB RAM)  
-**Security Model:** Capability-based (in progress)
-
-**Built with 🐺 by wofl**  
-*"One layer at a time, we build the future!"*
+**Built with 🐺 by wofl**
