@@ -1,96 +1,60 @@
-# RRLANG Document Pack v0.1
+# RRLANG Document Pack Patch v0.3 — Mass Corpus Harvester
 
-This pack is the dataset scaffold for the Riemann-Resonant Linguistics experiments.
+This patch adds a broader dataset harvester for RRLANG. It is designed to populate:
 
-It includes the Mesu seed texts already supplied by the user, plus scripts to fetch a cross-linguistic UDHR set and optional FLORES-200 material.
+- UDHR parallel texts via NLTK's UDHR packages
+- FLORES-200 parallel benchmark texts via Hugging Face `datasets` when available
+- Tatoeba CC0 monolingual sentence samples
+- Wikipedia native/factual prose via MediaWiki API random/extract queries
+- Project Gutenberg curated literary texts by user-supplied Gutenberg IDs
+- Synthetic controls
 
-## Why this is not just a pile of downloaded files
+The goal is not to blindly download terabytes. The default run is a sane research pack; `-Big` and `-Huge` increase limits.
 
-The safest research route is source-tracked retrieval. The scripts write a `source.json` beside every downloaded document so later RRLANG reports can cite exactly where each text came from.
+## Apply
 
-## Included immediately
+Copy the `scripts/` folder over your current document pack's `scripts/` folder.
 
-- Mesu UDHR prepared text
-- Mesu Dylan Thomas prepared text
-- Mesu Bashō prepared text
-- Mesu fossil/root/reference notes copied from the seed dataset
-- Control generator script
-
-## Fetch the UDHR target-language pack
-
-From this folder in PowerShell:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\Fetch-RRLangDocuments.ps1
-```
-
-Fetch only a few languages:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\Fetch-RRLangDocuments.ps1 -Only "en,fr,de,es,ja,zh"
-```
-
-The fetcher tries:
-
-1. OHCHR official translation pages
-2. EFELE / UDHR-in-XML individual plain-text files
-3. EFELE bulk plain-text zip
-
-Downloaded files land under:
+Your current root appears to be:
 
 ```text
-datasets/parallel/udhr/target_languages/<code>/udhr_<code>.txt
+D:\code\5hr-conlang\riemann_analysis\rrlang\testdata
 ```
 
-## Generate controls
+Run commands from that folder.
+
+## Quick first real pack
 
 ```powershell
-py -3 .\scripts\generate_controls.py
+powershell -ExecutionPolicy Bypass -File .\scripts\Fetch-RRLangMegaPack.ps1 -Preset Core
 ```
 
-## Run RRLANG over the UDHR pack
-
-Adjust the RrLangRepo path if needed:
+## Bigger pack
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\run_rrlang_udhr_batch.ps1 -RrLangRepo "..\rrlang_mvp_v0_2" -Nulls 100
+powershell -ExecutionPolicy Bypass -File .\scripts\Fetch-RRLangMegaPack.ps1 -Preset Broad -WikiPagesPerLang 40 -TatoebaPerLang 20000
 ```
 
-## Optional FLORES-200
-
-FLORES-200 is useful for modern parallel prose. It is optional because it uses the Hugging Face `datasets` package and has CC-BY-SA attribution/share-alike obligations.
+## Huge-ish local pack
 
 ```powershell
-py -3 -m pip install datasets
-py -3 .\scripts\fetch_flores200_optional.py --split devtest
+powershell -ExecutionPolicy Bypass -File .\scripts\Fetch-RRLangMegaPack.ps1 -Preset Broad -Big
 ```
 
-## Core target languages
+## Outputs
 
-- English
-- Welsh
-- French
-- Spanish
-- German
-- Russian
-- Arabic
-- Hebrew
-- Chinese
-- Japanese
-- Turkish
-- Swahili
-- Xhosa
-- Icelandic
-- Latin
-- Greek
-- Mesu
+Files land under:
 
-## Licensing notes
+```text
+datasets/
+  parallel/udhr/
+  parallel/flores200/
+  native/wikipedia_api/
+  native/tatoeba_cc0/
+  native/gutenberg/
+  controls/
+_cache/
+logs/
+```
 
-UDHR is widely described as public domain/copyright-free, but individual packaging and sites may have their own metadata or terms. Keep `source.json` files with every document.
-
-FLORES-200 is CC-BY-SA 4.0.
-
-Tatoeba textual downloads are CC BY 2.0 FR and require attribution.
-
-OPUS contains many corpora with mixed licenses; do not mix OPUS data into a publishable pack without per-corpus license checks.
+Every downloaded text gets a sidecar `source.json` where practical.
