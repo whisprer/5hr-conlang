@@ -1,0 +1,2116 @@
+{
+  "metadata": {
+    "experiment_name": "rrlang_mvp_analysis",
+    "input_path": "..\\rrlang_dataset_seed_v0_1\\datasets\\parallel\\udhr\\mesu\\udhr_mesu_text_only.txt",
+    "language": "Mesu",
+    "unix_timestamp": 1783227268,
+    "null_samples": 100,
+    "seed": 18427,
+    "case_policy": "lowercase",
+    "punctuation_policy": "preserve",
+    "whitespace_policy": "normalise",
+    "status": "exploratory"
+  },
+  "input_byte_len": 707,
+  "input_char_len": 707,
+  "cleaned_char_len": 698,
+  "global_alerts": [],
+  "encodings": [
+    {
+      "encoding": "utf8_bits",
+      "sequence_len": 5584,
+      "unique_symbol_count": 2,
+      "symbol_entropy": 0.994618685366,
+      "notes": ["E0 raw UTF-8 bit analysis is diagnostic only. Raw-byte findings are not linguistic evidence without cross-encoding support."],
+      "events": [
+        {
+          "event_name": "bit_one",
+          "description": "Positions where the raw UTF-8 diagnostic bitstream contains 1.",
+          "event_count": 2551,
+          "alerts": [
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from its shuffle null with z=-68.286. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "RAW_LAYER_FINDING_NOT_LINGUISTIC",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "This deviation occurred in raw UTF-8 bits. Treat it as encoding-level unless it survives linguistic encodings."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'run_entropy' deviates from its shuffle null with z=-6.740. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "RAW_LAYER_FINDING_NOT_LINGUISTIC",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "This deviation occurred in raw UTF-8 bits. Treat it as encoding-level unless it survives linguistic encodings."
+             },
+            {
+              "code": "OVER_REGULARITY_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'prime_gap_affinity' deviates from its shuffle null with z=8.861. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "RAW_LAYER_FINDING_NOT_LINGUISTIC",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "This deviation occurred in raw UTF-8 bits. Treat it as encoding-level unless it survives linguistic encodings."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.456840974212,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 2551,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 5584,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.517836142689,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.343394747158,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.203449627597,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.148961191690,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 2.046491205729,
+              "null_mean": 2.172522085094,
+              "null_std": 0.001845644308,
+              "z_score": -68.285573134531,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 1.794305789898,
+              "null_mean": 2.006168323654,
+              "null_std": 0.031434323254,
+              "z_score": -6.739847142368,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": 0.016019590637,
+              "null_mean": 0.001477574421,
+              "null_std": 0.022425297552,
+              "z_score": 0.648464805544,
+              "empirical_p": 0.475247524752,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.530588235294,
+              "null_mean": 0.437364705882,
+              "null_std": 0.010520174733,
+              "z_score": 8.861405041400,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.000324635667,
+              "null_mean": 0.000421124513,
+              "null_std": 0.000114985529,
+              "z_score": -0.839139035841,
+              "empirical_p": 0.376237623762,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.857671940583,
+              "null_mean": 0.793856479345,
+              "null_std": 0.043392452646,
+              "z_score": 1.470658083320,
+              "empirical_p": 0.099009900990,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "bit_transition",
+          "description": "Positions where the raw UTF-8 diagnostic bitstream changes from the previous bit.",
+          "event_count": 2964,
+          "alerts": [
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from its shuffle null with z=-57.974. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "RAW_LAYER_FINDING_NOT_LINGUISTIC",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "This deviation occurred in raw UTF-8 bits. Treat it as encoding-level unless it survives linguistic encodings."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'run_entropy' deviates from its shuffle null with z=-3.674. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "RAW_LAYER_FINDING_NOT_LINGUISTIC",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "This deviation occurred in raw UTF-8 bits. Treat it as encoding-level unless it survives linguistic encodings."
+             },
+            {
+              "code": "OVER_REGULARITY_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.530802292264,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 2964,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 5584,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.540148448043,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.342442645074,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.208839406208,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.151821862348,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 1.794877425020,
+              "null_mean": 1.875501352697,
+              "null_std": 0.001390695215,
+              "z_score": -57.973829765221,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 1.913408918534,
+              "null_mean": 2.008584975027,
+              "null_std": 0.025903819180,
+              "z_score": -3.674209421808,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": -0.050446842813,
+              "null_mean": 0.001549521742,
+              "null_std": 0.018577950854,
+              "z_score": -2.798821299736,
+              "empirical_p": 0.019801980198,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.392507593655,
+              "null_mean": 0.396442794465,
+              "null_std": 0.007684750711,
+              "z_score": -0.512079175748,
+              "empirical_p": 0.663366336634,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.000518514145,
+              "null_mean": 0.000389573469,
+              "null_std": 0.000129232067,
+              "z_score": 0.997745206224,
+              "empirical_p": 0.316831683168,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.856249886023,
+              "null_mean": 0.791401511442,
+              "null_std": 0.041351550395,
+              "z_score": 1.568221117718,
+              "empirical_p": 0.118811881188,
+              "null_samples": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "encoding": "grapheme",
+      "sequence_len": 698,
+      "unique_symbol_count": 18,
+      "symbol_entropy": 3.712837252332,
+      "notes": ["MVP E1 uses Unicode scalar values as a deterministic grapheme approximation. True extended grapheme-cluster segmentation is a planned later extension."],
+      "events": [
+        {
+          "event_name": "vowel",
+          "description": "Basic Latin-vowel positions plus common accented vowels.",
+          "event_count": 217,
+          "alerts": [
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from its shuffle null with z=-59.447. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'run_entropy' deviates from its shuffle null with z=-9.513. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "OVER_REGULARITY_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'prime_gap_affinity' deviates from its shuffle null with z=8.400. This is a tripwire, not a conclusion."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.310888252149,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 217,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 698,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.511520737327,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.437788018433,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.221198156682,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.184331797235,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 1.402282642423,
+              "null_mean": 2.815930213720,
+              "null_std": 0.023779910660,
+              "z_score": -59.447135504325,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 1.468248016222,
+              "null_mean": 2.228388971461,
+              "null_std": 0.079901313992,
+              "z_score": -9.513497554231,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": 0.059300699301,
+              "null_mean": -0.000196503497,
+              "null_std": 0.042792674595,
+              "z_score": 1.390359526730,
+              "empirical_p": 0.148514851485,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.763888888889,
+              "null_mean": 0.474675925926,
+              "null_std": 0.034428424071,
+              "z_score": 8.400412472192,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.000523358580,
+              "null_mean": 0.002138168435,
+              "null_std": 0.000748632707,
+              "z_score": -2.157012164578,
+              "empirical_p": 0.039603960396,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.906533150532,
+              "null_mean": 0.841541350906,
+              "null_std": 0.034510273072,
+              "z_score": 1.883259500482,
+              "empirical_p": 0.069306930693,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "consonant",
+          "description": "Alphabetic non-vowel positions under the MVP classifier.",
+          "event_count": 243,
+          "alerts": [
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from its shuffle null with z=-50.796. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'run_entropy' deviates from its shuffle null with z=-11.696. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "OVER_REGULARITY_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'prime_gap_affinity' deviates from its shuffle null with z=11.478. This is a tripwire, not a conclusion."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.348137535817,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 243,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 698,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.539094650206,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.382716049383,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.238683127572,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.168724279835,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 1.727400626605,
+              "null_mean": 2.624678210429,
+              "null_std": 0.017664302113,
+              "z_score": -50.796095882197,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 1.244878233357,
+              "null_mean": 2.129947829955,
+              "null_std": 0.075670646652,
+              "z_score": -11.696339806259,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": -0.023398601399,
+              "null_mean": 0.009346573427,
+              "null_std": 0.041342282895,
+              "z_score": -0.792050475494,
+              "empirical_p": 0.485148514851,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.876033057851,
+              "null_mean": 0.472892561983,
+              "null_std": 0.035123696861,
+              "z_score": 11.477735315490,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.000500281062,
+              "null_mean": 0.002201953710,
+              "null_std": 0.000733728212,
+              "z_score": -2.319213872990,
+              "empirical_p": 0.029702970297,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.821801179218,
+              "null_mean": 0.836240733594,
+              "null_std": 0.039086235201,
+              "z_score": -0.369428119677,
+              "empirical_p": 0.742574257426,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "whitespace",
+          "description": "Whitespace positions.",
+          "event_count": 145,
+          "alerts": [
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from its shuffle null with z=-13.995. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'run_entropy' deviates from its shuffle null with z=-6.336. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "OVER_REGULARITY_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'prime_gap_affinity' deviates from its shuffle null with z=3.272. This is a tripwire, not a conclusion."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.207736389685,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 145,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 698,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.524137931034,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.379310344828,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.268965517241,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.206896551724,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 2.889813988368,
+              "null_mean": 3.407215945976,
+              "null_std": 0.036971647777,
+              "z_score": -13.994560391872,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 1.999324889878,
+              "null_mean": 2.531525396679,
+              "null_std": 0.083997289954,
+              "z_score": -6.335924731526,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": -0.019538461538,
+              "null_mean": 0.004419440559,
+              "null_std": 0.037308936448,
+              "z_score": -0.642149157251,
+              "empirical_p": 0.584158415842,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.618055555556,
+              "null_mean": 0.477083333333,
+              "null_std": 0.043086318252,
+              "z_score": 3.271855845195,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.000233206974,
+              "null_mean": 0.001730729683,
+              "null_std": 0.000678655440,
+              "z_score": -2.206602377695,
+              "empirical_p": 0.029702970297,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.784969670042,
+              "null_mean": 0.833654017089,
+              "null_std": 0.044488081392,
+              "z_score": -1.094323367602,
+              "empirical_p": 0.237623762376,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "punctuation",
+          "description": "Punctuation positions.",
+          "event_count": 93,
+          "alerts": [
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from its shuffle null with z=-12.236. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.133237822350,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 93,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 698,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.537634408602,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.462365591398,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.268817204301,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.172043010753,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 3.298906624531,
+              "null_mean": 3.958629891316,
+              "null_std": 0.053918060967,
+              "z_score": -12.235663800857,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 2.647243616158,
+              "null_mean": 2.867053113354,
+              "null_std": 0.089750873716,
+              "z_score": -2.449107045911,
+              "empirical_p": 0.029702970297,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": -0.016363636364,
+              "null_mean": 0.004644895105,
+              "null_std": 0.032617101162,
+              "z_score": -0.644095603833,
+              "empirical_p": 0.544554455446,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.543478260870,
+              "null_mean": 0.443152173913,
+              "null_std": 0.055032034776,
+              "z_score": 1.823048836294,
+              "empirical_p": 0.069306930693,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.000645630553,
+              "null_mean": 0.001263861903,
+              "null_std": 0.000610860453,
+              "z_score": -1.012066417518,
+              "empirical_p": 0.287128712871,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.904685561423,
+              "null_mean": 0.834687423810,
+              "null_std": 0.046660192827,
+              "z_score": 1.500168202737,
+              "empirical_p": 0.178217821782,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "digit",
+          "description": "ASCII digit positions.",
+          "event_count": 0,
+          "alerts": [
+            {
+              "code": "LOW_EVENT_COUNT",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event occurs fewer than five times; gap and prime-position metrics are weak evidence."
+             },
+            {
+              "code": "DEGENERATE_EVENT_MAP",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map is all false or all true; many metrics collapse to trivial values."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 0,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 698,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "encoding": "grapheme_class",
+      "sequence_len": 698,
+      "unique_symbol_count": 4,
+      "symbol_entropy": 1.912391760161,
+      "notes": ["E2 maps Unicode scalar values into broad grapheme classes."],
+      "events": [
+        {
+          "event_name": "vowel",
+          "description": "Positions classified as vowel in the grapheme-class stream.",
+          "event_count": 217,
+          "alerts": [
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from its shuffle null with z=-69.232. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'run_entropy' deviates from its shuffle null with z=-9.473. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "OVER_REGULARITY_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'prime_gap_affinity' deviates from its shuffle null with z=8.634. This is a tripwire, not a conclusion."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.310888252149,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 217,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 698,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.511520737327,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.437788018433,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.221198156682,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.184331797235,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 1.402282642423,
+              "null_mean": 2.813714197313,
+              "null_std": 0.020386962000,
+              "z_score": -69.232068756310,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 1.468248016222,
+              "null_mean": 2.215567379031,
+              "null_std": 0.078887878461,
+              "z_score": -9.473183680221,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": 0.059300699301,
+              "null_mean": -0.001271468531,
+              "null_std": 0.045463346993,
+              "z_score": 1.332329708183,
+              "empirical_p": 0.207920792079,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.763888888889,
+              "null_mean": 0.481759259259,
+              "null_std": 0.032675657466,
+              "z_score": 8.634244924427,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.000523358580,
+              "null_mean": 0.002083540164,
+              "null_std": 0.000838005938,
+              "z_score": -1.861778674490,
+              "empirical_p": 0.079207920792,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.906533150532,
+              "null_mean": 0.838399467968,
+              "null_std": 0.040868484096,
+              "z_score": 1.667144844539,
+              "empirical_p": 0.108910891089,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "consonant",
+          "description": "Positions classified as consonant in the grapheme-class stream.",
+          "event_count": 243,
+          "alerts": [
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from its shuffle null with z=-45.859. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'run_entropy' deviates from its shuffle null with z=-13.322. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "OVER_REGULARITY_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'prime_gap_affinity' deviates from its shuffle null with z=13.297. This is a tripwire, not a conclusion."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.348137535817,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 243,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 698,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.539094650206,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.382716049383,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.238683127572,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.168724279835,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 1.727400626605,
+              "null_mean": 2.627862941318,
+              "null_std": 0.019635635490,
+              "z_score": -45.858577643762,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 1.244878233357,
+              "null_mean": 2.135668536391,
+              "null_std": 0.066867926985,
+              "z_score": -13.321637789564,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": -0.023398601399,
+              "null_mean": 0.008831608392,
+              "null_std": 0.047187606436,
+              "z_score": -0.683022772814,
+              "empirical_p": 0.594059405941,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.876033057851,
+              "null_mean": 0.472148760331,
+              "null_std": 0.030374775619,
+              "z_score": 13.296700610413,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.000500281062,
+              "null_mean": 0.002374851988,
+              "null_std": 0.000700188023,
+              "z_score": -2.677239345365,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.821801179218,
+              "null_mean": 0.843045477149,
+              "null_std": 0.030612273792,
+              "z_score": -0.693979744058,
+              "empirical_p": 0.524752475248,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "digit",
+          "description": "Positions classified as digit in the grapheme-class stream.",
+          "event_count": 0,
+          "alerts": [
+            {
+              "code": "LOW_EVENT_COUNT",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event occurs fewer than five times; gap and prime-position metrics are weak evidence."
+             },
+            {
+              "code": "DEGENERATE_EVENT_MAP",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map is all false or all true; many metrics collapse to trivial values."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 0,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 698,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "whitespace",
+          "description": "Positions classified as whitespace in the grapheme-class stream.",
+          "event_count": 145,
+          "alerts": [
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from its shuffle null with z=-14.340. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'run_entropy' deviates from its shuffle null with z=-6.311. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "OVER_REGULARITY_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'prime_gap_affinity' deviates from its shuffle null with z=3.163. This is a tripwire, not a conclusion."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.207736389685,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 145,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 698,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.524137931034,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.379310344828,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.268965517241,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.206896551724,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 2.889813988368,
+              "null_mean": 3.412081750914,
+              "null_std": 0.036421538059,
+              "z_score": -14.339530683915,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 1.999324889878,
+              "null_mean": 2.549270819042,
+              "null_std": 0.087137685614,
+              "z_score": -6.311229467367,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": -0.019538461538,
+              "null_mean": -0.000792167832,
+              "null_std": 0.042404699397,
+              "z_score": -0.442080570616,
+              "empirical_p": 0.772277227723,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.618055555556,
+              "null_mean": 0.471736111111,
+              "null_std": 0.046256875051,
+              "z_score": 3.163193455713,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.000233206974,
+              "null_mean": 0.001676321123,
+              "null_std": 0.000704580947,
+              "z_score": -2.048187869120,
+              "empirical_p": 0.039603960396,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.784969670042,
+              "null_mean": 0.836357518943,
+              "null_std": 0.040630594187,
+              "z_score": -1.264757504276,
+              "empirical_p": 0.227722772277,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "punctuation",
+          "description": "Positions classified as punctuation in the grapheme-class stream.",
+          "event_count": 93,
+          "alerts": [
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from its shuffle null with z=-10.287. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.133237822350,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 93,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 698,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.537634408602,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.462365591398,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.268817204301,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.172043010753,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 3.298906624531,
+              "null_mean": 3.947856236186,
+              "null_std": 0.063081943261,
+              "z_score": -10.287406793543,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 2.647243616158,
+              "null_mean": 2.845340192507,
+              "null_std": 0.106525611557,
+              "z_score": -1.859614542015,
+              "empirical_p": 0.069306930693,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": -0.016363636364,
+              "null_mean": -0.000584195804,
+              "null_std": 0.034223564594,
+              "z_score": -0.461069463295,
+              "empirical_p": 0.702970297030,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.543478260870,
+              "null_mean": 0.439673913043,
+              "null_std": 0.054782517201,
+              "z_score": 1.894844434500,
+              "empirical_p": 0.069306930693,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.000645630553,
+              "null_mean": 0.001197504415,
+              "null_std": 0.000572572576,
+              "z_score": -0.963849623965,
+              "empirical_p": 0.356435643564,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.904685561423,
+              "null_mean": 0.830588114848,
+              "null_std": 0.045868801198,
+              "z_score": 1.615421476871,
+              "empirical_p": 0.108910891089,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "other",
+          "description": "Positions classified as other in the grapheme-class stream.",
+          "event_count": 0,
+          "alerts": [
+            {
+              "code": "LOW_EVENT_COUNT",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event occurs fewer than five times; gap and prime-position metrics are weak evidence."
+             },
+            {
+              "code": "DEGENERATE_EVENT_MAP",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map is all false or all true; many metrics collapse to trivial values."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 0,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 698,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "encoding": "word_boundary",
+      "sequence_len": 698,
+      "unique_symbol_count": 2,
+      "symbol_entropy": 0.737133593413,
+      "notes": ["E6 MVP word boundaries are whitespace-derived and should be interpreted as orthographic/token boundaries."],
+      "events": [
+        {
+          "event_name": "word_boundary",
+          "description": "Positions marked as word boundaries after declared whitespace preprocessing.",
+          "event_count": 145,
+          "alerts": [
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from its shuffle null with z=-17.173. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'run_entropy' deviates from its shuffle null with z=-7.513. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "OVER_REGULARITY_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'prime_gap_affinity' deviates from its shuffle null with z=4.182. This is a tripwire, not a conclusion."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.207736389685,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 145,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 698,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.524137931034,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.379310344828,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.268965517241,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.206896551724,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 2.889813988368,
+              "null_mean": 3.421771776052,
+              "null_std": 0.030976104004,
+              "z_score": -17.173166373987,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 1.999324889878,
+              "null_mean": 2.541648780192,
+              "null_std": 0.072180401429,
+              "z_score": -7.513450737008,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": -0.019538461538,
+              "null_mean": -0.000729650350,
+              "null_std": 0.039288933484,
+              "z_score": -0.478730510627,
+              "empirical_p": 0.742574257426,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.618055555556,
+              "null_mean": 0.466041666667,
+              "null_std": 0.036345273229,
+              "z_score": 4.182494046242,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.000233206974,
+              "null_mean": 0.001724881821,
+              "null_std": 0.000715437828,
+              "z_score": -2.084981793917,
+              "empirical_p": 0.039603960396,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.784969670042,
+              "null_mean": 0.837222430223,
+              "null_std": 0.043235985599,
+              "z_score": -1.208547913443,
+              "empirical_p": 0.198019801980,
+              "null_samples": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "encoding": "frequency_class",
+      "sequence_len": 146,
+      "unique_symbol_count": 3,
+      "symbol_entropy": 1.432479246503,
+      "notes": ["E7 MVP frequency classes are calculated inside the supplied sample only."],
+      "events": [
+        {
+          "event_name": "hapax",
+          "description": "Token positions in frequency class hapax.",
+          "event_count": 25,
+          "alerts": [],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.171232876712,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 25,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 146,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.760000000000,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.480000000000,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.280000000000,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.240000000000,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 3.073934896284,
+              "null_mean": 3.187683818780,
+              "null_std": 0.149741059918,
+              "z_score": -0.759637487257,
+              "empirical_p": 0.386138613861,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 2.156177079414,
+              "null_mean": 2.448655375046,
+              "null_std": 0.162594264055,
+              "z_score": -1.798822961751,
+              "empirical_p": 0.089108910891,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": 0.005299417064,
+              "null_mean": -0.002636459989,
+              "null_std": 0.065370515288,
+              "z_score": 0.121398416680,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.458333333333,
+              "null_mean": 0.459166666667,
+              "null_std": 0.098384110613,
+              "z_score": -0.008470202436,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.002009128921,
+              "null_mean": 0.004627175991,
+              "null_std": 0.002050335214,
+              "z_score": -1.276887336274,
+              "empirical_p": 0.188118811881,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.864204019793,
+              "null_mean": 0.864096002692,
+              "null_std": 0.038968687186,
+              "z_score": 0.002771894799,
+              "empirical_p": 1,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "mid_frequency",
+          "description": "Token positions in frequency class mid_frequency.",
+          "event_count": 42,
+          "alerts": [],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.287671232877,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 42,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 146,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.547619047619,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.357142857143,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.309523809524,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.214285714286,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 2.654264875617,
+              "null_mean": 2.754718097128,
+              "null_std": 0.076634090766,
+              "z_score": -1.310816380891,
+              "empirical_p": 0.217821782178,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 1.913641221145,
+              "null_mean": 2.169756294763,
+              "null_std": 0.141620052413,
+              "z_score": -1.808466168830,
+              "empirical_p": 0.079207920792,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": 0.005829358771,
+              "null_mean": -0.005617382088,
+              "null_std": 0.084206216312,
+              "z_score": 0.135937005126,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.585365853659,
+              "null_mean": 0.484390243902,
+              "null_std": 0.068199351986,
+              "z_score": 1.480594856341,
+              "empirical_p": 0.148514851485,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.004872721571,
+              "null_mean": 0.007660506616,
+              "null_std": 0.002964676793,
+              "z_score": -0.940333547020,
+              "empirical_p": 0.386138613861,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.865137360339,
+              "null_mean": 0.882234963657,
+              "null_std": 0.032284128000,
+              "z_score": -0.529597804760,
+              "empirical_p": 0.623762376238,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "high_frequency",
+          "description": "Token positions in frequency class high_frequency.",
+          "event_count": 79,
+          "alerts": [],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.541095890411,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 79,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 146,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.556962025316,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.354430379747,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.240506329114,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.164556962025,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "observed": 1.719731839779,
+              "null_mean": 1.763179376089,
+              "null_std": 0.042569753314,
+              "z_score": -1.020619875073,
+              "empirical_p": 0.297029702970,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "observed": 1.717109060123,
+              "null_mean": 1.926530485339,
+              "null_std": 0.160120431249,
+              "z_score": -1.307899457818,
+              "empirical_p": 0.188118811881,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "observed": -0.011128775835,
+              "null_mean": 0.004093799682,
+              "null_std": 0.091206794864,
+              "z_score": -0.166901770195,
+              "empirical_p": 0.920792079208,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "observed": 0.423076923077,
+              "null_mean": 0.389358974359,
+              "null_std": 0.047715076178,
+              "z_score": 0.706651889062,
+              "empirical_p": 0.524752475248,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "observed": 0.007399614417,
+              "null_mean": 0.009443490594,
+              "null_std": 0.002894036444,
+              "z_score": -0.706237193714,
+              "empirical_p": 0.465346534653,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "observed": 0.869282334756,
+              "null_mean": 0.875963363093,
+              "null_std": 0.031375759442,
+              "z_score": -0.212935988004,
+              "empirical_p": 0.851485148515,
+              "null_samples": 100
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
