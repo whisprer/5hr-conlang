@@ -1,0 +1,400 @@
+RRLANG ANALYSIS REPORT
+======================
+
+Experiment: rrlang_mvp_analysis
+Status: exploratory
+Language: ControlCode
+Input: ..\rrlang_dataset_seed_v0_1\datasets\controls\code_sample_rust.rs
+Input bytes: 342
+Input chars: 342
+Cleaned chars: 260
+Null samples: 100
+Seed: 18427
+
+Encoding: utf8_bits
+  sequence_len: 2080
+  unique_symbols: 2
+  symbol_entropy_bits: 0.983286
+  note: E0 raw UTF-8 bit analysis is diagnostic only. Raw-byte findings are not linguistic evidence without cross-encoding support.
+
+  Event: bit_one
+    description: Positions where the raw UTF-8 diagnostic bitstream contains 1.
+    event_count: 882
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from its shuffle null with z=-21.627. This is a tripwire, not a conclusion.
+      - [warning:RAW_LAYER_FINDING_NOT_LINGUISTIC:L0] This deviation occurred in raw UTF-8 bits. Treat it as encoding-level unless it survives linguistic encodings.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints.
+    observed:
+      - event_density = 0.424038 (count(event=true) / sequence_length)
+      - event_count = 882.000000 (Number of true positions in the event map.)
+      - sequence_length = 2080.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.506803 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.341270 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.204082 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.150794 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=2.210048, null_mean=2.305338, null_std=0.004406, z=-21.627, p_emp=0.009901
+      - run_entropy: observed=2.065648, null_mean=2.032629, null_std=0.043196, z=0.764, p_emp=0.495050
+      - prime_index_occupancy_bias: observed=-0.016456, null_mean=0.001214, null_std=0.030865, z=-0.572, p_emp=0.633663
+      - prime_gap_affinity: observed=0.469921, null_mean=0.448865, null_std=0.017119, z=1.230, p_emp=0.217822
+      - zeta_spectral_coherence: observed=0.000685, null_mean=0.000930, null_std=0.000306, z=-0.804, p_emp=0.346535
+      - critical_line_symmetry: observed=0.779595, null_mean=0.811719, null_std=0.039313, z=-0.817, p_emp=0.376238
+  Event: bit_transition
+    description: Positions where the raw UTF-8 diagnostic bitstream changes from the previous bit.
+    event_count: 971
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from its shuffle null with z=-12.882. This is a tripwire, not a conclusion.
+      - [warning:RAW_LAYER_FINDING_NOT_LINGUISTIC:L0] This deviation occurred in raw UTF-8 bits. Treat it as encoding-level unless it survives linguistic encodings.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints.
+    observed:
+      - event_density = 0.466827 (count(event=true) / sequence_length)
+      - event_count = 971.000000 (Number of true positions in the event map.)
+      - sequence_length = 2080.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.529351 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.346035 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.204943 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.150360 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=2.067579, null_mean=2.124455, null_std=0.004415, z=-12.882, p_emp=0.009901
+      - run_entropy: observed=1.922269, null_mean=2.000285, null_std=0.043475, z=-1.795, p_emp=0.059406
+      - prime_index_occupancy_bias: observed=-0.014029, null_mean=0.002500, null_std=0.031568, z=-0.524, p_emp=0.613861
+      - prime_gap_affinity: observed=0.428866, null_mean=0.430000, null_std=0.013708, z=-0.083, p_emp=0.960396
+      - zeta_spectral_coherence: observed=0.000523, null_mean=0.000937, null_std=0.000287, z=-1.443, p_emp=0.158416
+      - critical_line_symmetry: observed=0.767096, null_mean=0.809979, null_std=0.043573, z=-0.984, p_emp=0.336634
+
+Encoding: grapheme
+  sequence_len: 260
+  unique_symbols: 41
+  symbol_entropy_bits: 4.452978
+  note: MVP E1 uses Unicode scalar values as a deterministic grapheme approximation. True extended grapheme-cluster segmentation is a planned later extension.
+
+  Event: vowel
+    description: Basic Latin-vowel positions plus common accented vowels.
+    event_count: 45
+    observed:
+      - event_density = 0.173077 (count(event=true) / sequence_length)
+      - event_count = 45.000000 (Number of true positions in the event map.)
+      - sequence_length = 260.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.688889 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.400000 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.266667 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.244444 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=3.298675, null_mean=3.428620, null_std=0.095183, z=-1.365, p_emp=0.138614
+      - run_entropy: observed=2.237636, null_mean=2.571091, null_std=0.131001, z=-2.545, p_emp=0.019802
+      - prime_index_occupancy_bias: observed=-0.059002, null_mean=0.002080, null_std=0.063280, z=-0.965, p_emp=0.386139
+      - prime_gap_affinity: observed=0.522727, null_mean=0.451364, null_std=0.077056, z=0.926, p_emp=0.386139
+      - zeta_spectral_coherence: observed=0.002125, null_mean=0.003245, null_std=0.001420, z=-0.788, p_emp=0.425743
+      - critical_line_symmetry: observed=0.876715, null_mean=0.860061, null_std=0.039393, z=0.423, p_emp=0.643564
+  Event: consonant
+    description: Alphabetic non-vowel positions under the MVP classifier.
+    event_count: 76
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from its shuffle null with z=-3.570. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint.
+    observed:
+      - event_density = 0.292308 (count(event=true) / sequence_length)
+      - event_count = 76.000000 (Number of true positions in the event map.)
+      - sequence_length = 260.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.618421 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.394737 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.250000 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.171053 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=2.648267, null_mean=2.807515, null_std=0.059210, z=-2.690, p_emp=0.019802
+      - run_entropy: observed=1.787211, null_mean=2.222727, null_std=0.121979, z=-3.570, p_emp=0.009901
+      - prime_index_occupancy_bias: observed=0.163280, null_mean=-0.007160, null_std=0.069054, z=2.468, p_emp=0.029703
+      - prime_gap_affinity: observed=0.626667, null_mean=0.482400, null_std=0.056166, z=2.569, p_emp=0.029703
+      - zeta_spectral_coherence: observed=0.004545, null_mean=0.004909, null_std=0.001875, z=-0.194, p_emp=0.881188
+      - critical_line_symmetry: observed=0.884672, null_mean=0.854623, null_std=0.036081, z=0.833, p_emp=0.287129
+  Event: whitespace
+    description: Whitespace positions.
+    event_count: 66
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from its shuffle null with z=-8.653. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from its shuffle null with z=-5.688. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'prime_gap_affinity' deviates from its shuffle null with z=5.212. This is a tripwire, not a conclusion.
+    observed:
+      - event_density = 0.253846 (count(event=true) / sequence_length)
+      - event_count = 66.000000 (Number of true positions in the event map.)
+      - sequence_length = 260.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.590909 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.363636 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.242424 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.196970 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=2.423001, null_mean=3.010451, null_std=0.067892, z=-8.653, p_emp=0.009901
+      - run_entropy: observed=1.562544, null_mean=2.312248, null_std=0.131803, z=-5.688, p_emp=0.009901
+      - prime_index_occupancy_bias: observed=-0.161943, null_mean=0.000309, null_std=0.061532, z=-2.637, p_emp=0.009901
+      - prime_gap_affinity: observed=0.800000, null_mean=0.474923, null_std=0.062374, z=5.212, p_emp=0.009901
+      - zeta_spectral_coherence: observed=0.003500, null_mean=0.004675, null_std=0.001894, z=-0.620, p_emp=0.524752
+      - critical_line_symmetry: observed=0.786116, null_mean=0.864971, null_std=0.032580, z=-2.420, p_emp=0.029703
+  Event: punctuation
+    description: Punctuation positions.
+    event_count: 58
+    observed:
+      - event_density = 0.223077 (count(event=true) / sequence_length)
+      - event_count = 58.000000 (Number of true positions in the event map.)
+      - sequence_length = 260.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.603448 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.362069 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.275862 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.189655 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=3.163984, null_mean=3.167649, null_std=0.067799, z=-0.054, p_emp=0.920792
+      - run_entropy: observed=2.434980, null_mean=2.392642, null_std=0.121225, z=0.349, p_emp=0.633663
+      - prime_index_occupancy_bias: observed=0.038859, null_mean=0.000793, null_std=0.077860, z=0.489, p_emp=0.712871
+      - prime_gap_affinity: observed=0.438596, null_mean=0.477193, null_std=0.060620, z=-0.637, p_emp=0.613861
+      - zeta_spectral_coherence: observed=0.003736, null_mean=0.004203, null_std=0.001606, z=-0.291, p_emp=0.792079
+      - critical_line_symmetry: observed=0.855142, null_mean=0.862067, null_std=0.036307, z=-0.191, p_emp=0.841584
+  Event: digit
+    description: ASCII digit positions.
+    event_count: 15
+    observed:
+      - event_density = 0.057692 (count(event=true) / sequence_length)
+      - event_count = 15.000000 (Number of true positions in the event map.)
+      - sequence_length = 260.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.533333 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.400000 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.400000 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.266667 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=2.978095, null_mean=3.455142, null_std=0.180655, z=-2.641, p_emp=0.029703
+      - run_entropy: observed=2.980342, null_mean=2.808577, null_std=0.156363, z=1.099, p_emp=0.316832
+      - prime_index_occupancy_bias: observed=0.018806, null_mean=0.004543, null_std=0.036819, z=0.387, p_emp=0.821782
+      - prime_gap_affinity: observed=0.142857, null_mean=0.384286, null_std=0.133835, z=-1.804, p_emp=0.099010
+      - zeta_spectral_coherence: observed=0.002339, null_mean=0.001040, null_std=0.000673, z=1.929, p_emp=0.049505
+      - critical_line_symmetry: observed=0.811596, null_mean=0.836832, null_std=0.044899, z=-0.562, p_emp=0.564356
+
+Encoding: grapheme_class
+  sequence_len: 260
+  unique_symbols: 5
+  symbol_entropy_bits: 2.179013
+  note: E2 maps Unicode scalar values into broad grapheme classes.
+
+  Event: vowel
+    description: Positions classified as vowel in the grapheme-class stream.
+    event_count: 45
+    observed:
+      - event_density = 0.173077 (count(event=true) / sequence_length)
+      - event_count = 45.000000 (Number of true positions in the event map.)
+      - sequence_length = 260.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.688889 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.400000 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.266667 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.244444 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=3.298675, null_mean=3.423540, null_std=0.090894, z=-1.374, p_emp=0.168317
+      - run_entropy: observed=2.237636, null_mean=2.591313, null_std=0.137200, z=-2.578, p_emp=0.019802
+      - prime_index_occupancy_bias: observed=-0.059002, null_mean=-0.003362, null_std=0.057615, z=-0.966, p_emp=0.445545
+      - prime_gap_affinity: observed=0.522727, null_mean=0.460227, null_std=0.081489, z=0.767, p_emp=0.495050
+      - zeta_spectral_coherence: observed=0.002125, null_mean=0.003480, null_std=0.001617, z=-0.839, p_emp=0.346535
+      - critical_line_symmetry: observed=0.876715, null_mean=0.865098, null_std=0.044513, z=0.261, p_emp=0.801980
+  Event: consonant
+    description: Positions classified as consonant in the grapheme-class stream.
+    event_count: 76
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from its shuffle null with z=-3.394. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from its shuffle null with z=-3.956. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint.
+    observed:
+      - event_density = 0.292308 (count(event=true) / sequence_length)
+      - event_count = 76.000000 (Number of true positions in the event map.)
+      - sequence_length = 260.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.618421 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.394737 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.250000 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.171053 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=2.648267, null_mean=2.826694, null_std=0.052573, z=-3.394, p_emp=0.009901
+      - run_entropy: observed=1.787211, null_mean=2.219907, null_std=0.109388, z=-3.956, p_emp=0.009901
+      - prime_index_occupancy_bias: observed=0.163280, null_mean=-0.002165, null_std=0.065009, z=2.545, p_emp=0.009901
+      - prime_gap_affinity: observed=0.626667, null_mean=0.479333, null_std=0.054346, z=2.711, p_emp=0.019802
+      - zeta_spectral_coherence: observed=0.004545, null_mean=0.004648, null_std=0.001730, z=-0.060, p_emp=0.930693
+      - critical_line_symmetry: observed=0.884672, null_mean=0.859328, null_std=0.041620, z=0.609, p_emp=0.495050
+  Event: digit
+    description: Positions classified as digit in the grapheme-class stream.
+    event_count: 15
+    observed:
+      - event_density = 0.057692 (count(event=true) / sequence_length)
+      - event_count = 15.000000 (Number of true positions in the event map.)
+      - sequence_length = 260.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.533333 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.400000 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.400000 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.266667 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=2.978095, null_mean=3.440218, null_std=0.177211, z=-2.608, p_emp=0.029703
+      - run_entropy: observed=2.980342, null_mean=2.765799, null_std=0.196144, z=1.094, p_emp=0.257426
+      - prime_index_occupancy_bias: observed=0.018806, null_mean=0.002480, null_std=0.034478, z=0.474, p_emp=0.752475
+      - prime_gap_affinity: observed=0.142857, null_mean=0.375000, null_std=0.117687, z=-1.973, p_emp=0.049505
+      - zeta_spectral_coherence: observed=0.002339, null_mean=0.001170, null_std=0.001075, z=1.087, p_emp=0.108911
+      - critical_line_symmetry: observed=0.811596, null_mean=0.840042, null_std=0.050742, z=-0.561, p_emp=0.574257
+  Event: whitespace
+    description: Positions classified as whitespace in the grapheme-class stream.
+    event_count: 66
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from its shuffle null with z=-8.894. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from its shuffle null with z=-6.959. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'prime_gap_affinity' deviates from its shuffle null with z=5.454. This is a tripwire, not a conclusion.
+    observed:
+      - event_density = 0.253846 (count(event=true) / sequence_length)
+      - event_count = 66.000000 (Number of true positions in the event map.)
+      - sequence_length = 260.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.590909 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.363636 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.242424 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.196970 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=2.423001, null_mean=3.014928, null_std=0.066554, z=-8.894, p_emp=0.009901
+      - run_entropy: observed=1.562544, null_mean=2.314357, null_std=0.108035, z=-6.959, p_emp=0.009901
+      - prime_index_occupancy_bias: observed=-0.161943, null_mean=-0.006252, null_std=0.067005, z=-2.324, p_emp=0.019802
+      - prime_gap_affinity: observed=0.800000, null_mean=0.479538, null_std=0.058758, z=5.454, p_emp=0.009901
+      - zeta_spectral_coherence: observed=0.003500, null_mean=0.004455, null_std=0.001717, z=-0.556, p_emp=0.663366
+      - critical_line_symmetry: observed=0.786116, null_mean=0.859783, null_std=0.038460, z=-1.915, p_emp=0.039604
+  Event: punctuation
+    description: Positions classified as punctuation in the grapheme-class stream.
+    event_count: 58
+    observed:
+      - event_density = 0.223077 (count(event=true) / sequence_length)
+      - event_count = 58.000000 (Number of true positions in the event map.)
+      - sequence_length = 260.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.603448 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.362069 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.275862 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.189655 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=3.163984, null_mean=3.160106, null_std=0.075800, z=0.051, p_emp=0.980198
+      - run_entropy: observed=2.434980, null_mean=2.401776, null_std=0.108272, z=0.307, p_emp=0.693069
+      - prime_index_occupancy_bias: observed=0.038859, null_mean=-0.003474, null_std=0.063014, z=0.672, p_emp=0.564356
+      - prime_gap_affinity: observed=0.438596, null_mean=0.471579, null_std=0.059704, z=-0.552, p_emp=0.603960
+      - zeta_spectral_coherence: observed=0.003736, null_mean=0.004129, null_std=0.001668, z=-0.236, p_emp=0.871287
+      - critical_line_symmetry: observed=0.855142, null_mean=0.857435, null_std=0.038193, z=-0.060, p_emp=0.990099
+  Event: other
+    description: Positions classified as other in the grapheme-class stream.
+    event_count: 0
+    alerts:
+      - [warning:LOW_EVENT_COUNT:L0] The event occurs fewer than five times; gap and prime-position metrics are weak evidence.
+      - [warning:DEGENERATE_EVENT_MAP:L0] The event map is all false or all true; many metrics collapse to trivial values.
+    observed:
+      - event_density = 0.000000 (count(event=true) / sequence_length)
+      - event_count = 0.000000 (Number of true positions in the event map.)
+      - sequence_length = 260.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.000000 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.000000 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.000000 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.000000 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - run_entropy: observed=-0.000000, null_mean=-0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_index_occupancy_bias: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_gap_affinity: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - zeta_spectral_coherence: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - critical_line_symmetry: observed=1.000000, null_mean=1.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+
+Encoding: word_boundary
+  sequence_len: 260
+  unique_symbols: 2
+  symbol_entropy_bits: 0.817317
+  note: E6 MVP word boundaries are whitespace-derived and should be interpreted as orthographic/token boundaries.
+
+  Event: word_boundary
+    description: Positions marked as word boundaries after declared whitespace preprocessing.
+    event_count: 66
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from its shuffle null with z=-8.359. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the null expectation. Inspect for periodicity, clustering, repeated material, or genre constraints.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from its shuffle null with z=-6.450. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, or formal constraint.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'prime_gap_affinity' deviates from its shuffle null with z=5.094. This is a tripwire, not a conclusion.
+    observed:
+      - event_density = 0.253846 (count(event=true) / sequence_length)
+      - event_count = 66.000000 (Number of true positions in the event map.)
+      - sequence_length = 260.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.590909 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.363636 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.242424 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.196970 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=2.423001, null_mean=3.002074, null_std=0.069274, z=-8.359, p_emp=0.009901
+      - run_entropy: observed=1.562544, null_mean=2.301560, null_std=0.114584, z=-6.450, p_emp=0.009901
+      - prime_index_occupancy_bias: observed=-0.161943, null_mean=-0.008232, null_std=0.066684, z=-2.305, p_emp=0.019802
+      - prime_gap_affinity: observed=0.800000, null_mean=0.481692, null_std=0.062490, z=5.094, p_emp=0.009901
+      - zeta_spectral_coherence: observed=0.003500, null_mean=0.004285, null_std=0.001652, z=-0.475, p_emp=0.673267
+      - critical_line_symmetry: observed=0.786116, null_mean=0.854788, null_std=0.036937, z=-1.859, p_emp=0.059406
+
+Encoding: frequency_class
+  sequence_len: 48
+  unique_symbols: 3
+  symbol_entropy_bits: 1.183006
+  note: E7 MVP frequency classes are calculated inside the supplied sample only.
+
+  Event: hapax
+    description: Token positions in frequency class hapax.
+    event_count: 10
+    alerts:
+      - [warning:WINDOW_TOO_SMALL:L0] The event map has fewer than 128 positions; positional and spectral metrics may be unstable.
+    observed:
+      - event_density = 0.208333 (count(event=true) / sequence_length)
+      - event_count = 10.000000 (Number of true positions in the event map.)
+      - sequence_length = 48.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.800000 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.400000 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.300000 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.300000 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=2.503258, null_mean=2.412933, null_std=0.198634, z=0.455, p_emp=0.584158
+      - run_entropy: observed=1.966917, null_mean=2.057339, null_std=0.265960, z=-0.340, p_emp=0.683168
+      - prime_index_occupancy_bias: observed=-0.116667, null_mean=0.000896, null_std=0.133395, z=-0.881, p_emp=0.455446
+      - prime_gap_affinity: observed=0.444444, null_mean=0.490000, null_std=0.170893, z=-0.267, p_emp=1.000000
+      - zeta_spectral_coherence: observed=0.012086, null_mean=0.014679, null_std=0.006974, z=-0.372, p_emp=0.772277
+      - critical_line_symmetry: observed=0.890246, null_mean=0.899963, null_std=0.033951, z=-0.286, p_emp=0.811881
+  Event: mid_frequency
+    description: Token positions in frequency class mid_frequency.
+    event_count: 33
+    alerts:
+      - [warning:WINDOW_TOO_SMALL:L0] The event map has fewer than 128 positions; positional and spectral metrics may be unstable.
+    observed:
+      - event_density = 0.687500 (count(event=true) / sequence_length)
+      - event_count = 33.000000 (Number of true positions in the event map.)
+      - sequence_length = 48.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.636364 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.333333 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.242424 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.151515 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=1.134581, null_mean=1.215322, null_std=0.071251, z=-1.133, p_emp=0.297030
+      - run_entropy: observed=1.919241, null_mean=1.891356, null_std=0.183151, z=0.152, p_emp=0.881188
+      - prime_index_occupancy_bias: observed=0.175000, null_mean=0.003708, null_std=0.134143, z=1.277, p_emp=0.267327
+      - prime_gap_affinity: observed=0.250000, null_mean=0.294375, null_std=0.054250, z=-0.818, p_emp=0.633663
+      - zeta_spectral_coherence: observed=0.007373, null_mean=0.018249, null_std=0.005660, z=-1.922, p_emp=0.049505
+      - critical_line_symmetry: observed=0.894078, null_mean=0.908206, null_std=0.030694, z=-0.460, p_emp=0.594059
+  Event: high_frequency
+    description: Token positions in frequency class high_frequency.
+    event_count: 5
+    alerts:
+      - [warning:WINDOW_TOO_SMALL:L0] The event map has fewer than 128 positions; positional and spectral metrics may be unstable.
+    observed:
+      - event_density = 0.104167 (count(event=true) / sequence_length)
+      - event_count = 5.000000 (Number of true positions in the event map.)
+      - sequence_length = 48.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.800000 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.600000 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.400000 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.200000 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy: observed=1.500000, null_mean=1.858113, null_std=0.254254, z=-1.408, p_emp=0.267327
+      - run_entropy: observed=1.891061, null_mean=2.064486, null_std=0.279978, z=-0.619, p_emp=0.524752
+      - prime_index_occupancy_bias: observed=-0.058333, null_mean=0.008708, null_std=0.096333, z=-0.696, p_emp=0.673267
+      - prime_gap_affinity: observed=0.250000, null_mean=0.415000, null_std=0.244175, z=-0.676, p_emp=0.643564
+      - zeta_spectral_coherence: observed=0.004439, null_mean=0.009179, null_std=0.006742, z=-0.703, p_emp=0.584158
+      - critical_line_symmetry: observed=0.822192, null_mean=0.896807, null_std=0.041874, z=-1.782, p_emp=0.108911
+
+Interpretation rule:
+  This tool reports measurements and evidence-tiered warnings, not origin classifications.
+  Raw UTF-8 findings are diagnostic only unless supported by linguistic encodings.

@@ -1,0 +1,4676 @@
+{
+  "metadata": {
+    "experiment_name": "rrlang_mvp_analysis_v0_2",
+    "input_path": ".\\testdata\\datasets_canonical\\mesu_register\\mesu_basho_text_only.txt",
+    "language": "MesuRegister",
+    "unix_timestamp": 1783342083,
+    "null_samples": 100,
+    "seed": 18427,
+    "case_policy": "lowercase",
+    "punctuation_policy": "preserve",
+    "hyphen_policy": "punctuation",
+    "whitespace_policy": "normalise",
+    "max_chars": null,
+    "tool_version": "0.3.0",
+    "status": "exploratory"
+  },
+  "input_byte_len": 43,
+  "input_char_len": 43,
+  "cleaned_char_len": 42,
+  "global_alerts": [
+    {
+      "code": "SHORT_CORPUS",
+      "severity": "warning",
+      "interpretation_level": 0,
+      "message": "Cleaned input has fewer than 128 characters; this run is exploratory only."
+     }
+  ],
+  "encodings": [
+    {
+      "encoding": "grapheme",
+      "sequence_len": 42,
+      "unique_symbol_count": 14,
+      "symbol_entropy": 3.525564375305,
+      "notes": ["MVP E1 uses Unicode scalar values as a deterministic grapheme approximation. True extended grapheme-cluster segmentation is a planned later extension.", "Hyphen policy for this run: punctuation."],
+      "events": [
+        {
+          "event_name": "vowel",
+          "description": "Basic Latin-vowel positions plus common accented vowels.",
+          "event_count": 13,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-7.520. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 2,
+              "message": "Metric 'gap_entropy' deviates from 'markov_1' null with z=-3.282. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 2,
+              "message": "Gap entropy is substantially lower than the 'markov_1' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.309523809524,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 13,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.615384615385,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.384615384615,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.307692307692,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.230769230769,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 0.811278124459,
+              "null_mean": 2.243418709009,
+              "null_std": 0.190432621949,
+              "z_score": -7.520458259163,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.351644115153,
+              "null_mean": 1.862080909152,
+              "null_std": 0.217842491505,
+              "z_score": -2.343146144137,
+              "empirical_p": 0.039603960396,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": -0.126373626374,
+              "null_mean": -0.020686813187,
+              "null_std": 0.166001835213,
+              "z_score": -0.636660510716,
+              "empirical_p": 0.643564356436,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0.750000000000,
+              "null_mean": 0.495000000000,
+              "null_std": 0.139553963190,
+              "z_score": 1.827250148770,
+              "empirical_p": 0.099009900990,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0.014205767013,
+              "null_mean": 0.023058058571,
+              "null_std": 0.008016516868,
+              "z_score": -1.104256587239,
+              "empirical_p": 0.277227722772,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 0.940714781679,
+              "null_mean": 0.910949701711,
+              "null_std": 0.026922671737,
+              "z_score": 1.105576751745,
+              "empirical_p": 0.247524752475,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 0.811278124459,
+              "null_mean": 1.772957369091,
+              "null_std": 0.293005356543,
+              "z_score": -3.282121719474,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": 1.351644115153,
+              "null_mean": 1.273345269780,
+              "null_std": 0.234004424642,
+              "z_score": 0.334604123374,
+              "empirical_p": 0.762376237624,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": -0.126373626374,
+              "null_mean": 0.008324175824,
+              "null_std": 0.203027445342,
+              "z_score": -0.663446274324,
+              "empirical_p": 0.504950495050,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0.750000000000,
+              "null_mean": 0.803374278499,
+              "null_std": 0.093213511205,
+              "z_score": -0.572602381450,
+              "empirical_p": 0.623762376238,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0.014205767013,
+              "null_mean": 0.016344764998,
+              "null_std": 0.006095300669,
+              "z_score": -0.350925754308,
+              "empirical_p": 0.752475247525,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 0.940714781679,
+              "null_mean": 0.928545260247,
+              "null_std": 0.023261017879,
+              "z_score": 0.523172351940,
+              "empirical_p": 0.613861386139,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 0.811278124459,
+              "null_mean": 0.703234409854,
+              "null_std": 0.301391628566,
+              "z_score": 0.358482799006,
+              "empirical_p": 0.801980198020,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": 1.351644115153,
+              "null_mean": 1.343247846882,
+              "null_std": 0.146872127932,
+              "z_score": 0.057167199723,
+              "empirical_p": 0.990099009901,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": -0.126373626374,
+              "null_mean": 0.008434065934,
+              "null_std": 0.168587392132,
+              "z_score": -0.799630924966,
+              "empirical_p": 0.455445544554,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0.750000000000,
+              "null_mean": 0.839194638695,
+              "null_std": 0.124455812721,
+              "z_score": -0.716677162319,
+              "empirical_p": 0.346534653465,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0.014205767013,
+              "null_mean": 0.014343231822,
+              "null_std": 0.004880249359,
+              "z_score": -0.028167578955,
+              "empirical_p": 0.980198019802,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 0.940714781679,
+              "null_mean": 0.943933136946,
+              "null_std": 0.026334536137,
+              "z_score": -0.122210440698,
+              "empirical_p": 0.871287128713,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.811278124459,
+              "null_mean": 0.811278124459,
+              "null_std": 0.000000000000,
+              "z_score": -0.994987437107,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.351644115153,
+              "null_mean": 1.351644115153,
+              "null_std": 0.000000000000,
+              "z_score": 1.066493360615,
+              "empirical_p": 0.643564356436,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "gap_order_shuffle",
+              "observed": -0.126373626374,
+              "null_mean": 0.103406593407,
+              "null_std": 0.136710919272,
+              "z_score": -1.680774447310,
+              "empirical_p": 0.118811881188,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.750000000000,
+              "null_mean": 0.750000000000,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.014205767013,
+              "null_mean": 0.016170829331,
+              "null_std": 0.003475753487,
+              "z_score": -0.565362970937,
+              "empirical_p": 0.425742574257,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.940714781679,
+              "null_mean": 0.950822196022,
+              "null_std": 0.016575941403,
+              "z_score": -0.609764121212,
+              "empirical_p": 0.277227722772,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "consonant",
+          "description": "Alphabetic non-vowel positions under the MVP classifier.",
+          "event_count": 15,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.357142857143,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 15,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.866666666667,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.400000000000,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.266666666667,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.266666666667,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.492614068017,
+              "null_mean": 2.119247837828,
+              "null_std": 0.224193396573,
+              "z_score": -2.795058995442,
+              "empirical_p": 0.029702970297,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.103307408608,
+              "null_mean": 1.833515631906,
+              "null_std": 0.276584783279,
+              "z_score": -2.640088202397,
+              "empirical_p": 0.019801980198,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": 0.401098901099,
+              "null_mean": -0.029972527473,
+              "null_std": 0.168231509723,
+              "z_score": 2.562370326946,
+              "empirical_p": 0.029702970297,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0.714285714286,
+              "null_mean": 0.467857142857,
+              "null_std": 0.153759658463,
+              "z_score": 1.602686776832,
+              "empirical_p": 0.148514851485,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0.011983600717,
+              "null_mean": 0.024644015434,
+              "null_std": 0.007846464513,
+              "z_score": -1.613518381007,
+              "empirical_p": 0.128712871287,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 0.939266388010,
+              "null_mean": 0.912322766395,
+              "null_std": 0.029797010821,
+              "z_score": 0.904239078768,
+              "empirical_p": 0.297029702970,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 1.492614068017,
+              "null_mean": 1.482075988754,
+              "null_std": 0.365102152564,
+              "z_score": 0.028863372044,
+              "empirical_p": 0.930693069307,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": 1.103307408608,
+              "null_mean": 1.029157389841,
+              "null_std": 0.274570032726,
+              "z_score": 0.270058673302,
+              "empirical_p": 0.762376237624,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": 0.401098901099,
+              "null_mean": -0.004010989011,
+              "null_std": 0.244951557503,
+              "z_score": 1.653836759558,
+              "empirical_p": 0.138613861386,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0.714285714286,
+              "null_mean": 0.856794976266,
+              "null_std": 0.090037500243,
+              "z_score": -1.582776749632,
+              "empirical_p": 0.198019801980,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0.011983600717,
+              "null_mean": 0.016702772757,
+              "null_std": 0.006288885026,
+              "z_score": -0.750398841931,
+              "empirical_p": 0.445544554455,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 0.939266388010,
+              "null_mean": 0.930272079399,
+              "null_std": 0.027139397929,
+              "z_score": 0.331411501234,
+              "empirical_p": 0.752475247525,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 1.492614068017,
+              "null_mean": 1.539608345216,
+              "null_std": 0.267294166563,
+              "z_score": -0.175814825302,
+              "empirical_p": 0.831683168317,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": 1.103307408608,
+              "null_mean": 1.119122090326,
+              "null_std": 0.202109631953,
+              "z_score": -0.078248035806,
+              "empirical_p": 0.960396039604,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": 0.401098901099,
+              "null_mean": 0.010467032967,
+              "null_std": 0.185657453089,
+              "z_score": 2.104046250940,
+              "empirical_p": 0.049504950495,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0.714285714286,
+              "null_mean": 0.862060282854,
+              "null_std": 0.097611657219,
+              "z_score": -1.513902875733,
+              "empirical_p": 0.108910891089,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0.011983600717,
+              "null_mean": 0.016037677050,
+              "null_std": 0.005858739135,
+              "z_score": -0.691970787622,
+              "empirical_p": 0.455445544554,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 0.939266388010,
+              "null_mean": 0.936437402017,
+              "null_std": 0.023832369367,
+              "z_score": 0.118703514067,
+              "empirical_p": 0.861386138614,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.492614068017,
+              "null_mean": 1.492614068017,
+              "null_std": 0.000000000000,
+              "z_score": -0.939011028702,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.103307408608,
+              "null_mean": 1.103307408608,
+              "null_std": 0.000000000000,
+              "z_score": 0.994987437107,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.401098901099,
+              "null_mean": -0.035934065934,
+              "null_std": 0.238687715411,
+              "z_score": 1.830982236684,
+              "empirical_p": 0.128712871287,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.714285714286,
+              "null_mean": 0.714285714286,
+              "null_std": 0.000000000000,
+              "z_score": 0.994987437107,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.011983600717,
+              "null_mean": 0.018081338423,
+              "null_std": 0.005942441686,
+              "z_score": -1.026133368826,
+              "empirical_p": 0.316831683168,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.939266388010,
+              "null_mean": 0.947467267914,
+              "null_std": 0.021153975740,
+              "z_score": -0.387675584252,
+              "empirical_p": 0.712871287129,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "whitespace",
+          "description": "Whitespace positions.",
+          "event_count": 9,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.214285714286,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 9,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.888888888889,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.444444444444,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.333333333333,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.222222222222,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.905639062230,
+              "null_mean": 2.283150359248,
+              "null_std": 0.309081393452,
+              "z_score": -1.221397680403,
+              "empirical_p": 0.306930693069,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.667951197199,
+              "null_mean": 2.007214228499,
+              "null_std": 0.274311837376,
+              "z_score": -1.236778676949,
+              "empirical_p": 0.237623762376,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": -0.208791208791,
+              "null_mean": 0.009807692308,
+              "null_std": 0.120773280716,
+              "z_score": -1.809993897687,
+              "empirical_p": 0.138613861386,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0.625000000000,
+              "null_mean": 0.466250000000,
+              "null_std": 0.187903606010,
+              "z_score": 0.844848075942,
+              "empirical_p": 0.504950495050,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0.011759892742,
+              "null_mean": 0.016068869924,
+              "null_std": 0.007247532357,
+              "z_score": -0.594544042006,
+              "empirical_p": 0.613861386139,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 0.886537983487,
+              "null_mean": 0.902475201555,
+              "null_std": 0.026761039533,
+              "z_score": -0.595538078706,
+              "empirical_p": 0.603960396040,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 1.905639062230,
+              "null_mean": 2.102961115050,
+              "null_std": 0.301010945041,
+              "z_score": -0.655531156161,
+              "empirical_p": 0.415841584158,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": 1.667951197199,
+              "null_mean": 1.711952676190,
+              "null_std": 0.309444478823,
+              "z_score": -0.142195068916,
+              "empirical_p": 0.910891089109,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": -0.208791208791,
+              "null_mean": -0.027939560440,
+              "null_std": 0.135614390980,
+              "z_score": -1.333572691248,
+              "empirical_p": 0.207920792079,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0.625000000000,
+              "null_mean": 0.627897907648,
+              "null_std": 0.204364645472,
+              "z_score": -0.014180083063,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0.011759892742,
+              "null_mean": 0.013540017291,
+              "null_std": 0.007048315242,
+              "z_score": -0.252560291058,
+              "empirical_p": 0.831683168317,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 0.886537983487,
+              "null_mean": 0.915029916222,
+              "null_std": 0.031190600076,
+              "z_score": -0.913478184614,
+              "empirical_p": 0.396039603960,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 1.905639062230,
+              "null_mean": 1.996961041719,
+              "null_std": 0.343709886044,
+              "z_score": -0.265694945642,
+              "empirical_p": 0.811881188119,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": 1.667951197199,
+              "null_mean": 1.598915490003,
+              "null_std": 0.304327922010,
+              "z_score": 0.226846444911,
+              "empirical_p": 0.910891089109,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": -0.208791208791,
+              "null_mean": 0.002939560440,
+              "null_std": 0.158203276897,
+              "z_score": -1.338346293351,
+              "empirical_p": 0.178217821782,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0.625000000000,
+              "null_mean": 0.656568903319,
+              "null_std": 0.163702948217,
+              "z_score": -0.192842607068,
+              "empirical_p": 0.920792079208,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0.011759892742,
+              "null_mean": 0.014828712982,
+              "null_std": 0.007456660144,
+              "z_score": -0.411554258935,
+              "empirical_p": 0.732673267327,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 0.886537983487,
+              "null_mean": 0.916151244585,
+              "null_std": 0.034333666409,
+              "z_score": -0.862513800457,
+              "empirical_p": 0.396039603960,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.905639062230,
+              "null_mean": 1.905639062230,
+              "null_std": 0.000000000000,
+              "z_score": -0.994987437107,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.667951197199,
+              "null_mean": 1.667951197199,
+              "null_std": 0.000000000000,
+              "z_score": -1.061697492489,
+              "empirical_p": 0.396039603960,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "gap_order_shuffle",
+              "observed": -0.208791208791,
+              "null_mean": -0.136703296703,
+              "null_std": 0.118210974399,
+              "z_score": -0.609824193181,
+              "empirical_p": 0.683168316832,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.625000000000,
+              "null_mean": 0.625000000000,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.011759892742,
+              "null_mean": 0.010014576846,
+              "null_std": 0.001742172731,
+              "z_score": 1.001804164220,
+              "empirical_p": 0.336633663366,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.886537983487,
+              "null_mean": 0.886668929130,
+              "null_std": 0.012518278728,
+              "z_score": -0.010460355255,
+              "empirical_p": 0.970297029703,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "punctuation",
+          "description": "Punctuation positions under the declared punctuation/hyphen policies.",
+          "event_count": 5,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.119047619048,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 5,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.600000000000,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.400000000000,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.800000000000,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.400000000000,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.500000000000,
+              "null_mean": 1.860000000000,
+              "null_std": 0.225630429927,
+              "z_score": -1.595529468770,
+              "empirical_p": 0.287128712871,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.960964047444,
+              "null_mean": 2.028101525782,
+              "null_std": 0.286466627139,
+              "z_score": -0.234364047948,
+              "empirical_p": 0.861386138614,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": -0.065934065934,
+              "null_mean": -0.002417582418,
+              "null_std": 0.107879457763,
+              "z_score": -0.588772736104,
+              "empirical_p": 0.702970297030,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0.250000000000,
+              "null_mean": 0.447500000000,
+              "null_std": 0.214072464838,
+              "z_score": -0.922584789917,
+              "empirical_p": 0.623762376238,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0.008631513540,
+              "null_mean": 0.011759470285,
+              "null_std": 0.008489053657,
+              "z_score": -0.368469427882,
+              "empirical_p": 0.792079207921,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 0.887374771778,
+              "null_mean": 0.906559632977,
+              "null_std": 0.038253281270,
+              "z_score": -0.501521975710,
+              "empirical_p": 0.633663366337,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 1.500000000000,
+              "null_mean": 1.685762834588,
+              "null_std": 0.540520961952,
+              "z_score": -0.343673691982,
+              "empirical_p": 0.821782178218,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": 1.960964047444,
+              "null_mean": 1.898876387809,
+              "null_std": 0.301034672566,
+              "z_score": 0.206247536557,
+              "empirical_p": 0.841584158416,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": -0.065934065934,
+              "null_mean": -0.008736263736,
+              "null_std": 0.114313500960,
+              "z_score": -0.500359115220,
+              "empirical_p": 0.643564356436,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0.250000000000,
+              "null_mean": 0.540992063492,
+              "null_std": 0.261234301874,
+              "z_score": -1.113912152442,
+              "empirical_p": 0.297029702970,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0.008631513540,
+              "null_mean": 0.010356612613,
+              "null_std": 0.008478545761,
+              "z_score": -0.203466386957,
+              "empirical_p": 0.861386138614,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 0.887374771778,
+              "null_mean": 0.899434435810,
+              "null_std": 0.041855307193,
+              "z_score": -0.288127476325,
+              "empirical_p": 0.811881188119,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 1.500000000000,
+              "null_mean": 1.610588678855,
+              "null_std": 0.563370783001,
+              "z_score": -0.196298214589,
+              "empirical_p": 0.821782178218,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": 1.960964047444,
+              "null_mean": 2.053975535689,
+              "null_std": 0.270624813370,
+              "z_score": -0.343691648550,
+              "empirical_p": 0.603960396040,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": -0.065934065934,
+              "null_mean": -0.006401098901,
+              "null_std": 0.118891938859,
+              "z_score": -0.500731736771,
+              "empirical_p": 0.683168316832,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0.250000000000,
+              "null_mean": 0.423773809524,
+              "null_std": 0.265755205048,
+              "z_score": -0.653886758276,
+              "empirical_p": 0.584158415842,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0.008631513540,
+              "null_mean": 0.009041549127,
+              "null_std": 0.007042972617,
+              "z_score": -0.058219108405,
+              "empirical_p": 0.960396039604,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 0.887374771778,
+              "null_mean": 0.908552022111,
+              "null_std": 0.036327617390,
+              "z_score": -0.582951810633,
+              "empirical_p": 0.534653465347,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.500000000000,
+              "null_mean": 1.500000000000,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.960964047444,
+              "null_mean": 1.960964047444,
+              "null_std": 0.000000000000,
+              "z_score": 1.000783539524,
+              "empirical_p": 0.871287128713,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "gap_order_shuffle",
+              "observed": -0.065934065934,
+              "null_mean": -0.042280219780,
+              "null_std": 0.075593353473,
+              "z_score": -0.312909072914,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.250000000000,
+              "null_mean": 0.250000000000,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.008631513540,
+              "null_mean": 0.009361809457,
+              "null_std": 0.001845765729,
+              "z_score": -0.395660134770,
+              "empirical_p": 0.772277227723,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.887374771778,
+              "null_mean": 0.905393043593,
+              "null_std": 0.025951945046,
+              "z_score": -0.694293694894,
+              "empirical_p": 0.534653465347,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "hyphen_boundary",
+          "description": "Hyphen positions treated as morpheme boundaries by the declared hyphen policy.",
+          "event_count": 0,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             },
+            {
+              "code": "LOW_EVENT_COUNT",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event occurs fewer than five times; gap and prime-position metrics are weak evidence."
+             },
+            {
+              "code": "DEGENERATE_EVENT_MAP",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map is all false or all true; many metrics collapse to trivial values."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 0,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "digit",
+          "description": "ASCII digit positions.",
+          "event_count": 0,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             },
+            {
+              "code": "LOW_EVENT_COUNT",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event occurs fewer than five times; gap and prime-position metrics are weak evidence."
+             },
+            {
+              "code": "DEGENERATE_EVENT_MAP",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map is all false or all true; many metrics collapse to trivial values."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 0,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "encoding": "grapheme_class",
+      "sequence_len": 42,
+      "unique_symbol_count": 4,
+      "symbol_entropy": 1.895935499984,
+      "notes": ["E2 maps Unicode scalar values into broad grapheme classes. Hyphen policy: punctuation."],
+      "events": [
+        {
+          "event_name": "vowel",
+          "description": "Positions classified as vowel in the grapheme-class stream.",
+          "event_count": 13,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-5.788. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.309523809524,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 13,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.615384615385,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.384615384615,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.307692307692,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.230769230769,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 0.811278124459,
+              "null_mean": 2.242156587204,
+              "null_std": 0.247225926306,
+              "z_score": -5.787736278810,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.351644115153,
+              "null_mean": 1.908644004565,
+              "null_std": 0.240337655696,
+              "z_score": -2.317572283042,
+              "empirical_p": 0.039603960396,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": -0.126373626374,
+              "null_mean": 0.010851648352,
+              "null_std": 0.153786368174,
+              "z_score": -0.892311043914,
+              "empirical_p": 0.405940594059,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0.750000000000,
+              "null_mean": 0.490833333333,
+              "null_std": 0.145013931758,
+              "z_score": 1.787184607189,
+              "empirical_p": 0.108910891089,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0.014205767013,
+              "null_mean": 0.022220697193,
+              "null_std": 0.007257851856,
+              "z_score": -1.104311625446,
+              "empirical_p": 0.257425742574,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 0.940714781679,
+              "null_mean": 0.913834513683,
+              "null_std": 0.025519649169,
+              "z_score": 1.053316517730,
+              "empirical_p": 0.316831683168,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 0.811278124459,
+              "null_mean": 1.696860825479,
+              "null_std": 0.322852941860,
+              "z_score": -2.742990960275,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": 1.351644115153,
+              "null_mean": 1.240212389153,
+              "null_std": 0.261724149389,
+              "z_score": 0.425760199278,
+              "empirical_p": 0.673267326733,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": -0.126373626374,
+              "null_mean": 0.052967032967,
+              "null_std": 0.190677837115,
+              "z_score": -0.940542760785,
+              "empirical_p": 0.356435643564,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0.750000000000,
+              "null_mean": 0.802668220668,
+              "null_std": 0.115850670403,
+              "z_score": -0.454621630458,
+              "empirical_p": 0.712871287129,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0.014205767013,
+              "null_mean": 0.015477000037,
+              "null_std": 0.005926562144,
+              "z_score": -0.214497543934,
+              "empirical_p": 0.900990099010,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 0.940714781679,
+              "null_mean": 0.926479453324,
+              "null_std": 0.026427258844,
+              "z_score": 0.538660798648,
+              "empirical_p": 0.574257425743,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 0.811278124459,
+              "null_mean": 0.695408154753,
+              "null_std": 0.328092447777,
+              "z_score": 0.353162562843,
+              "empirical_p": 0.891089108911,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": 1.351644115153,
+              "null_mean": 1.334216312287,
+              "null_std": 0.154541822976,
+              "z_score": 0.112770786123,
+              "empirical_p": 0.960396039604,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": -0.126373626374,
+              "null_mean": -0.011263736264,
+              "null_std": 0.184353977632,
+              "z_score": -0.624396021113,
+              "empirical_p": 0.574257425743,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0.750000000000,
+              "null_mean": 0.849701631702,
+              "null_std": 0.107135122065,
+              "z_score": -0.930615747477,
+              "empirical_p": 0.405940594059,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0.014205767013,
+              "null_mean": 0.014644006288,
+              "null_std": 0.005400849747,
+              "z_score": -0.081142652586,
+              "empirical_p": 0.940594059406,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 0.940714781679,
+              "null_mean": 0.941858196814,
+              "null_std": 0.032219094571,
+              "z_score": -0.035488742003,
+              "empirical_p": 0.990099009901,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.811278124459,
+              "null_mean": 0.811278124459,
+              "null_std": 0.000000000000,
+              "z_score": -0.994987437107,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.351644115153,
+              "null_mean": 1.351644115153,
+              "null_std": 0.000000000000,
+              "z_score": 0.854964599855,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "gap_order_shuffle",
+              "observed": -0.126373626374,
+              "null_mean": 0.086510989011,
+              "null_std": 0.135746680286,
+              "z_score": -1.568249145656,
+              "empirical_p": 0.227722772277,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.750000000000,
+              "null_mean": 0.750000000000,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.014205767013,
+              "null_mean": 0.016832637035,
+              "null_std": 0.003720080863,
+              "z_score": -0.706132505725,
+              "empirical_p": 0.455445544554,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.940714781679,
+              "null_mean": 0.951424494089,
+              "null_std": 0.014361267092,
+              "z_score": -0.745735897929,
+              "empirical_p": 0.227722772277,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "consonant",
+          "description": "Positions classified as consonant in the grapheme-class stream.",
+          "event_count": 15,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             },
+            {
+              "code": "STATISTICAL_DEVIATION",
+              "severity": "info",
+              "interpretation_level": 1,
+              "message": "Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-3.505. This is a tripwire, not a conclusion."
+             },
+            {
+              "code": "PERIODICITY_OR_CLUSTERING_WARNING",
+              "severity": "warning",
+              "interpretation_level": 1,
+              "message": "Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.357142857143,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 15,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.866666666667,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.400000000000,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.266666666667,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.266666666667,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.492614068017,
+              "null_mean": 2.116371041417,
+              "null_std": 0.177951456836,
+              "z_score": -3.505208580422,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.103307408608,
+              "null_mean": 1.799548923605,
+              "null_std": 0.240599289587,
+              "z_score": -2.893780427171,
+              "empirical_p": 0.009900990099,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": 0.401098901099,
+              "null_mean": -0.014615384615,
+              "null_std": 0.175356520926,
+              "z_score": 2.370680505745,
+              "empirical_p": 0.049504950495,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0.714285714286,
+              "null_mean": 0.488571428571,
+              "null_std": 0.131872016815,
+              "z_score": 1.711616241005,
+              "empirical_p": 0.138613861386,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0.011983600717,
+              "null_mean": 0.024028194025,
+              "null_std": 0.008674089361,
+              "z_score": -1.388571503796,
+              "empirical_p": 0.168316831683,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 0.939266388010,
+              "null_mean": 0.907620921988,
+              "null_std": 0.028388721542,
+              "z_score": 1.114719659859,
+              "empirical_p": 0.237623762376,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 1.492614068017,
+              "null_mean": 1.539188450308,
+              "null_std": 0.298642382911,
+              "z_score": -0.155953692297,
+              "empirical_p": 0.910891089109,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": 1.103307408608,
+              "null_mean": 1.079091407006,
+              "null_std": 0.226215512648,
+              "z_score": 0.107048368694,
+              "empirical_p": 0.950495049505,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": 0.401098901099,
+              "null_mean": -0.004615384615,
+              "null_std": 0.217455613460,
+              "z_score": 1.865733789339,
+              "empirical_p": 0.039603960396,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0.714285714286,
+              "null_mean": 0.851463192853,
+              "null_std": 0.096121761212,
+              "z_score": -1.427121984004,
+              "empirical_p": 0.168316831683,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0.011983600717,
+              "null_mean": 0.016499844065,
+              "null_std": 0.006451116896,
+              "z_score": -0.700071541199,
+              "empirical_p": 0.584158415842,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 0.939266388010,
+              "null_mean": 0.930634621957,
+              "null_std": 0.029388941543,
+              "z_score": 0.293707959525,
+              "empirical_p": 0.821782178218,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 1.492614068017,
+              "null_mean": 1.554013368508,
+              "null_std": 0.255938288492,
+              "z_score": -0.239898847696,
+              "empirical_p": 0.752475247525,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": 1.103307408608,
+              "null_mean": 1.106681389182,
+              "null_std": 0.194151144687,
+              "z_score": -0.017378113218,
+              "empirical_p": 0.990099009901,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": 0.401098901099,
+              "null_mean": 0.016401098901,
+              "null_std": 0.197197500342,
+              "z_score": 1.950824942159,
+              "empirical_p": 0.069306930693,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0.714285714286,
+              "null_mean": 0.843041426711,
+              "null_std": 0.093473607584,
+              "z_score": -1.377455259863,
+              "empirical_p": 0.227722772277,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0.011983600717,
+              "null_mean": 0.017622462534,
+              "null_std": 0.006352510833,
+              "z_score": -0.887658748708,
+              "empirical_p": 0.386138613861,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 0.939266388010,
+              "null_mean": 0.934654852088,
+              "null_std": 0.026166551509,
+              "z_score": 0.176237817208,
+              "empirical_p": 0.831683168317,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.492614068017,
+              "null_mean": 1.492614068017,
+              "null_std": 0.000000000000,
+              "z_score": -1.153225973122,
+              "empirical_p": 0.297029702970,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.103307408608,
+              "null_mean": 1.103307408608,
+              "null_std": 0.000000000000,
+              "z_score": 0.994987437107,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.401098901099,
+              "null_mean": -0.079862637363,
+              "null_std": 0.198580079803,
+              "z_score": 2.422002946809,
+              "empirical_p": 0.039603960396,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.714285714286,
+              "null_mean": 0.714285714286,
+              "null_std": 0.000000000000,
+              "z_score": 0.994987437107,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.011983600717,
+              "null_mean": 0.017353819398,
+              "null_std": 0.005203850042,
+              "z_score": -1.031970298570,
+              "empirical_p": 0.326732673267,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.939266388010,
+              "null_mean": 0.947446866111,
+              "null_std": 0.022615736316,
+              "z_score": -0.361716195619,
+              "empirical_p": 0.663366336634,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "digit",
+          "description": "Positions classified as digit in the grapheme-class stream.",
+          "event_count": 0,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             },
+            {
+              "code": "LOW_EVENT_COUNT",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event occurs fewer than five times; gap and prime-position metrics are weak evidence."
+             },
+            {
+              "code": "DEGENERATE_EVENT_MAP",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map is all false or all true; many metrics collapse to trivial values."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 0,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "whitespace",
+          "description": "Positions classified as whitespace in the grapheme-class stream.",
+          "event_count": 9,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.214285714286,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 9,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.888888888889,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.444444444444,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.333333333333,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.222222222222,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.905639062230,
+              "null_mean": 2.262445035602,
+              "null_std": 0.305170322151,
+              "z_score": -1.169202728683,
+              "empirical_p": 0.247524752475,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.667951197199,
+              "null_mean": 2.013264484923,
+              "null_std": 0.277887237700,
+              "z_score": -1.242638167133,
+              "empirical_p": 0.188118811881,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": -0.208791208791,
+              "null_mean": 0.015274725275,
+              "null_std": 0.158659961253,
+              "z_score": -1.412239939404,
+              "empirical_p": 0.267326732673,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0.625000000000,
+              "null_mean": 0.458750000000,
+              "null_std": 0.188908848470,
+              "z_score": 0.880054064944,
+              "empirical_p": 0.534653465347,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0.011759892742,
+              "null_mean": 0.018385826609,
+              "null_std": 0.008212063415,
+              "z_score": -0.806853714051,
+              "empirical_p": 0.495049504950,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 0.886537983487,
+              "null_mean": 0.914856970873,
+              "null_std": 0.028599842242,
+              "z_score": -0.990179845977,
+              "empirical_p": 0.336633663366,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 1.905639062230,
+              "null_mean": 2.073366501056,
+              "null_std": 0.305106454993,
+              "z_score": -0.549734153707,
+              "empirical_p": 0.544554455446,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": 1.667951197199,
+              "null_mean": 1.653173478803,
+              "null_std": 0.267922318181,
+              "z_score": 0.055156727876,
+              "empirical_p": 0.990099009901,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": -0.208791208791,
+              "null_mean": -0.012280219780,
+              "null_std": 0.153400246053,
+              "z_score": -1.281034379458,
+              "empirical_p": 0.178217821782,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0.625000000000,
+              "null_mean": 0.670639610390,
+              "null_std": 0.175629241889,
+              "z_score": -0.259863391191,
+              "empirical_p": 0.831683168317,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0.011759892742,
+              "null_mean": 0.013939548124,
+              "null_std": 0.006097811685,
+              "z_score": -0.357448785613,
+              "empirical_p": 0.712871287129,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 0.886537983487,
+              "null_mean": 0.921673122129,
+              "null_std": 0.030211397084,
+              "z_score": -1.162976294825,
+              "empirical_p": 0.217821782178,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 1.905639062230,
+              "null_mean": 2.086396667891,
+              "null_std": 0.299476943992,
+              "z_score": -0.603577702016,
+              "empirical_p": 0.504950495050,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": 1.667951197199,
+              "null_mean": 1.620535059513,
+              "null_std": 0.290170830354,
+              "z_score": 0.163407664470,
+              "empirical_p": 0.871287128713,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": -0.208791208791,
+              "null_mean": 0.008104395604,
+              "null_std": 0.157079434075,
+              "z_score": -1.380802048801,
+              "empirical_p": 0.198019801980,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0.625000000000,
+              "null_mean": 0.679783438783,
+              "null_std": 0.156828078022,
+              "z_score": -0.349321623236,
+              "empirical_p": 0.801980198020,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0.011759892742,
+              "null_mean": 0.014558576157,
+              "null_std": 0.007506565262,
+              "z_score": -0.372831423879,
+              "empirical_p": 0.752475247525,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 0.886537983487,
+              "null_mean": 0.916612136990,
+              "null_std": 0.031132291080,
+              "z_score": -0.966011573807,
+              "empirical_p": 0.376237623762,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.905639062230,
+              "null_mean": 1.905639062230,
+              "null_std": 0.000000000000,
+              "z_score": -0.994987437107,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.667951197199,
+              "null_mean": 1.667951197199,
+              "null_std": 0.000000000000,
+              "z_score": -0.925125637580,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "gap_order_shuffle",
+              "observed": -0.208791208791,
+              "null_mean": -0.131071428571,
+              "null_std": 0.135557736385,
+              "z_score": -0.573333417129,
+              "empirical_p": 0.762376237624,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.625000000000,
+              "null_mean": 0.625000000000,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.011759892742,
+              "null_mean": 0.009878478354,
+              "null_std": 0.001874893580,
+              "z_score": 1.003477961674,
+              "empirical_p": 0.316831683168,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.886537983487,
+              "null_mean": 0.887739867342,
+              "null_std": 0.011839622644,
+              "z_score": -0.101513696106,
+              "empirical_p": 0.910891089109,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "punctuation",
+          "description": "Positions classified as punctuation in the grapheme-class stream.",
+          "event_count": 5,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.119047619048,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 5,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.600000000000,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.400000000000,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.800000000000,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.400000000000,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.500000000000,
+              "null_mean": 1.778112781245,
+              "null_std": 0.275051251655,
+              "z_score": -1.011130760433,
+              "empirical_p": 0.425742574257,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.960964047444,
+              "null_mean": 2.023419912203,
+              "null_std": 0.288741187516,
+              "z_score": -0.216303968604,
+              "empirical_p": 0.851485148515,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": -0.065934065934,
+              "null_mean": 0.000302197802,
+              "null_std": 0.104693779823,
+              "z_score": -0.632666657450,
+              "empirical_p": 0.504950495050,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0.250000000000,
+              "null_mean": 0.417500000000,
+              "null_std": 0.248873725638,
+              "z_score": -0.673032075083,
+              "empirical_p": 0.613861386139,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0.008631513540,
+              "null_mean": 0.011402710728,
+              "null_std": 0.007453754390,
+              "z_score": -0.371785417430,
+              "empirical_p": 0.801980198020,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 0.887374771778,
+              "null_mean": 0.899006666628,
+              "null_std": 0.037663979537,
+              "z_score": -0.308833399803,
+              "empirical_p": 0.801980198020,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 1.500000000000,
+              "null_mean": 1.706647871761,
+              "null_std": 0.580666381036,
+              "z_score": -0.355880551226,
+              "empirical_p": 0.752475247525,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": 1.960964047444,
+              "null_mean": 1.799375291525,
+              "null_std": 0.372510797132,
+              "z_score": 0.433782744455,
+              "empirical_p": 0.534653465347,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": -0.065934065934,
+              "null_mean": 0.022170329670,
+              "null_std": 0.126954592117,
+              "z_score": -0.693983526988,
+              "empirical_p": 0.544554455446,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0.250000000000,
+              "null_mean": 0.514674603175,
+              "null_std": 0.280663133445,
+              "z_score": -0.943033022989,
+              "empirical_p": 0.376237623762,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0.008631513540,
+              "null_mean": 0.010096583614,
+              "null_std": 0.007113609261,
+              "z_score": -0.205953127224,
+              "empirical_p": 0.811881188119,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 0.887374771778,
+              "null_mean": 0.906176013508,
+              "null_std": 0.038749403178,
+              "z_score": -0.485200807975,
+              "empirical_p": 0.683168316832,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 1.500000000000,
+              "null_mean": 1.601805792776,
+              "null_std": 0.598175548066,
+              "z_score": -0.170193838757,
+              "empirical_p": 0.841584158416,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": 1.960964047444,
+              "null_mean": 2.060524067894,
+              "null_std": 0.237381443784,
+              "z_score": -0.419409448621,
+              "empirical_p": 0.603960396040,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": -0.065934065934,
+              "null_mean": -0.009780219780,
+              "null_std": 0.101748667249,
+              "z_score": -0.551887780669,
+              "empirical_p": 0.693069306931,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0.250000000000,
+              "null_mean": 0.430202380952,
+              "null_std": 0.256797610800,
+              "z_score": -0.701729195965,
+              "empirical_p": 0.495049504950,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0.008631513540,
+              "null_mean": 0.009767744299,
+              "null_std": 0.007186807903,
+              "z_score": -0.158099503177,
+              "empirical_p": 0.811881188119,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 0.887374771778,
+              "null_mean": 0.911021542273,
+              "null_std": 0.035490733362,
+              "z_score": -0.666280131605,
+              "empirical_p": 0.475247524752,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.500000000000,
+              "null_mean": 1.500000000000,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.960964047444,
+              "null_mean": 1.960964047444,
+              "null_std": 0.000000000000,
+              "z_score": 0.997650015988,
+              "empirical_p": 0.940594059406,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "gap_order_shuffle",
+              "observed": -0.065934065934,
+              "null_mean": -0.058049450549,
+              "null_std": 0.075525511096,
+              "z_score": -0.104396716688,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.250000000000,
+              "null_mean": 0.250000000000,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.008631513540,
+              "null_mean": 0.009397237199,
+              "null_std": 0.001749186053,
+              "z_score": -0.437759983992,
+              "empirical_p": 0.801980198020,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.887374771778,
+              "null_mean": 0.907111656728,
+              "null_std": 0.021803418263,
+              "z_score": -0.905219755557,
+              "empirical_p": 0.366336633663,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "hyphen_boundary",
+          "description": "Positions classified as hyphen_boundary in the grapheme-class stream.",
+          "event_count": 0,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             },
+            {
+              "code": "LOW_EVENT_COUNT",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event occurs fewer than five times; gap and prime-position metrics are weak evidence."
+             },
+            {
+              "code": "DEGENERATE_EVENT_MAP",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map is all false or all true; many metrics collapse to trivial values."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 0,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "other",
+          "description": "Positions classified as other in the grapheme-class stream.",
+          "event_count": 0,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             },
+            {
+              "code": "LOW_EVENT_COUNT",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event occurs fewer than five times; gap and prime-position metrics are weak evidence."
+             },
+            {
+              "code": "DEGENERATE_EVENT_MAP",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map is all false or all true; many metrics collapse to trivial values."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 0,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "encoding": "word_boundary",
+      "sequence_len": 42,
+      "unique_symbol_count": 2,
+      "symbol_entropy": 0.749595257259,
+      "notes": ["E6 MVP word boundaries are whitespace-derived and should be interpreted as orthographic/token boundaries."],
+      "events": [
+        {
+          "event_name": "word_boundary",
+          "description": "Positions marked as word boundaries after declared whitespace preprocessing.",
+          "event_count": 9,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.214285714286,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 9,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 42,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.888888888889,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.444444444444,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.333333333333,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.222222222222,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.905639062230,
+              "null_mean": 2.307743574299,
+              "null_std": 0.289217021353,
+              "z_score": -1.390321047453,
+              "empirical_p": 0.257425742574,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.667951197199,
+              "null_mean": 1.990348444628,
+              "null_std": 0.271602346159,
+              "z_score": -1.187019375897,
+              "empirical_p": 0.207920792079,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": -0.208791208791,
+              "null_mean": 0.011648351648,
+              "null_std": 0.141311385851,
+              "z_score": -1.559956114733,
+              "empirical_p": 0.168316831683,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0.625000000000,
+              "null_mean": 0.501250000000,
+              "null_std": 0.185910773374,
+              "z_score": 0.665641897745,
+              "empirical_p": 0.742574257426,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0.011759892742,
+              "null_mean": 0.017514408337,
+              "null_std": 0.008005124616,
+              "z_score": -0.718853968074,
+              "empirical_p": 0.524752475248,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 0.886537983487,
+              "null_mean": 0.906565111516,
+              "null_std": 0.029968464818,
+              "z_score": -0.668273405091,
+              "empirical_p": 0.564356435644,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 1.905639062230,
+              "null_mean": 2.084763891424,
+              "null_std": 0.295822319358,
+              "z_score": -0.605514923900,
+              "empirical_p": 0.524752475248,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": 1.667951197199,
+              "null_mean": 1.653201097029,
+              "null_std": 0.253321231320,
+              "z_score": 0.058226861179,
+              "empirical_p": 0.970297029703,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": -0.208791208791,
+              "null_mean": 0.030054945055,
+              "null_std": 0.165165900113,
+              "z_score": -1.446098460296,
+              "empirical_p": 0.148514851485,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0.625000000000,
+              "null_mean": 0.659863913864,
+              "null_std": 0.190052474606,
+              "z_score": -0.183443619643,
+              "empirical_p": 0.881188118812,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0.011759892742,
+              "null_mean": 0.015645639626,
+              "null_std": 0.007325482734,
+              "z_score": -0.530442432944,
+              "empirical_p": 0.603960396040,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 0.886537983487,
+              "null_mean": 0.921812780089,
+              "null_std": 0.029654790150,
+              "z_score": -1.189514288338,
+              "empirical_p": 0.237623762376,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 1.905639062230,
+              "null_mean": 2.036240828493,
+              "null_std": 0.339972477712,
+              "z_score": -0.384153938409,
+              "empirical_p": 0.732673267327,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": 1.667951197199,
+              "null_mean": 1.606191099114,
+              "null_std": 0.260469042174,
+              "z_score": 0.237111088401,
+              "empirical_p": 0.762376237624,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": -0.208791208791,
+              "null_mean": -0.001648351648,
+              "null_std": 0.160588353237,
+              "z_score": -1.289899628261,
+              "empirical_p": 0.237623762376,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0.625000000000,
+              "null_mean": 0.701184953935,
+              "null_std": 0.153006803442,
+              "z_score": -0.497918734468,
+              "empirical_p": 0.603960396040,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0.011759892742,
+              "null_mean": 0.014704277437,
+              "null_std": 0.007130879728,
+              "z_score": -0.412906234202,
+              "empirical_p": 0.643564356436,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 0.886537983487,
+              "null_mean": 0.914189181550,
+              "null_std": 0.030577182357,
+              "z_score": -0.904308243340,
+              "empirical_p": 0.376237623762,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.905639062230,
+              "null_mean": 1.905639062230,
+              "null_std": 0.000000000000,
+              "z_score": -0.994987437107,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "gap_order_shuffle",
+              "observed": 1.667951197199,
+              "null_mean": 1.667951197199,
+              "null_std": 0.000000000000,
+              "z_score": -0.910154463562,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "gap_order_shuffle",
+              "observed": -0.208791208791,
+              "null_mean": -0.124313186813,
+              "null_std": 0.135254877139,
+              "z_score": -0.624583924552,
+              "empirical_p": 0.732673267327,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.625000000000,
+              "null_mean": 0.625000000000,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.011759892742,
+              "null_mean": 0.010025074112,
+              "null_std": 0.001931943215,
+              "z_score": 0.897965642313,
+              "empirical_p": 0.396039603960,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "gap_order_shuffle",
+              "observed": 0.886537983487,
+              "null_mean": 0.888642178361,
+              "null_std": 0.011884150607,
+              "z_score": -0.177058920172,
+              "empirical_p": 0.881188118812,
+              "null_samples": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "encoding": "frequency_class",
+      "sequence_len": 13,
+      "unique_symbol_count": 2,
+      "symbol_entropy": 0.779349837292,
+      "notes": ["E7 MVP frequency classes are calculated inside the supplied sample only. Hyphen policy: punctuation."],
+      "events": [
+        {
+          "event_name": "hapax",
+          "description": "Token positions in frequency class hapax.",
+          "event_count": 10,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.769230769231,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 10,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 13,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0.700000000000,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.400000000000,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.300000000000,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.200000000000,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 0.918295834054,
+              "null_mean": 0.801200678202,
+              "null_std": 0.203444990526,
+              "z_score": 0.575561755292,
+              "empirical_p": 0.841584158416,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.148834854281,
+              "null_mean": 1.443858916759,
+              "null_std": 0.351498193451,
+              "z_score": -0.839333083285,
+              "empirical_p": 0.485148514851,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": 0.166666666667,
+              "null_mean": 0.028333333333,
+              "null_std": 0.232170019748,
+              "z_score": 0.595827719202,
+              "empirical_p": 0.881188118812,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0.333333333333,
+              "null_mean": 0.226666666667,
+              "null_std": 0.098523834696,
+              "z_score": 1.082648345911,
+              "empirical_p": 0.603960396040,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0.037142831157,
+              "null_mean": 0.042043476197,
+              "null_std": 0.020815354187,
+              "z_score": -0.235434141366,
+              "empirical_p": 0.881188118812,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 0.953610063146,
+              "null_mean": 0.937267579542,
+              "null_std": 0.024160035612,
+              "z_score": 0.676426304436,
+              "empirical_p": 0.534653465347,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 0.918295834054,
+              "null_mean": 0.831570526394,
+              "null_std": 0.201373337481,
+              "z_score": 0.430669267074,
+              "empirical_p": 0.821782178218,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": 1.148834854281,
+              "null_mean": 1.177495528673,
+              "null_std": 0.406917267099,
+              "z_score": -0.070433664799,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": 0.166666666667,
+              "null_mean": 0.008333333333,
+              "null_std": 0.295281828132,
+              "z_score": 0.536210894979,
+              "empirical_p": 0.752475247525,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0.333333333333,
+              "null_mean": 0.342323593074,
+              "null_std": 0.166674537815,
+              "z_score": -0.053939011070,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0.037142831157,
+              "null_mean": 0.042259284860,
+              "null_std": 0.020243019316,
+              "z_score": -0.252751510199,
+              "empirical_p": 0.871287128713,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 0.953610063146,
+              "null_mean": 0.947680183933,
+              "null_std": 0.021117518926,
+              "z_score": 0.280803783524,
+              "empirical_p": 0.722772277228,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 0.918295834054,
+              "null_mean": 0.712725962739,
+              "null_std": 0.212408900977,
+              "z_score": 0.967802527908,
+              "empirical_p": 0.554455445545,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": 1.148834854281,
+              "null_mean": 1.185383633769,
+              "null_std": 0.371173016184,
+              "z_score": -0.098468309642,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": 0.166666666667,
+              "null_mean": 0.046666666667,
+              "null_std": 0.269138376618,
+              "z_score": 0.445867295135,
+              "empirical_p": 0.584158415842,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0.333333333333,
+              "null_mean": 0.251052669553,
+              "null_std": 0.163910873544,
+              "z_score": 0.501984169822,
+              "empirical_p": 0.584158415842,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0.037142831157,
+              "null_mean": 0.039126446862,
+              "null_std": 0.025899158137,
+              "z_score": -0.076589968473,
+              "empirical_p": 0.970297029703,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 0.953610063146,
+              "null_mean": 0.939652970452,
+              "null_std": 0.031100815254,
+              "z_score": 0.448769351549,
+              "empirical_p": 0.643564356436,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "mid_frequency",
+          "description": "Token positions in frequency class mid_frequency.",
+          "event_count": 3,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             },
+            {
+              "code": "LOW_EVENT_COUNT",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event occurs fewer than five times; gap and prime-position metrics are weak evidence."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0.230769230769,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 3,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 13,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 1,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0.666666666667,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0.333333333333,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0.333333333333,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1,
+              "null_mean": 0.860000000000,
+              "null_std": 0.348735088020,
+              "z_score": 0.401450857139,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": 1.148834854281,
+              "null_mean": 1.483327086886,
+              "null_std": 0.345129307006,
+              "z_score": -0.969179451919,
+              "empirical_p": 0.396039603960,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": -0.166666666667,
+              "null_mean": 0.006666666667,
+              "null_std": 0.243800805520,
+              "z_score": -0.710962923046,
+              "empirical_p": 0.534653465347,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0.500000000000,
+              "null_mean": 0.530000000000,
+              "null_std": 0.368041499636,
+              "z_score": -0.081512546899,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0.037142831157,
+              "null_mean": 0.043221915090,
+              "null_std": 0.021316190430,
+              "z_score": -0.285186227512,
+              "empirical_p": 0.831683168317,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 0.953610063146,
+              "null_mean": 0.939264725185,
+              "null_std": 0.021806055053,
+              "z_score": 0.657860301905,
+              "empirical_p": 0.455445544554,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 1,
+              "null_mean": 0.723669166277,
+              "null_std": 0.552656675617,
+              "z_score": 0.500004516212,
+              "empirical_p": 0.762376237624,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": 1.148834854281,
+              "null_mean": 1.160628349744,
+              "null_std": 0.336243472330,
+              "z_score": -0.035074273356,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": -0.166666666667,
+              "null_mean": 0.011666666667,
+              "null_std": 0.305445342841,
+              "z_score": -0.583846954988,
+              "empirical_p": 0.603960396040,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0.500000000000,
+              "null_mean": 0.697500000000,
+              "null_std": 0.354673582563,
+              "z_score": -0.556850043842,
+              "empirical_p": 0.851485148515,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0.037142831157,
+              "null_mean": 0.040213950182,
+              "null_std": 0.019885197551,
+              "z_score": -0.154442469948,
+              "empirical_p": 0.930693069307,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 0.953610063146,
+              "null_mean": 0.942188995448,
+              "null_std": 0.023290406853,
+              "z_score": 0.490376478624,
+              "empirical_p": 0.594059405941,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 1,
+              "null_mean": 0.534917312648,
+              "null_std": 0.576851077594,
+              "z_score": 0.806243943050,
+              "empirical_p": 0.861386138614,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": 1.148834854281,
+              "null_mean": 1.099259978221,
+              "null_std": 0.452769858580,
+              "z_score": 0.109492438864,
+              "empirical_p": 0.920792079208,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": -0.166666666667,
+              "null_mean": 0.010000000000,
+              "null_std": 0.257131722631,
+              "z_score": -0.687066787632,
+              "empirical_p": 0.584158415842,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0.500000000000,
+              "null_mean": 0.613333333333,
+              "null_std": 0.417678905128,
+              "z_score": -0.271340812145,
+              "empirical_p": 0.891089108911,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0.037142831157,
+              "null_mean": 0.038435617777,
+              "null_std": 0.024764503026,
+              "z_score": -0.052203212763,
+              "empirical_p": 0.970297029703,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 0.953610063146,
+              "null_mean": 0.946887300451,
+              "null_std": 0.029023883938,
+              "z_score": 0.231628637628,
+              "empirical_p": 0.851485148515,
+              "null_samples": 100
+            }
+          ]
+        },
+        {
+          "event_name": "high_frequency",
+          "description": "Token positions in frequency class high_frequency.",
+          "event_count": 0,
+          "alerts": [
+            {
+              "code": "WINDOW_TOO_SMALL",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map has fewer than 128 positions; positional and spectral metrics may be unstable."
+             },
+            {
+              "code": "LOW_EVENT_COUNT",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event occurs fewer than five times; gap and prime-position metrics are weak evidence."
+             },
+            {
+              "code": "DEGENERATE_EVENT_MAP",
+              "severity": "warning",
+              "interpretation_level": 0,
+              "message": "The event map is all false or all true; many metrics collapse to trivial values."
+             }
+          ],
+          "observed": [
+            {
+              "name": "event_density",
+              "value": 0,
+              "details": "count(event=true) / sequence_length"
+            },
+            {
+              "name": "event_count",
+              "value": 0,
+              "details": "Number of true positions in the event map."
+            },
+            {
+              "name": "sequence_length",
+              "value": 13,
+              "details": "Number of positions in the event map."
+            },
+            {
+              "name": "modular_residue_peak_m_2",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 2."
+            },
+            {
+              "name": "modular_residue_peak_m_3",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 3."
+            },
+            {
+              "name": "modular_residue_peak_m_5",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 5."
+            },
+            {
+              "name": "modular_residue_peak_m_7",
+              "value": 0,
+              "details": "Largest event-position residue fraction modulo 7."
+            }
+          ],
+          "comparisons": [
+            {
+              "name": "gap_entropy",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "density_shuffle",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "density_shuffle",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "density_shuffle",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_1",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_1",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_1",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "gap_entropy",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "run_entropy",
+              "null_model": "markov_2",
+              "observed": -0,
+              "null_mean": -0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_index_occupancy_bias",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "prime_gap_affinity",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "zeta_spectral_coherence",
+              "null_model": "markov_2",
+              "observed": 0,
+              "null_mean": 0,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            },
+            {
+              "name": "critical_line_symmetry",
+              "null_model": "markov_2",
+              "observed": 1,
+              "null_mean": 1,
+              "null_std": 0,
+              "z_score": 0,
+              "empirical_p": 1,
+              "null_samples": 100
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

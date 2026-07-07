@@ -1,0 +1,770 @@
+RRLANG ANALYSIS REPORT
+======================
+
+Experiment: rrlang_mvp_analysis_v0_2
+Status: exploratory
+Language: CanonicalUDHR
+Input: .\testdata\datasets_canonical\parallel\udhr\es\udhr_es_canonical.txt
+Input bytes: 13035
+Input chars: 12825
+Cleaned chars: 11965
+Null samples per null model: 100
+Seed: 18427
+Tool version: 0.3.0
+Hyphen policy: punctuation
+Max chars cap: none
+
+Encoding: grapheme
+  sequence_len: 11965
+  unique_symbols: 47
+  symbol_entropy_bits: 4.167824
+  note: MVP E1 uses Unicode scalar values as a deterministic grapheme approximation. True extended grapheme-cluster segmentation is a planned later extension.
+  note: Hyphen policy for this run: punctuation.
+
+  Event: vowel
+    description: Basic Latin-vowel positions plus common accented vowels.
+    event_count: 4482
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-441.563. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from 'density_shuffle' null with z=-39.680. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the 'density_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'prime_gap_affinity' deviates from 'density_shuffle' null with z=38.085. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'gap_entropy' deviates from 'markov_1' null with z=-4.094. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L2] Gap entropy is substantially lower than the 'markov_1' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L3] Metric 'prime_gap_affinity' deviates from 'markov_2' null with z=-3.576. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'run_entropy' deviates from 'gap_order_shuffle' null with z=-4.845. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L2] Run entropy is substantially lower than the 'gap_order_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:SURVIVES_MARKOV_2_NULL:L3] At least one metric remains deviant under the Markov-2 null. This is stronger than density-only evidence, but still requires corpus and encoding replication.
+    observed:
+      - event_density = 0.374593 (count(event=true) / sequence_length)
+      - event_count = 4482.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.504462 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.337796 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.209728 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.148148 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=2.040955, null_mean=2.543623, null_std=0.001138, z=-441.563, p_emp=0.009901
+      - run_entropy [density_shuffle]: observed=1.343531, null_mean=2.119521, null_std=0.019556, z=-39.680, p_emp=0.009901
+      - prime_index_occupancy_bias [density_shuffle]: observed=0.000625, null_mean=0.001986, null_std=0.014536, z=-0.094, p_emp=0.920792
+      - prime_gap_affinity [density_shuffle]: observed=0.750056, null_mean=0.464497, null_std=0.007498, z=38.085, p_emp=0.009901
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000108, null_mean=0.000194, null_std=0.000067, z=-1.288, p_emp=0.148515
+      - critical_line_symmetry [density_shuffle]: observed=0.832544, null_mean=0.769541, null_std=0.048116, z=1.309, p_emp=0.198020
+      - gap_entropy [markov_1]: observed=2.040955, null_mean=2.128505, null_std=0.021383, z=-4.094, p_emp=0.009901
+      - run_entropy [markov_1]: observed=1.343531, null_mean=1.327468, null_std=0.016303, z=0.985, p_emp=0.346535
+      - prime_index_occupancy_bias [markov_1]: observed=0.000625, null_mean=-0.002568, null_std=0.015476, z=0.206, p_emp=0.831683
+      - prime_gap_affinity [markov_1]: observed=0.750056, null_mean=0.767385, null_std=0.006052, z=-2.863, p_emp=0.009901
+      - zeta_spectral_coherence [markov_1]: observed=0.000108, null_mean=0.000110, null_std=0.000038, z=-0.051, p_emp=0.920792
+      - critical_line_symmetry [markov_1]: observed=0.832544, null_mean=0.802930, null_std=0.042403, z=0.698, p_emp=0.554455
+      - gap_entropy [markov_2]: observed=2.040955, null_mean=2.046540, null_std=0.017137, z=-0.326, p_emp=0.683168
+      - run_entropy [markov_2]: observed=1.343531, null_mean=1.345722, null_std=0.012904, z=-0.170, p_emp=0.881188
+      - prime_index_occupancy_bias [markov_2]: observed=0.000625, null_mean=-0.002935, null_std=0.015345, z=0.232, p_emp=0.821782
+      - prime_gap_affinity [markov_2]: observed=0.750056, null_mean=0.773108, null_std=0.006446, z=-3.576, p_emp=0.009901
+      - zeta_spectral_coherence [markov_2]: observed=0.000108, null_mean=0.000087, null_std=0.000029, z=0.714, p_emp=0.504950
+      - critical_line_symmetry [markov_2]: observed=0.832544, null_mean=0.836308, null_std=0.041132, z=-0.092, p_emp=0.970297
+      - gap_entropy [gap_order_shuffle]: observed=2.040955, null_mean=2.040955, null_std=0.000000, z=0.993, p_emp=1.000000
+      - run_entropy [gap_order_shuffle]: observed=1.343531, null_mean=1.344433, null_std=0.000186, z=-4.845, p_emp=0.009901
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=0.000625, null_mean=0.003628, null_std=0.016034, z=-0.187, p_emp=0.851485
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.750056, null_mean=0.750056, null_std=0.000000, z=0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000108, null_mean=0.000081, null_std=0.000028, z=0.964, p_emp=0.326733
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.832544, null_mean=0.822441, null_std=0.038996, z=0.259, p_emp=0.821782
+  Event: consonant
+    description: Alphabetic non-vowel positions under the MVP classifier.
+    event_count: 5298
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-475.713. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from 'density_shuffle' null with z=-51.417. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the 'density_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'prime_gap_affinity' deviates from 'density_shuffle' null with z=55.080. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'zeta_spectral_coherence' deviates from 'markov_1' null with z=3.201. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L3] Metric 'zeta_spectral_coherence' deviates from 'markov_2' null with z=4.143. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'run_entropy' deviates from 'gap_order_shuffle' null with z=-5.663. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L2] Run entropy is substantially lower than the 'gap_order_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'zeta_spectral_coherence' deviates from 'gap_order_shuffle' null with z=3.985. This is a tripwire, not a conclusion.
+      - [info:SURVIVES_MARKOV_2_NULL:L3] At least one metric remains deviant under the Markov-2 null. This is stronger than density-only evidence, but still requires corpus and encoding replication.
+    observed:
+      - event_density = 0.442791 (count(event=true) / sequence_length)
+      - event_count = 5298.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.501510 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.342393 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.210268 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.144960 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=1.832104, null_mean=2.234623, null_std=0.000846, z=-475.713, p_emp=0.009901
+      - run_entropy [density_shuffle]: observed=1.145265, null_mean=2.027167, null_std=0.017152, z=-51.417, p_emp=0.009901
+      - prime_index_occupancy_bias [density_shuffle]: observed=0.007118, null_mean=0.001087, null_std=0.013564, z=0.445, p_emp=0.702970
+      - prime_gap_affinity [density_shuffle]: observed=0.757787, null_mean=0.440851, null_std=0.005754, z=55.080, p_emp=0.009901
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000236, null_mean=0.000208, null_std=0.000066, z=0.423, p_emp=0.663366
+      - critical_line_symmetry [density_shuffle]: observed=0.821057, null_mean=0.767720, null_std=0.046051, z=1.158, p_emp=0.267327
+      - gap_entropy [markov_1]: observed=1.832104, null_mean=1.838145, null_std=0.017623, z=-0.343, p_emp=0.792079
+      - run_entropy [markov_1]: observed=1.145265, null_mean=1.149944, null_std=0.015053, z=-0.311, p_emp=0.811881
+      - prime_index_occupancy_bias [markov_1]: observed=0.007118, null_mean=-0.001809, null_std=0.013750, z=0.649, p_emp=0.504950
+      - prime_gap_affinity [markov_1]: observed=0.757787, null_mean=0.751148, null_std=0.006329, z=1.049, p_emp=0.297030
+      - zeta_spectral_coherence [markov_1]: observed=0.000236, null_mean=0.000114, null_std=0.000038, z=3.201, p_emp=0.019802
+      - critical_line_symmetry [markov_1]: observed=0.821057, null_mean=0.821440, null_std=0.047219, z=-0.008, p_emp=1.000000
+      - gap_entropy [markov_2]: observed=1.832104, null_mean=1.830622, null_std=0.013291, z=0.112, p_emp=0.970297
+      - run_entropy [markov_2]: observed=1.145265, null_mean=1.144071, null_std=0.010968, z=0.109, p_emp=0.920792
+      - prime_index_occupancy_bias [markov_2]: observed=0.007118, null_mean=0.000737, null_std=0.017485, z=0.365, p_emp=0.663366
+      - prime_gap_affinity [markov_2]: observed=0.757787, null_mean=0.754175, null_std=0.004516, z=0.800, p_emp=0.415842
+      - zeta_spectral_coherence [markov_2]: observed=0.000236, null_mean=0.000100, null_std=0.000033, z=4.143, p_emp=0.009901
+      - critical_line_symmetry [markov_2]: observed=0.821057, null_mean=0.826695, null_std=0.040189, z=-0.140, p_emp=0.920792
+      - gap_entropy [gap_order_shuffle]: observed=1.832104, null_mean=1.832104, null_std=0.000000, z=0.947, p_emp=0.891089
+      - run_entropy [gap_order_shuffle]: observed=1.145265, null_mean=1.146633, null_std=0.000242, z=-5.663, p_emp=0.009901
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=0.007118, null_mean=0.001176, null_std=0.016281, z=0.365, p_emp=0.742574
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.757787, null_mean=0.757787, null_std=0.000000, z=0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000236, null_mean=0.000101, null_std=0.000034, z=3.985, p_emp=0.009901
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.821057, null_mean=0.812167, null_std=0.044258, z=0.201, p_emp=0.792079
+  Event: whitespace
+    description: Whitespace positions.
+    event_count: 1926
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-117.792. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from 'density_shuffle' null with z=-17.715. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the 'density_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'prime_gap_affinity' deviates from 'density_shuffle' null with z=6.548. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'gap_entropy' deviates from 'markov_1' null with z=-6.557. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L2] Gap entropy is substantially lower than the 'markov_1' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'prime_gap_affinity' deviates from 'markov_1' null with z=-4.179. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L3] Metric 'gap_entropy' deviates from 'markov_2' null with z=-5.551. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L3] Gap entropy is substantially lower than the 'markov_2' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L3] Metric 'run_entropy' deviates from 'markov_2' null with z=-4.151. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L3] Run entropy is substantially lower than the 'markov_2' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:SURVIVES_MARKOV_2_NULL:L3] At least one metric remains deviant under the Markov-2 null. This is stronger than density-only evidence, but still requires corpus and encoding replication.
+    observed:
+      - event_density = 0.160969 (count(event=true) / sequence_length)
+      - event_count = 1926.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.506750 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.345794 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.208204 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.155763 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=3.452659, null_mean=3.936557, null_std=0.004108, z=-117.792, p_emp=0.009901
+      - run_entropy [density_shuffle]: observed=2.462136, null_mean=2.837415, null_std=0.021184, z=-17.715, p_emp=0.009901
+      - prime_index_occupancy_bias [density_shuffle]: observed=-0.007804, null_mean=-0.000904, null_std=0.008651, z=-0.798, p_emp=0.415842
+      - prime_gap_affinity [density_shuffle]: observed=0.531429, null_mean=0.455506, null_std=0.011594, z=6.548, p_emp=0.009901
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000034, null_mean=0.000115, null_std=0.000047, z=-1.741, p_emp=0.089109
+      - critical_line_symmetry [density_shuffle]: observed=0.734129, null_mean=0.769722, null_std=0.051538, z=-0.691, p_emp=0.475248
+      - gap_entropy [markov_1]: observed=3.452659, null_mean=3.662508, null_std=0.032005, z=-6.557, p_emp=0.009901
+      - run_entropy [markov_1]: observed=2.462136, null_mean=2.452579, null_std=0.023697, z=0.403, p_emp=0.732673
+      - prime_index_occupancy_bias [markov_1]: observed=-0.007804, null_mean=0.001696, null_std=0.011886, z=-0.799, p_emp=0.445545
+      - prime_gap_affinity [markov_1]: observed=0.531429, null_mean=0.579699, null_std=0.011550, z=-4.179, p_emp=0.009901
+      - zeta_spectral_coherence [markov_1]: observed=0.000034, null_mean=0.000092, null_std=0.000040, z=-1.432, p_emp=0.118812
+      - critical_line_symmetry [markov_1]: observed=0.734129, null_mean=0.788674, null_std=0.055428, z=-0.984, p_emp=0.356436
+      - gap_entropy [markov_2]: observed=3.452659, null_mean=3.622689, null_std=0.030631, z=-5.551, p_emp=0.009901
+      - run_entropy [markov_2]: observed=2.462136, null_mean=2.547716, null_std=0.020616, z=-4.151, p_emp=0.009901
+      - prime_index_occupancy_bias [markov_2]: observed=-0.007804, null_mean=-0.001310, null_std=0.011961, z=-0.543, p_emp=0.564356
+      - prime_gap_affinity [markov_2]: observed=0.531429, null_mean=0.548604, null_std=0.011908, z=-1.442, p_emp=0.128713
+      - zeta_spectral_coherence [markov_2]: observed=0.000034, null_mean=0.000083, null_std=0.000036, z=-1.356, p_emp=0.148515
+      - critical_line_symmetry [markov_2]: observed=0.734129, null_mean=0.784393, null_std=0.060218, z=-0.835, p_emp=0.425743
+      - gap_entropy [gap_order_shuffle]: observed=3.452659, null_mean=3.452659, null_std=0.000000, z=1.067, p_emp=0.544554
+      - run_entropy [gap_order_shuffle]: observed=2.462136, null_mean=2.462136, null_std=0.000000, z=0.931, p_emp=0.950495
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=-0.007804, null_mean=-0.000752, null_std=0.011480, z=-0.614, p_emp=0.702970
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.531429, null_mean=0.531429, null_std=0.000000, z=0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000034, null_mean=0.000038, null_std=0.000013, z=-0.361, p_emp=0.712871
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.734129, null_mean=0.747828, null_std=0.038686, z=-0.354, p_emp=0.722772
+  Event: punctuation
+    description: Punctuation positions under the declared punctuation/hyphen policies.
+    event_count: 198
+    observed:
+      - event_density = 0.016548 (count(event=true) / sequence_length)
+      - event_count = 198.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.505051 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.358586 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.222222 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.191919 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=6.417496, null_mean=6.475578, null_std=0.061472, z=-0.945, p_emp=0.346535
+      - run_entropy [density_shuffle]: observed=4.231746, null_mean=4.229065, null_std=0.044988, z=0.060, p_emp=0.970297
+      - prime_index_occupancy_bias [density_shuffle]: observed=0.001797, null_mean=-0.000113, null_std=0.003674, z=0.520, p_emp=0.683168
+      - prime_gap_affinity [density_shuffle]: observed=0.304569, null_mean=0.272081, null_std=0.032699, z=0.994, p_emp=0.376238
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000007, null_mean=0.000012, null_std=0.000008, z=-0.601, p_emp=0.435644
+      - critical_line_symmetry [density_shuffle]: observed=0.683900, null_mean=0.737318, null_std=0.068505, z=-0.780, p_emp=0.435644
+      - gap_entropy [markov_1]: observed=6.417496, null_mean=6.474182, null_std=0.057855, z=-0.980, p_emp=0.356436
+      - run_entropy [markov_1]: observed=4.231746, null_mean=4.200135, null_std=0.043551, z=0.726, p_emp=0.465347
+      - prime_index_occupancy_bias [markov_1]: observed=0.001797, null_mean=0.000064, null_std=0.003491, z=0.496, p_emp=0.693069
+      - prime_gap_affinity [markov_1]: observed=0.304569, null_mean=0.268971, null_std=0.035052, z=1.016, p_emp=0.316832
+      - zeta_spectral_coherence [markov_1]: observed=0.000007, null_mean=0.000012, null_std=0.000012, z=-0.407, p_emp=0.405941
+      - critical_line_symmetry [markov_1]: observed=0.683900, null_mean=0.731130, null_std=0.067531, z=-0.699, p_emp=0.415842
+      - gap_entropy [markov_2]: observed=6.417496, null_mean=6.469024, null_std=0.062765, z=-0.821, p_emp=0.415842
+      - run_entropy [markov_2]: observed=4.231746, null_mean=4.253715, null_std=0.035736, z=-0.615, p_emp=0.504950
+      - prime_index_occupancy_bias [markov_2]: observed=0.001797, null_mean=0.000351, null_std=0.004019, z=0.360, p_emp=0.653465
+      - prime_gap_affinity [markov_2]: observed=0.304569, null_mean=0.259210, null_std=0.033384, z=1.359, p_emp=0.158416
+      - zeta_spectral_coherence [markov_2]: observed=0.000007, null_mean=0.000012, null_std=0.000015, z=-0.291, p_emp=0.554455
+      - critical_line_symmetry [markov_2]: observed=0.683900, null_mean=0.723243, null_std=0.065304, z=-0.602, p_emp=0.534653
+      - gap_entropy [gap_order_shuffle]: observed=6.417496, null_mean=6.417496, null_std=0.000000, z=-0.990, p_emp=0.564356
+      - run_entropy [gap_order_shuffle]: observed=4.231746, null_mean=4.231746, null_std=0.000000, z=1.263, p_emp=0.118812
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=0.001797, null_mean=0.000054, null_std=0.003281, z=0.531, p_emp=0.623762
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.304569, null_mean=0.304569, null_std=0.000000, z=-0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000007, null_mean=0.000004, null_std=0.000001, z=2.485, p_emp=0.019802
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.683900, null_mean=0.692180, null_std=0.034528, z=-0.240, p_emp=0.792079
+  Event: hyphen_boundary
+    description: Hyphen positions treated as morpheme boundaries by the declared hyphen policy.
+    event_count: 0
+    alerts:
+      - [warning:LOW_EVENT_COUNT:L0] The event occurs fewer than five times; gap and prime-position metrics are weak evidence.
+      - [warning:DEGENERATE_EVENT_MAP:L0] The event map is all false or all true; many metrics collapse to trivial values.
+    observed:
+      - event_density = 0.000000 (count(event=true) / sequence_length)
+      - event_count = 0.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.000000 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.000000 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.000000 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.000000 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - run_entropy [density_shuffle]: observed=-0.000000, null_mean=-0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_index_occupancy_bias [density_shuffle]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_gap_affinity [density_shuffle]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - critical_line_symmetry [density_shuffle]: observed=1.000000, null_mean=1.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - gap_entropy [markov_1]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - run_entropy [markov_1]: observed=-0.000000, null_mean=-0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_index_occupancy_bias [markov_1]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_gap_affinity [markov_1]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - zeta_spectral_coherence [markov_1]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - critical_line_symmetry [markov_1]: observed=1.000000, null_mean=1.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - gap_entropy [markov_2]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - run_entropy [markov_2]: observed=-0.000000, null_mean=-0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_index_occupancy_bias [markov_2]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_gap_affinity [markov_2]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - zeta_spectral_coherence [markov_2]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - critical_line_symmetry [markov_2]: observed=1.000000, null_mean=1.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+  Event: digit
+    description: ASCII digit positions.
+    event_count: 60
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-31.779. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from 'density_shuffle' null with z=4.715. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'zeta_spectral_coherence' deviates from 'density_shuffle' null with z=5.134. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'zeta_spectral_coherence' deviates from 'markov_1' null with z=3.708. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'run_entropy' deviates from 'gap_order_shuffle' null with z=-9.732. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L2] Run entropy is substantially lower than the 'gap_order_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'zeta_spectral_coherence' deviates from 'gap_order_shuffle' null with z=4.355. This is a tripwire, not a conclusion.
+    observed:
+      - event_density = 0.005015 (count(event=true) / sequence_length)
+      - event_count = 60.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.533333 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.400000 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.316667 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.166667 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=3.706678, null_mean=5.737660, null_std=0.063909, z=-31.779, p_emp=0.009901
+      - run_entropy [density_shuffle]: observed=4.175987, null_mean=3.911665, null_std=0.056060, z=4.715, p_emp=0.009901
+      - prime_index_occupancy_bias [density_shuffle]: observed=-0.001736, null_mean=0.000110, null_std=0.001861, z=-0.992, p_emp=0.386139
+      - prime_gap_affinity [density_shuffle]: observed=0.050847, null_mean=0.206271, null_std=0.055096, z=-2.821, p_emp=0.009901
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000028, null_mean=0.000004, null_std=0.000005, z=5.134, p_emp=0.009901
+      - critical_line_symmetry [density_shuffle]: observed=0.762854, null_mean=0.709973, null_std=0.072421, z=0.730, p_emp=0.435644
+      - gap_entropy [markov_1]: observed=3.706678, null_mean=3.720492, null_std=0.351017, z=-0.039, p_emp=0.990099
+      - run_entropy [markov_1]: observed=4.175987, null_mean=4.339153, null_std=0.163552, z=-0.998, p_emp=0.386139
+      - prime_index_occupancy_bias [markov_1]: observed=-0.001736, null_mean=0.000103, null_std=0.001754, z=-1.049, p_emp=0.316832
+      - prime_gap_affinity [markov_1]: observed=0.050847, null_mean=0.101647, null_std=0.042414, z=-1.198, p_emp=0.257426
+      - zeta_spectral_coherence [markov_1]: observed=0.000028, null_mean=0.000007, null_std=0.000006, z=3.708, p_emp=0.019802
+      - critical_line_symmetry [markov_1]: observed=0.762854, null_mean=0.677881, null_std=0.064811, z=1.311, p_emp=0.178218
+      - gap_entropy [markov_2]: observed=3.706678, null_mean=3.666396, null_std=0.192201, z=0.210, p_emp=0.772277
+      - run_entropy [markov_2]: observed=4.175987, null_mean=4.128648, null_std=0.149403, z=0.317, p_emp=0.683168
+      - prime_index_occupancy_bias [markov_2]: observed=-0.001736, null_mean=-0.000076, null_std=0.001910, z=-0.869, p_emp=0.396040
+      - prime_gap_affinity [markov_2]: observed=0.050847, null_mean=0.102948, null_std=0.038384, z=-1.357, p_emp=0.198020
+      - zeta_spectral_coherence [markov_2]: observed=0.000028, null_mean=0.000008, null_std=0.000014, z=1.517, p_emp=0.039604
+      - critical_line_symmetry [markov_2]: observed=0.762854, null_mean=0.695551, null_std=0.073886, z=0.911, p_emp=0.287129
+      - gap_entropy [gap_order_shuffle]: observed=3.706678, null_mean=3.706678, null_std=0.000000, z=0.997, p_emp=0.633663
+      - run_entropy [gap_order_shuffle]: observed=4.175987, null_mean=4.413291, null_std=0.024383, z=-9.732, p_emp=0.009901
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=-0.001736, null_mean=0.000450, null_std=0.001770, z=-1.235, p_emp=0.237624
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.050847, null_mean=0.050847, null_std=0.000000, z=0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000028, null_mean=0.000007, null_std=0.000005, z=4.355, p_emp=0.029703
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.762854, null_mean=0.700439, null_std=0.047847, z=1.304, p_emp=0.198020
+
+Encoding: grapheme_class
+  sequence_len: 11965
+  unique_symbols: 6
+  symbol_entropy_bits: 1.612602
+  note: E2 maps Unicode scalar values into broad grapheme classes. Hyphen policy: punctuation.
+
+  Event: vowel
+    description: Positions classified as vowel in the grapheme-class stream.
+    event_count: 4482
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-386.836. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from 'density_shuffle' null with z=-40.568. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the 'density_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'prime_gap_affinity' deviates from 'density_shuffle' null with z=37.389. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'gap_entropy' deviates from 'markov_1' null with z=-3.876. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L2] Gap entropy is substantially lower than the 'markov_1' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L3] Metric 'prime_gap_affinity' deviates from 'markov_2' null with z=-3.987. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'run_entropy' deviates from 'gap_order_shuffle' null with z=-4.922. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L2] Run entropy is substantially lower than the 'gap_order_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:SURVIVES_MARKOV_2_NULL:L3] At least one metric remains deviant under the Markov-2 null. This is stronger than density-only evidence, but still requires corpus and encoding replication.
+    observed:
+      - event_density = 0.374593 (count(event=true) / sequence_length)
+      - event_count = 4482.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.504462 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.337796 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.209728 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.148148 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=2.040955, null_mean=2.543450, null_std=0.001299, z=-386.836, p_emp=0.009901
+      - run_entropy [density_shuffle]: observed=1.343531, null_mean=2.116059, null_std=0.019043, z=-40.568, p_emp=0.009901
+      - prime_index_occupancy_bias [density_shuffle]: observed=0.000625, null_mean=0.002084, null_std=0.014608, z=-0.100, p_emp=0.980198
+      - prime_gap_affinity [density_shuffle]: observed=0.750056, null_mean=0.465706, null_std=0.007605, z=37.389, p_emp=0.009901
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000108, null_mean=0.000197, null_std=0.000063, z=-1.420, p_emp=0.188119
+      - critical_line_symmetry [density_shuffle]: observed=0.832544, null_mean=0.772052, null_std=0.045557, z=1.328, p_emp=0.178218
+      - gap_entropy [markov_1]: observed=2.040955, null_mean=2.129591, null_std=0.022868, z=-3.876, p_emp=0.009901
+      - run_entropy [markov_1]: observed=1.343531, null_mean=1.328599, null_std=0.017709, z=0.843, p_emp=0.455446
+      - prime_index_occupancy_bias [markov_1]: observed=0.000625, null_mean=0.000281, null_std=0.013398, z=0.026, p_emp=0.950495
+      - prime_gap_affinity [markov_1]: observed=0.750056, null_mean=0.766995, null_std=0.006761, z=-2.506, p_emp=0.019802
+      - zeta_spectral_coherence [markov_1]: observed=0.000108, null_mean=0.000108, null_std=0.000041, z=-0.016, p_emp=0.990099
+      - critical_line_symmetry [markov_1]: observed=0.832544, null_mean=0.809244, null_std=0.042229, z=0.552, p_emp=0.594059
+      - gap_entropy [markov_2]: observed=2.040955, null_mean=2.046154, null_std=0.016822, z=-0.309, p_emp=0.772277
+      - run_entropy [markov_2]: observed=1.343531, null_mean=1.344276, null_std=0.013295, z=-0.056, p_emp=0.950495
+      - prime_index_occupancy_bias [markov_2]: observed=0.000625, null_mean=0.003575, null_std=0.014076, z=-0.210, p_emp=0.861386
+      - prime_gap_affinity [markov_2]: observed=0.750056, null_mean=0.773250, null_std=0.005817, z=-3.987, p_emp=0.009901
+      - zeta_spectral_coherence [markov_2]: observed=0.000108, null_mean=0.000086, null_std=0.000028, z=0.793, p_emp=0.415842
+      - critical_line_symmetry [markov_2]: observed=0.832544, null_mean=0.836550, null_std=0.042805, z=-0.094, p_emp=0.930693
+      - gap_entropy [gap_order_shuffle]: observed=2.040955, null_mean=2.040955, null_std=0.000000, z=0.992, p_emp=1.000000
+      - run_entropy [gap_order_shuffle]: observed=1.343531, null_mean=1.344450, null_std=0.000187, z=-4.922, p_emp=0.009901
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=0.000625, null_mean=-0.001355, null_std=0.014708, z=0.135, p_emp=0.930693
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.750056, null_mean=0.750056, null_std=0.000000, z=0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000108, null_mean=0.000080, null_std=0.000026, z=1.071, p_emp=0.287129
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.832544, null_mean=0.821413, null_std=0.038882, z=0.286, p_emp=0.801980
+  Event: consonant
+    description: Positions classified as consonant in the grapheme-class stream.
+    event_count: 5298
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-470.582. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from 'density_shuffle' null with z=-47.866. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the 'density_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'prime_gap_affinity' deviates from 'density_shuffle' null with z=48.051. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'zeta_spectral_coherence' deviates from 'markov_1' null with z=3.620. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L3] Metric 'zeta_spectral_coherence' deviates from 'markov_2' null with z=4.609. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'run_entropy' deviates from 'gap_order_shuffle' null with z=-5.868. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L2] Run entropy is substantially lower than the 'gap_order_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'zeta_spectral_coherence' deviates from 'gap_order_shuffle' null with z=3.831. This is a tripwire, not a conclusion.
+      - [info:SURVIVES_MARKOV_2_NULL:L3] At least one metric remains deviant under the Markov-2 null. This is stronger than density-only evidence, but still requires corpus and encoding replication.
+    observed:
+      - event_density = 0.442791 (count(event=true) / sequence_length)
+      - event_count = 5298.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.501510 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.342393 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.210268 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.144960 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=1.832104, null_mean=2.234403, null_std=0.000855, z=-470.582, p_emp=0.009901
+      - run_entropy [density_shuffle]: observed=1.145265, null_mean=2.021877, null_std=0.018314, z=-47.866, p_emp=0.009901
+      - prime_index_occupancy_bias [density_shuffle]: observed=0.007118, null_mean=0.002307, null_std=0.013296, z=0.362, p_emp=0.722772
+      - prime_gap_affinity [density_shuffle]: observed=0.757787, null_mean=0.442050, null_std=0.006571, z=48.051, p_emp=0.009901
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000236, null_mean=0.000213, null_std=0.000064, z=0.353, p_emp=0.762376
+      - critical_line_symmetry [density_shuffle]: observed=0.821057, null_mean=0.766504, null_std=0.041825, z=1.304, p_emp=0.207921
+      - gap_entropy [markov_1]: observed=1.832104, null_mean=1.837778, null_std=0.017725, z=-0.320, p_emp=0.742574
+      - run_entropy [markov_1]: observed=1.145265, null_mean=1.149824, null_std=0.015844, z=-0.288, p_emp=0.762376
+      - prime_index_occupancy_bias [markov_1]: observed=0.007118, null_mean=0.000376, null_std=0.015042, z=0.448, p_emp=0.693069
+      - prime_gap_affinity [markov_1]: observed=0.757787, null_mean=0.751005, null_std=0.007124, z=0.952, p_emp=0.336634
+      - zeta_spectral_coherence [markov_1]: observed=0.000236, null_mean=0.000106, null_std=0.000036, z=3.620, p_emp=0.009901
+      - critical_line_symmetry [markov_1]: observed=0.821057, null_mean=0.809115, null_std=0.042088, z=0.284, p_emp=0.742574
+      - gap_entropy [markov_2]: observed=1.832104, null_mean=1.833739, null_std=0.016284, z=-0.100, p_emp=0.920792
+      - run_entropy [markov_2]: observed=1.145265, null_mean=1.146756, null_std=0.013807, z=-0.108, p_emp=0.871287
+      - prime_index_occupancy_bias [markov_2]: observed=0.007118, null_mean=-0.002030, null_std=0.016587, z=0.552, p_emp=0.603960
+      - prime_gap_affinity [markov_2]: observed=0.757787, null_mean=0.753547, null_std=0.006088, z=0.697, p_emp=0.425743
+      - zeta_spectral_coherence [markov_2]: observed=0.000236, null_mean=0.000096, null_std=0.000030, z=4.609, p_emp=0.009901
+      - critical_line_symmetry [markov_2]: observed=0.821057, null_mean=0.825452, null_std=0.043502, z=-0.101, p_emp=0.910891
+      - gap_entropy [gap_order_shuffle]: observed=1.832104, null_mean=1.832104, null_std=0.000000, z=1.027, p_emp=0.643564
+      - run_entropy [gap_order_shuffle]: observed=1.145265, null_mean=1.146687, null_std=0.000242, z=-5.868, p_emp=0.009901
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=0.007118, null_mean=0.000780, null_std=0.015856, z=0.400, p_emp=0.683168
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.757787, null_mean=0.757787, null_std=0.000000, z=0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000236, null_mean=0.000099, null_std=0.000036, z=3.831, p_emp=0.009901
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.821057, null_mean=0.805796, null_std=0.045704, z=0.334, p_emp=0.732673
+  Event: digit
+    description: Positions classified as digit in the grapheme-class stream.
+    event_count: 60
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-30.863. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from 'density_shuffle' null with z=4.997. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'prime_gap_affinity' deviates from 'density_shuffle' null with z=-3.213. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L3] Metric 'zeta_spectral_coherence' deviates from 'markov_2' null with z=4.539. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'run_entropy' deviates from 'gap_order_shuffle' null with z=-7.926. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L2] Run entropy is substantially lower than the 'gap_order_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:SURVIVES_MARKOV_2_NULL:L3] At least one metric remains deviant under the Markov-2 null. This is stronger than density-only evidence, but still requires corpus and encoding replication.
+    observed:
+      - event_density = 0.005015 (count(event=true) / sequence_length)
+      - event_count = 60.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.533333 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.400000 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.316667 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.166667 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=3.706678, null_mean=5.751526, null_std=0.066255, z=-30.863, p_emp=0.009901
+      - run_entropy [density_shuffle]: observed=4.175987, null_mean=3.924101, null_std=0.050410, z=4.997, p_emp=0.009901
+      - prime_index_occupancy_bias [density_shuffle]: observed=-0.001736, null_mean=-0.000143, null_std=0.002073, z=-0.769, p_emp=0.445545
+      - prime_gap_affinity [density_shuffle]: observed=0.050847, null_mean=0.214237, null_std=0.050849, z=-3.213, p_emp=0.009901
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000028, null_mean=0.000004, null_std=0.000010, z=2.350, p_emp=0.019802
+      - critical_line_symmetry [density_shuffle]: observed=0.762854, null_mean=0.708462, null_std=0.067712, z=0.803, p_emp=0.405941
+      - gap_entropy [markov_1]: observed=3.706678, null_mean=3.718582, null_std=0.357382, z=-0.033, p_emp=0.950495
+      - run_entropy [markov_1]: observed=4.175987, null_mean=4.348231, null_std=0.153900, z=-1.119, p_emp=0.227723
+      - prime_index_occupancy_bias [markov_1]: observed=-0.001736, null_mean=0.000196, null_std=0.001896, z=-1.020, p_emp=0.336634
+      - prime_gap_affinity [markov_1]: observed=0.050847, null_mean=0.109995, null_std=0.044252, z=-1.337, p_emp=0.188119
+      - zeta_spectral_coherence [markov_1]: observed=0.000028, null_mean=0.000007, null_std=0.000009, z=2.486, p_emp=0.029703
+      - critical_line_symmetry [markov_1]: observed=0.762854, null_mean=0.674058, null_std=0.063406, z=1.400, p_emp=0.138614
+      - gap_entropy [markov_2]: observed=3.706678, null_mean=3.676467, null_std=0.194780, z=0.155, p_emp=0.782178
+      - run_entropy [markov_2]: observed=4.175987, null_mean=4.138291, null_std=0.159943, z=0.236, p_emp=0.861386
+      - prime_index_occupancy_bias [markov_2]: observed=-0.001736, null_mean=-0.000496, null_std=0.001901, z=-0.652, p_emp=0.455446
+      - prime_gap_affinity [markov_2]: observed=0.050847, null_mean=0.099881, null_std=0.036290, z=-1.351, p_emp=0.188119
+      - zeta_spectral_coherence [markov_2]: observed=0.000028, null_mean=0.000006, null_std=0.000005, z=4.539, p_emp=0.019802
+      - critical_line_symmetry [markov_2]: observed=0.762854, null_mean=0.680708, null_std=0.059180, z=1.388, p_emp=0.118812
+      - gap_entropy [gap_order_shuffle]: observed=3.706678, null_mean=3.706678, null_std=0.000000, z=0.981, p_emp=0.673267
+      - run_entropy [gap_order_shuffle]: observed=4.175987, null_mean=4.409102, null_std=0.029412, z=-7.926, p_emp=0.009901
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=-0.001736, null_mean=-0.000080, null_std=0.001693, z=-0.978, p_emp=0.425743
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.050847, null_mean=0.050847, null_std=0.000000, z=0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000028, null_mean=0.000008, null_std=0.000007, z=2.892, p_emp=0.029703
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.762854, null_mean=0.698194, null_std=0.047221, z=1.369, p_emp=0.207921
+  Event: whitespace
+    description: Positions classified as whitespace in the grapheme-class stream.
+    event_count: 1926
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-123.053. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from 'density_shuffle' null with z=-18.728. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the 'density_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'prime_gap_affinity' deviates from 'density_shuffle' null with z=7.487. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'gap_entropy' deviates from 'markov_1' null with z=-5.943. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L2] Gap entropy is substantially lower than the 'markov_1' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'prime_gap_affinity' deviates from 'markov_1' null with z=-4.396. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L3] Metric 'gap_entropy' deviates from 'markov_2' null with z=-5.420. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L3] Gap entropy is substantially lower than the 'markov_2' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L3] Metric 'run_entropy' deviates from 'markov_2' null with z=-4.102. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L3] Run entropy is substantially lower than the 'markov_2' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:SURVIVES_MARKOV_2_NULL:L3] At least one metric remains deviant under the Markov-2 null. This is stronger than density-only evidence, but still requires corpus and encoding replication.
+    observed:
+      - event_density = 0.160969 (count(event=true) / sequence_length)
+      - event_count = 1926.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.506750 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.345794 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.208204 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.155763 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=3.452659, null_mean=3.936670, null_std=0.003933, z=-123.053, p_emp=0.009901
+      - run_entropy [density_shuffle]: observed=2.462136, null_mean=2.838990, null_std=0.020123, z=-18.728, p_emp=0.009901
+      - prime_index_occupancy_bias [density_shuffle]: observed=-0.007804, null_mean=-0.000225, null_std=0.011031, z=-0.687, p_emp=0.623762
+      - prime_gap_affinity [density_shuffle]: observed=0.531429, null_mean=0.453927, null_std=0.010351, z=7.487, p_emp=0.009901
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000034, null_mean=0.000114, null_std=0.000051, z=-1.578, p_emp=0.128713
+      - critical_line_symmetry [density_shuffle]: observed=0.734129, null_mean=0.767451, null_std=0.053020, z=-0.628, p_emp=0.574257
+      - gap_entropy [markov_1]: observed=3.452659, null_mean=3.660858, null_std=0.035032, z=-5.943, p_emp=0.009901
+      - run_entropy [markov_1]: observed=2.462136, null_mean=2.452257, null_std=0.025982, z=0.380, p_emp=0.752475
+      - prime_index_occupancy_bias [markov_1]: observed=-0.007804, null_mean=-0.001411, null_std=0.011327, z=-0.564, p_emp=0.504950
+      - prime_gap_affinity [markov_1]: observed=0.531429, null_mean=0.577269, null_std=0.010428, z=-4.396, p_emp=0.009901
+      - zeta_spectral_coherence [markov_1]: observed=0.000034, null_mean=0.000084, null_std=0.000036, z=-1.411, p_emp=0.128713
+      - critical_line_symmetry [markov_1]: observed=0.734129, null_mean=0.775242, null_std=0.050927, z=-0.807, p_emp=0.405941
+      - gap_entropy [markov_2]: observed=3.452659, null_mean=3.624087, null_std=0.031632, z=-5.420, p_emp=0.009901
+      - run_entropy [markov_2]: observed=2.462136, null_mean=2.546861, null_std=0.020654, z=-4.102, p_emp=0.009901
+      - prime_index_occupancy_bias [markov_2]: observed=-0.007804, null_mean=-0.001320, null_std=0.010525, z=-0.616, p_emp=0.564356
+      - prime_gap_affinity [markov_2]: observed=0.531429, null_mean=0.549327, null_std=0.010485, z=-1.707, p_emp=0.099010
+      - zeta_spectral_coherence [markov_2]: observed=0.000034, null_mean=0.000078, null_std=0.000031, z=-1.425, p_emp=0.099010
+      - critical_line_symmetry [markov_2]: observed=0.734129, null_mean=0.790580, null_std=0.056367, z=-1.001, p_emp=0.356436
+      - gap_entropy [gap_order_shuffle]: observed=3.452659, null_mean=3.452659, null_std=0.000000, z=1.071, p_emp=0.465347
+      - run_entropy [gap_order_shuffle]: observed=2.462136, null_mean=2.462136, null_std=0.000000, z=0.895, p_emp=0.990099
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=-0.007804, null_mean=0.000737, null_std=0.010040, z=-0.851, p_emp=0.425743
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.531429, null_mean=0.531429, null_std=0.000000, z=0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000034, null_mean=0.000039, null_std=0.000013, z=-0.419, p_emp=0.643564
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.734129, null_mean=0.741856, null_std=0.039519, z=-0.196, p_emp=0.831683
+  Event: punctuation
+    description: Positions classified as punctuation in the grapheme-class stream.
+    event_count: 198
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'zeta_spectral_coherence' deviates from 'gap_order_shuffle' null with z=3.188. This is a tripwire, not a conclusion.
+    observed:
+      - event_density = 0.016548 (count(event=true) / sequence_length)
+      - event_count = 198.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.505051 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.358586 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.222222 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.191919 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=6.417496, null_mean=6.477855, null_std=0.058529, z=-1.031, p_emp=0.267327
+      - run_entropy [density_shuffle]: observed=4.231746, null_mean=4.229416, null_std=0.045015, z=0.052, p_emp=0.950495
+      - prime_index_occupancy_bias [density_shuffle]: observed=0.001797, null_mean=0.000508, null_std=0.003373, z=0.382, p_emp=0.722772
+      - prime_gap_affinity [density_shuffle]: observed=0.304569, null_mean=0.269492, null_std=0.031433, z=1.116, p_emp=0.257426
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000007, null_mean=0.000015, null_std=0.000018, z=-0.447, p_emp=0.445545
+      - critical_line_symmetry [density_shuffle]: observed=0.683900, null_mean=0.736937, null_std=0.075509, z=-0.702, p_emp=0.405941
+      - gap_entropy [markov_1]: observed=6.417496, null_mean=6.469126, null_std=0.069394, z=-0.744, p_emp=0.465347
+      - run_entropy [markov_1]: observed=4.231746, null_mean=4.196299, null_std=0.047945, z=0.739, p_emp=0.366337
+      - prime_index_occupancy_bias [markov_1]: observed=0.001797, null_mean=-0.001134, null_std=0.003490, z=0.840, p_emp=0.405941
+      - prime_gap_affinity [markov_1]: observed=0.304569, null_mean=0.270037, null_std=0.029978, z=1.152, p_emp=0.188119
+      - zeta_spectral_coherence [markov_1]: observed=0.000007, null_mean=0.000012, null_std=0.000011, z=-0.422, p_emp=0.544554
+      - critical_line_symmetry [markov_1]: observed=0.683900, null_mean=0.728683, null_std=0.077057, z=-0.581, p_emp=0.594059
+      - gap_entropy [markov_2]: observed=6.417496, null_mean=6.458769, null_std=0.060589, z=-0.681, p_emp=0.495050
+      - run_entropy [markov_2]: observed=4.231746, null_mean=4.249501, null_std=0.032326, z=-0.549, p_emp=0.613861
+      - prime_index_occupancy_bias [markov_2]: observed=0.001797, null_mean=0.000432, null_std=0.003360, z=0.406, p_emp=0.683168
+      - prime_gap_affinity [markov_2]: observed=0.304569, null_mean=0.261961, null_std=0.032919, z=1.294, p_emp=0.217822
+      - zeta_spectral_coherence [markov_2]: observed=0.000007, null_mean=0.000013, null_std=0.000015, z=-0.360, p_emp=0.445545
+      - critical_line_symmetry [markov_2]: observed=0.683900, null_mean=0.731720, null_std=0.067467, z=-0.709, p_emp=0.485149
+      - gap_entropy [gap_order_shuffle]: observed=6.417496, null_mean=6.417496, null_std=0.000000, z=-0.821, p_emp=0.861386
+      - run_entropy [gap_order_shuffle]: observed=4.231746, null_mean=4.231746, null_std=0.000000, z=1.182, p_emp=0.267327
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=0.001797, null_mean=0.000489, null_std=0.003590, z=0.364, p_emp=0.772277
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.304569, null_mean=0.304569, null_std=0.000000, z=-0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000007, null_mean=0.000004, null_std=0.000001, z=3.188, p_emp=0.009901
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.683900, null_mean=0.690007, null_std=0.034805, z=-0.175, p_emp=0.851485
+  Event: hyphen_boundary
+    description: Positions classified as hyphen_boundary in the grapheme-class stream.
+    event_count: 0
+    alerts:
+      - [warning:LOW_EVENT_COUNT:L0] The event occurs fewer than five times; gap and prime-position metrics are weak evidence.
+      - [warning:DEGENERATE_EVENT_MAP:L0] The event map is all false or all true; many metrics collapse to trivial values.
+    observed:
+      - event_density = 0.000000 (count(event=true) / sequence_length)
+      - event_count = 0.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.000000 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.000000 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.000000 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.000000 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - run_entropy [density_shuffle]: observed=-0.000000, null_mean=-0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_index_occupancy_bias [density_shuffle]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_gap_affinity [density_shuffle]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - critical_line_symmetry [density_shuffle]: observed=1.000000, null_mean=1.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - gap_entropy [markov_1]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - run_entropy [markov_1]: observed=-0.000000, null_mean=-0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_index_occupancy_bias [markov_1]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_gap_affinity [markov_1]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - zeta_spectral_coherence [markov_1]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - critical_line_symmetry [markov_1]: observed=1.000000, null_mean=1.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - gap_entropy [markov_2]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - run_entropy [markov_2]: observed=-0.000000, null_mean=-0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_index_occupancy_bias [markov_2]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_gap_affinity [markov_2]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - zeta_spectral_coherence [markov_2]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - critical_line_symmetry [markov_2]: observed=1.000000, null_mean=1.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+  Event: other
+    description: Positions classified as other in the grapheme-class stream.
+    event_count: 1
+    alerts:
+      - [warning:LOW_EVENT_COUNT:L0] The event occurs fewer than five times; gap and prime-position metrics are weak evidence.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from 'density_shuffle' null with z=-238293783602023.688. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the 'density_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'zeta_spectral_coherence' deviates from 'density_shuffle' null with z=1472.353. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'critical_line_symmetry' deviates from 'density_shuffle' null with z=10.989. This is a tripwire, not a conclusion.
+    observed:
+      - event_density = 0.000084 (count(event=true) / sequence_length)
+      - event_count = 1.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 1.000000 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 1.000000 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 1.000000 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 1.000000 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - run_entropy [density_shuffle]: observed=1.000000, null_mean=1.584963, null_std=0.000000, z=-238293783602023.688, p_emp=0.009901
+      - prime_index_occupancy_bias [density_shuffle]: observed=0.000000, null_mean=0.000016, null_std=0.000276, z=-0.058, p_emp=1.000000
+      - prime_gap_affinity [density_shuffle]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000084, null_mean=0.000000, null_std=0.000000, z=1472.353, p_emp=0.009901
+      - critical_line_symmetry [density_shuffle]: observed=0.999639, null_mean=0.606468, null_std=0.035779, z=10.989, p_emp=0.009901
+      - gap_entropy [markov_1]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - run_entropy [markov_1]: observed=1.000000, null_mean=-0.000000, null_std=0.000000, z=0.000, p_emp=0.009901
+      - prime_index_occupancy_bias [markov_1]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_gap_affinity [markov_1]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - zeta_spectral_coherence [markov_1]: observed=0.000084, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=0.009901
+      - critical_line_symmetry [markov_1]: observed=0.999639, null_mean=1.000000, null_std=0.000000, z=0.000, p_emp=0.009901
+      - gap_entropy [markov_2]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - run_entropy [markov_2]: observed=1.000000, null_mean=-0.000000, null_std=0.000000, z=0.000, p_emp=0.009901
+      - prime_index_occupancy_bias [markov_2]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - prime_gap_affinity [markov_2]: observed=0.000000, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=1.000000
+      - zeta_spectral_coherence [markov_2]: observed=0.000084, null_mean=0.000000, null_std=0.000000, z=0.000, p_emp=0.009901
+      - critical_line_symmetry [markov_2]: observed=0.999639, null_mean=1.000000, null_std=0.000000, z=0.000, p_emp=0.009901
+
+Encoding: word_boundary
+  sequence_len: 11965
+  unique_symbols: 2
+  symbol_entropy_bits: 0.636624
+  note: E6 MVP word boundaries are whitespace-derived and should be interpreted as orthographic/token boundaries.
+
+  Event: word_boundary
+    description: Positions marked as word boundaries after declared whitespace preprocessing.
+    event_count: 1926
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-124.096. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from 'density_shuffle' null with z=-17.072. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the 'density_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'prime_gap_affinity' deviates from 'density_shuffle' null with z=6.653. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'gap_entropy' deviates from 'markov_1' null with z=-6.527. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L2] Gap entropy is substantially lower than the 'markov_1' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L2] Metric 'prime_gap_affinity' deviates from 'markov_1' null with z=-3.675. This is a tripwire, not a conclusion.
+      - [info:STATISTICAL_DEVIATION:L3] Metric 'gap_entropy' deviates from 'markov_2' null with z=-5.708. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L3] Gap entropy is substantially lower than the 'markov_2' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L3] Metric 'run_entropy' deviates from 'markov_2' null with z=-4.756. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L3] Run entropy is substantially lower than the 'markov_2' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:SURVIVES_MARKOV_2_NULL:L3] At least one metric remains deviant under the Markov-2 null. This is stronger than density-only evidence, but still requires corpus and encoding replication.
+    observed:
+      - event_density = 0.160969 (count(event=true) / sequence_length)
+      - event_count = 1926.000000 (Number of true positions in the event map.)
+      - sequence_length = 11965.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.506750 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.345794 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.208204 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.155763 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=3.452659, null_mean=3.936387, null_std=0.003898, z=-124.096, p_emp=0.009901
+      - run_entropy [density_shuffle]: observed=2.462136, null_mean=2.836301, null_std=0.021917, z=-17.072, p_emp=0.009901
+      - prime_index_occupancy_bias [density_shuffle]: observed=-0.007804, null_mean=0.001091, null_std=0.012462, z=-0.714, p_emp=0.495050
+      - prime_gap_affinity [density_shuffle]: observed=0.531429, null_mean=0.453782, null_std=0.011671, z=6.653, p_emp=0.009901
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000034, null_mean=0.000113, null_std=0.000044, z=-1.770, p_emp=0.059406
+      - critical_line_symmetry [density_shuffle]: observed=0.734129, null_mean=0.767486, null_std=0.049398, z=-0.675, p_emp=0.554455
+      - gap_entropy [markov_1]: observed=3.452659, null_mean=3.659259, null_std=0.031654, z=-6.527, p_emp=0.009901
+      - run_entropy [markov_1]: observed=2.462136, null_mean=2.451592, null_std=0.023133, z=0.456, p_emp=0.653465
+      - prime_index_occupancy_bias [markov_1]: observed=-0.007804, null_mean=0.001300, null_std=0.010634, z=-0.856, p_emp=0.405941
+      - prime_gap_affinity [markov_1]: observed=0.531429, null_mean=0.576226, null_std=0.012191, z=-3.675, p_emp=0.009901
+      - zeta_spectral_coherence [markov_1]: observed=0.000034, null_mean=0.000077, null_std=0.000032, z=-1.333, p_emp=0.188119
+      - critical_line_symmetry [markov_1]: observed=0.734129, null_mean=0.773422, null_std=0.055753, z=-0.705, p_emp=0.485149
+      - gap_entropy [markov_2]: observed=3.452659, null_mean=3.630613, null_std=0.031174, z=-5.708, p_emp=0.009901
+      - run_entropy [markov_2]: observed=2.462136, null_mean=2.551549, null_std=0.018800, z=-4.756, p_emp=0.009901
+      - prime_index_occupancy_bias [markov_2]: observed=-0.007804, null_mean=0.002269, null_std=0.011476, z=-0.878, p_emp=0.356436
+      - prime_gap_affinity [markov_2]: observed=0.531429, null_mean=0.547723, null_std=0.010827, z=-1.505, p_emp=0.178218
+      - zeta_spectral_coherence [markov_2]: observed=0.000034, null_mean=0.000077, null_std=0.000034, z=-1.280, p_emp=0.198020
+      - critical_line_symmetry [markov_2]: observed=0.734129, null_mean=0.783779, null_std=0.055743, z=-0.891, p_emp=0.356436
+      - gap_entropy [gap_order_shuffle]: observed=3.452659, null_mean=3.452659, null_std=0.000000, z=1.213, p_emp=0.099010
+      - run_entropy [gap_order_shuffle]: observed=2.462136, null_mean=2.462136, null_std=0.000000, z=0.931, p_emp=0.950495
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=-0.007804, null_mean=0.001585, null_std=0.010294, z=-0.912, p_emp=0.405941
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.531429, null_mean=0.531429, null_std=0.000000, z=0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000034, null_mean=0.000038, null_std=0.000011, z=-0.389, p_emp=0.762376
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.734129, null_mean=0.748563, null_std=0.038019, z=-0.380, p_emp=0.633663
+
+Encoding: frequency_class
+  sequence_len: 1927
+  unique_symbols: 3
+  symbol_entropy_bits: 1.343969
+  note: E7 MVP frequency classes are calculated inside the supplied sample only. Hyphen policy: punctuation.
+
+  Event: hapax
+    description: Token positions in frequency class hapax.
+    event_count: 407
+    observed:
+      - event_density = 0.211209 (count(event=true) / sequence_length)
+      - event_count = 407.000000 (Number of true positions in the event map.)
+      - sequence_length = 1927.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.520885 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.356265 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.216216 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.164619 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=3.446426, null_mean=3.465518, null_std=0.014031, z=-1.361, p_emp=0.178218
+      - run_entropy [density_shuffle]: observed=2.474995, null_mean=2.577078, null_std=0.053131, z=-1.921, p_emp=0.049505
+      - prime_index_occupancy_bias [density_shuffle]: observed=-0.007714, null_mean=0.001252, null_std=0.028737, z=-0.312, p_emp=0.762376
+      - prime_gap_affinity [density_shuffle]: observed=0.517241, null_mean=0.470123, null_std=0.025553, z=1.844, p_emp=0.079208
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000520, null_mean=0.000653, null_std=0.000246, z=-0.538, p_emp=0.594059
+      - critical_line_symmetry [density_shuffle]: observed=0.813570, null_mean=0.803324, null_std=0.045781, z=0.224, p_emp=0.841584
+      - gap_entropy [markov_1]: observed=3.446426, null_mean=3.452580, null_std=0.065873, z=-0.093, p_emp=0.920792
+      - run_entropy [markov_1]: observed=2.474995, null_mean=2.496682, null_std=0.055059, z=-0.394, p_emp=0.722772
+      - prime_index_occupancy_bias [markov_1]: observed=-0.007714, null_mean=-0.006772, null_std=0.024358, z=-0.039, p_emp=0.980198
+      - prime_gap_affinity [markov_1]: observed=0.517241, null_mean=0.494320, null_std=0.023393, z=0.980, p_emp=0.415842
+      - zeta_spectral_coherence [markov_1]: observed=0.000520, null_mean=0.000691, null_std=0.000262, z=-0.651, p_emp=0.514851
+      - critical_line_symmetry [markov_1]: observed=0.813570, null_mean=0.820937, null_std=0.044000, z=-0.167, p_emp=0.900990
+      - gap_entropy [markov_2]: observed=3.446426, null_mean=3.468848, null_std=0.061561, z=-0.364, p_emp=0.712871
+      - run_entropy [markov_2]: observed=2.474995, null_mean=2.493278, null_std=0.060657, z=-0.301, p_emp=0.732673
+      - prime_index_occupancy_bias [markov_2]: observed=-0.007714, null_mean=0.003588, null_std=0.023107, z=-0.489, p_emp=0.613861
+      - prime_gap_affinity [markov_2]: observed=0.517241, null_mean=0.501807, null_std=0.024365, z=0.633, p_emp=0.504950
+      - zeta_spectral_coherence [markov_2]: observed=0.000520, null_mean=0.000664, null_std=0.000274, z=-0.523, p_emp=0.603960
+      - critical_line_symmetry [markov_2]: observed=0.813570, null_mean=0.807313, null_std=0.048879, z=0.128, p_emp=0.861386
+      - gap_entropy [gap_order_shuffle]: observed=3.446426, null_mean=3.446426, null_std=0.000000, z=-0.984, p_emp=0.821782
+      - run_entropy [gap_order_shuffle]: observed=2.474995, null_mean=2.473656, null_std=0.003257, z=0.411, p_emp=0.693069
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=-0.007714, null_mean=-0.002119, null_std=0.027366, z=-0.204, p_emp=0.881188
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.517241, null_mean=0.517241, null_std=0.000000, z=0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000520, null_mean=0.000559, null_std=0.000184, z=-0.210, p_emp=0.841584
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.813570, null_mean=0.783673, null_std=0.031187, z=0.959, p_emp=0.366337
+  Event: mid_frequency
+    description: Token positions in frequency class mid_frequency.
+    event_count: 335
+    observed:
+      - event_density = 0.173845 (count(event=true) / sequence_length)
+      - event_count = 335.000000 (Number of true positions in the event map.)
+      - sequence_length = 1927.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.504478 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.349254 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.226866 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.167164 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=3.742414, null_mean=3.751676, null_std=0.018802, z=-0.493, p_emp=0.623762
+      - run_entropy [density_shuffle]: observed=2.670633, null_mean=2.740259, null_std=0.057569, z=-1.209, p_emp=0.217822
+      - prime_index_occupancy_bias [density_shuffle]: observed=0.052478, null_mean=-0.002169, null_std=0.026148, z=2.090, p_emp=0.019802
+      - prime_gap_affinity [density_shuffle]: observed=0.485030, null_mean=0.456766, null_std=0.026736, z=1.057, p_emp=0.405941
+      - zeta_spectral_coherence [density_shuffle]: observed=0.001038, null_mean=0.000613, null_std=0.000249, z=1.710, p_emp=0.089109
+      - critical_line_symmetry [density_shuffle]: observed=0.794163, null_mean=0.807169, null_std=0.045601, z=-0.285, p_emp=0.792079
+      - gap_entropy [markov_1]: observed=3.742414, null_mean=3.750884, null_std=0.075615, z=-0.112, p_emp=0.920792
+      - run_entropy [markov_1]: observed=2.670633, null_mean=2.684264, null_std=0.064646, z=-0.211, p_emp=0.811881
+      - prime_index_occupancy_bias [markov_1]: observed=0.052478, null_mean=-0.002452, null_std=0.025765, z=2.132, p_emp=0.049505
+      - prime_gap_affinity [markov_1]: observed=0.485030, null_mean=0.475344, null_std=0.026785, z=0.362, p_emp=0.732673
+      - zeta_spectral_coherence [markov_1]: observed=0.001038, null_mean=0.000567, null_std=0.000247, z=1.904, p_emp=0.069307
+      - critical_line_symmetry [markov_1]: observed=0.794163, null_mean=0.815299, null_std=0.044269, z=-0.477, p_emp=0.623762
+      - gap_entropy [markov_2]: observed=3.742414, null_mean=3.762383, null_std=0.072554, z=-0.275, p_emp=0.811881
+      - run_entropy [markov_2]: observed=2.670633, null_mean=2.695706, null_std=0.066851, z=-0.375, p_emp=0.752475
+      - prime_index_occupancy_bias [markov_2]: observed=0.052478, null_mean=0.005340, null_std=0.021660, z=2.176, p_emp=0.039604
+      - prime_gap_affinity [markov_2]: observed=0.485030, null_mean=0.478199, null_std=0.027510, z=0.248, p_emp=0.821782
+      - zeta_spectral_coherence [markov_2]: observed=0.001038, null_mean=0.000563, null_std=0.000280, z=1.693, p_emp=0.059406
+      - critical_line_symmetry [markov_2]: observed=0.794163, null_mean=0.816083, null_std=0.048788, z=-0.449, p_emp=0.633663
+      - gap_entropy [gap_order_shuffle]: observed=3.742414, null_mean=3.742414, null_std=0.000000, z=-0.899, p_emp=0.950495
+      - run_entropy [gap_order_shuffle]: observed=2.670633, null_mean=2.666632, null_std=0.003617, z=1.106, p_emp=0.198020
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=0.052478, null_mean=0.001114, null_std=0.022979, z=2.235, p_emp=0.039604
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.485030, null_mean=0.485030, null_std=0.000000, z=0.995, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.001038, null_mean=0.000642, null_std=0.000187, z=2.119, p_emp=0.059406
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.794163, null_mean=0.824401, null_std=0.038077, z=-0.794, p_emp=0.435644
+  Event: high_frequency
+    description: Token positions in frequency class high_frequency.
+    event_count: 1185
+    alerts:
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'gap_entropy' deviates from 'density_shuffle' null with z=-5.274. This is a tripwire, not a conclusion.
+      - [warning:PERIODICITY_OR_CLUSTERING_WARNING:L1] Gap entropy is substantially lower than the 'density_shuffle' null expectation. Inspect for periodicity, clustering, repeated material, genre constraints, or local phonotactic regularity.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'run_entropy' deviates from 'density_shuffle' null with z=-5.870. This is a tripwire, not a conclusion.
+      - [warning:OVER_REGULARITY_WARNING:L1] Run entropy is substantially lower than the 'density_shuffle' null expectation. Possible causes include genuine structure, repeated boilerplate, encoding artefact, formal constraint, or local transition structure not captured by this null.
+      - [info:STATISTICAL_DEVIATION:L1] Metric 'prime_gap_affinity' deviates from 'density_shuffle' null with z=5.668. This is a tripwire, not a conclusion.
+    observed:
+      - event_density = 0.614946 (count(event=true) / sequence_length)
+      - event_count = 1185.000000 (Number of true positions in the event map.)
+      - sequence_length = 1927.000000 (Number of positions in the event map.)
+      - modular_residue_peak_m_2 = 0.506329 (Largest event-position residue fraction modulo 2.)
+      - modular_residue_peak_m_3 = 0.337553 (Largest event-position residue fraction modulo 3.)
+      - modular_residue_peak_m_5 = 0.213502 (Largest event-position residue fraction modulo 5.)
+      - modular_residue_peak_m_7 = 0.153586 (Largest event-position residue fraction modulo 7.)
+    null-adjusted metrics:
+      - gap_entropy [density_shuffle]: observed=1.540295, null_mean=1.557379, null_std=0.003239, z=-5.274, p_emp=0.009901
+      - run_entropy [density_shuffle]: observed=1.826159, null_mean=2.093624, null_std=0.045562, z=-5.870, p_emp=0.009901
+      - prime_index_occupancy_bias [density_shuffle]: observed=-0.044764, null_mean=-0.001659, null_std=0.029560, z=-1.458, p_emp=0.148515
+      - prime_gap_affinity [density_shuffle]: observed=0.406250, null_mean=0.342306, null_std=0.011281, z=5.668, p_emp=0.009901
+      - zeta_spectral_coherence [density_shuffle]: observed=0.000511, null_mean=0.001000, null_std=0.000310, z=-1.578, p_emp=0.138614
+      - critical_line_symmetry [density_shuffle]: observed=0.785529, null_mean=0.814565, null_std=0.039371, z=-0.737, p_emp=0.405941
+      - gap_entropy [markov_1]: observed=1.540295, null_mean=1.537488, null_std=0.034842, z=0.081, p_emp=0.900990
+      - run_entropy [markov_1]: observed=1.826159, null_mean=1.832282, null_std=0.050605, z=-0.121, p_emp=0.910891
+      - prime_index_occupancy_bias [markov_1]: observed=-0.044764, null_mean=-0.005517, null_std=0.029011, z=-1.353, p_emp=0.217822
+      - prime_gap_affinity [markov_1]: observed=0.406250, null_mean=0.407563, null_std=0.015102, z=-0.087, p_emp=0.950495
+      - zeta_spectral_coherence [markov_1]: observed=0.000511, null_mean=0.000809, null_std=0.000270, z=-1.104, p_emp=0.267327
+      - critical_line_symmetry [markov_1]: observed=0.785529, null_mean=0.826915, null_std=0.042599, z=-0.972, p_emp=0.336634
+      - gap_entropy [markov_2]: observed=1.540295, null_mean=1.536308, null_std=0.034830, z=0.114, p_emp=0.891089
+      - run_entropy [markov_2]: observed=1.826159, null_mean=1.836084, null_std=0.045580, z=-0.218, p_emp=0.821782
+      - prime_index_occupancy_bias [markov_2]: observed=-0.044764, null_mean=-0.003017, null_std=0.029873, z=-1.397, p_emp=0.138614
+      - prime_gap_affinity [markov_2]: observed=0.406250, null_mean=0.407485, null_std=0.013455, z=-0.092, p_emp=0.940594
+      - zeta_spectral_coherence [markov_2]: observed=0.000511, null_mean=0.000823, null_std=0.000265, z=-1.182, p_emp=0.237624
+      - critical_line_symmetry [markov_2]: observed=0.785529, null_mean=0.818137, null_std=0.043283, z=-0.753, p_emp=0.485149
+      - gap_entropy [gap_order_shuffle]: observed=1.540295, null_mean=1.540295, null_std=0.000000, z=-0.717, p_emp=1.000000
+      - run_entropy [gap_order_shuffle]: observed=1.826159, null_mean=1.836233, null_std=0.005531, z=-1.821, p_emp=0.059406
+      - prime_index_occupancy_bias [gap_order_shuffle]: observed=-0.044764, null_mean=-0.004550, null_std=0.029880, z=-1.346, p_emp=0.188119
+      - prime_gap_affinity [gap_order_shuffle]: observed=0.406250, null_mean=0.406250, null_std=0.000000, z=0.000, p_emp=1.000000
+      - zeta_spectral_coherence [gap_order_shuffle]: observed=0.000511, null_mean=0.000760, null_std=0.000217, z=-1.146, p_emp=0.247525
+      - critical_line_symmetry [gap_order_shuffle]: observed=0.785529, null_mean=0.812417, null_std=0.036996, z=-0.727, p_emp=0.564356
+
+Interpretation rule:
+  This tool reports measurements and evidence-tiered warnings, not origin classifications.
+  Raw UTF-8 findings are diagnostic only unless supported by linguistic encodings. v0.3 adds max-chars caps, batch/resume ergonomics, fast/linguistic profiles, and skip-raw support.
