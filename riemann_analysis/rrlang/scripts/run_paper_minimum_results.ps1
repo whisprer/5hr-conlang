@@ -201,7 +201,7 @@ function Get-TrustedSurvivors {
 
 function Export-TrustedSurvivors {
     param(
-        [Parameter(Mandatory=$true)][object[]]$Rows,
+        [AllowEmptyCollection()][object[]]$Rows,
         [Parameter(Mandatory=$true)][string]$OutCsv
     )
 
@@ -220,7 +220,7 @@ function Export-TrustedSurvivors {
 
 function Export-InputSummary {
     param(
-        [Parameter(Mandatory=$true)][object[]]$Rows,
+        [AllowEmptyCollection()][object[]]$Rows,
         [Parameter(Mandatory=$true)][string]$OutCsv
     )
 
@@ -267,7 +267,7 @@ function Export-InputSummary {
 
 function Convert-RowsToMarkdown {
     param(
-        [Parameter(Mandatory=$true)][object[]]$Rows,
+        [AllowEmptyCollection()][object[]]$Rows,
         [Parameter(Mandatory=$true)][string[]]$Columns,
         [int]$MaxRows = 20
     )
@@ -530,3 +530,4 @@ Write-Host "Preview:"
 Write-Host ""
 
 Get-Content -Path $ReportPath -Raw
+
