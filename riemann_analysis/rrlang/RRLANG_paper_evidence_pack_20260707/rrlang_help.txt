@@ -1,0 +1,53 @@
+rrlang 0.3.0
+Riemann-Resonant Linguistics research instrument MVP.
+
+USAGE:
+  rrlang inspect --input <PATH>
+  rrlang analyse --input <PATH> [OPTIONS]
+  rrlang analyse --config <PATH> [OPTIONS]
+  rrlang batch --dataset-root <DIR> --out-dir <DIR> [OPTIONS]
+
+COMMANDS:
+  inspect      Print basic corpus size/token information.
+  analyse      Run encoding, metric, null-model, and alert pipeline on one file.
+  batch        Recursively analyse .txt files with progress and resume support.
+  help         Show this help.
+
+ANALYSE OPTIONS:
+  --input, -i <PATH>                 Input UTF-8 text file.
+  --config <PATH>                    Optional simple TOML-like config file.
+  --language <NAME>                  Language label for the report.
+  --name <NAME>                      Experiment name.
+  --encodings <LIST>                 Comma list: utf8_bits,bit_text,grapheme,grapheme_class,word_boundary,frequency_class
+  --skip-raw                         Remove utf8_bits and bit_text from enabled encodings.
+  --linguistic-profile               Use grapheme,grapheme_class,word_boundary,frequency_class.
+  --fast-profile                     Use linguistic profile, --nulls 25, and --max-chars 25000 unless overridden.
+  --max-chars <N|none>               Cap cleaned input before analysis. Useful for large corpora.
+  --nulls <N>                        Number of null samples per null model. Default: 100.
+  --seed <N>                         Deterministic RNG seed. Default: 18427.
+  --progress                         Print start/end timing for single-file analysis.
+  --out <PATH|none>                  JSON report path. Default: rrlang_report.json.
+  --text-out <PATH|none>             Text report path. Default: rrlang_report.txt.
+  --case-policy <preserve|lowercase> Default: lowercase.
+  --punctuation-policy <preserve|remove>
+  --hyphen-policy <punctuation|morpheme_boundary|word_internal|remove>
+  --whitespace-policy <preserve|normalise>
+
+BATCH OPTIONS:
+  --dataset-root <DIR>               Root folder containing .txt datasets.
+  --out-dir <DIR>                    Output folder for report pairs.
+  --skip-existing, --resume          Do not rerun files with existing .json and .txt outputs.
+  --continue-on-error                Keep going after a failed input.
+  --include-raw-inputs               Include source_raw, _cache, and *_raw.txt files.
+  Plus all analyse options except --input/--out/--text-out, which batch sets per file.
+
+EXAMPLES:
+  rrlang inspect --input testdata/tiny/english.txt
+  rrlang analyse --input testdata/tiny/english.txt --language English --skip-raw --nulls 25 --out outputs/english.json --text-out outputs/english.txt
+  rrlang batch --dataset-root testdata/datasets_canonical/parallel/udhr --out-dir outputs/canonical_udhr_v0_3 --linguistic-profile --nulls 100 --skip-existing
+  rrlang batch --dataset-root testdata/datasets --out-dir outputs/broad_fast_v0_3 --fast-profile --skip-existing --continue-on-error
+
+INTERPRETATION:
+  rrlang reports measurements and evidence-tiered warnings. It does not classify origin,
+  prove artificiality, or make Riemann-hypothesis claims.
+
