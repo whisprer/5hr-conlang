@@ -1,0 +1,980 @@
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
+
+$RepoRoot = "D:\code\5hr-conlang\riemann_analysis\rrlang"
+Set-Location -LiteralPath $RepoRoot
+
+$RrlangExe = Join-Path $RepoRoot "target\release\rrlang.exe"
+$Summariser = Join-Path $RepoRoot "scripts\summarise_rrlang_reports_v3.py"
+
+$MesuUdhrSource = Join-Path $RepoRoot "testdata\datasets_canonical\parallel\udhr\mesu\udhr_mesu_canonical.txt"
+$ThomasMesuSource = Join-Path $RepoRoot "testdata\datasets\private_parallel\dylan_thomas\prepared\thomas_mesu_text_only.txt"
+$BashoMesuSource = Join-Path $RepoRoot "testdata\datasets\private_parallel\basho\prepared\basho_mesu_text_only.txt"
+
+$MesuRegisterRoot = Join-Path $RepoRoot "testdata\datasets_canonical\mesu_register"
+$ControlsRoot = Join-Path $RepoRoot "testdata\datasets_canonical\paper_minimum_controls"
+
+$MesuOut = Join-Path $RepoRoot "outputs\mesu_register_v0_3_nulls100"
+$MesuSummary = Join-Path $RepoRoot "outputs\summary_mesu_register_v0_3_nulls100"
+
+$ControlsOut = Join-Path $RepoRoot "outputs\controls_paper_minimum_v0_3_nulls100"
+$ControlsSummary = Join-Path $RepoRoot "outputs\summary_controls_paper_minimum_v0_3_nulls100"
+
+$PaperOut = Join-Path $RepoRoot "outputs\paper_minimum_results_20260707"
+
+function Assert-File {
+    param(
+        [Parameter(Mandatory=$true)][string]$Path,
+        [Parameter(Mandatory=$true)][string]$Purpose
+    )
+
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        throw "Missing $Purpose at: $Path"
+    }
+}
+
+function Assert-Dir {
+    param(
+        [Parameter(Mandatory=$true)][string]$Path,
+        [Parameter(Mandatory=$true)][string]$Purpose
+    )
+
+    if (-not (Test-Path -LiteralPath $Path -PathType Container)) {
+        throw "Missing $Purpose at: $Path"
+    }
+}
+
+function Invoke-Native {
+    param(
+        [Parameter(Mandatory=$true)][string]$Name,
+        [Parameter(Mandatory=$true)][string]$FilePath,
+        [Parameter(Mandatory=$true)][string[]]$Arguments
+    )
+
+    Write-Host ""
+    Write-Host "=== $Name ===" -ForegroundColor Cyan
+    Write-Host "> $FilePath $($Arguments -join ' ')" -ForegroundColor DarkGray
+
+    & $FilePath @Arguments
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "$Name failed with exit code $LASTEXITCODE"
+    }
+}
+
+function Get-PythonCommand {
+    & py -3 --version *> $null
+    if ($LASTEXITCODE -eq 0) {
+        return @{
+            Cmd = "py"
+            Prefix = @("-3")
+        }
+    }
+
+    & python --version *> $null
+    if ($LASTEXITCODE -eq 0) {
+        return @{
+            Cmd = "python"
+            Prefix = @()
+        }
+    }
+
+    throw "Could not find Python via 'py -3' or 'python'."
+}
+
+function New-DeterministicControlFiles {
+    param(
+        [Parameter(Mandatory=$true)][string]$SourceMesuUdhr,
+        [Parameter(Mandatory=$true)][string]$OutDir
+    )
+
+    New-Item -Force -ItemType Directory -Path $OutDir | Out-Null
+
+    $mesu = Get-Content -LiteralPath $SourceMesuUdhr -Raw -Encoding UTF8
+
+    $duplicated = @(
+        $mesu.Trim()
+        ""
+        $mesu.Trim()
+        ""
+        $mesu.Trim()
+        ""
+        $mesu.Trim()
+    ) -join [Environment]::NewLine
+
+    Set-Content -LiteralPath (Join-Path $OutDir "control_mesu_udhr_duplicated_x4.txt") `
+        -Value $duplicated `
+        -Encoding UTF8
+
+    $punctuation = @(".", ",", ";", ":", "!", "?")
+    $sb = New-Object System.Text.StringBuilder
+    $nonWhitespaceCount = 0
+    $punctuationIndex = 0
+
+    foreach ($ch in $mesu.ToCharArray()) {
+        [void]$sb.Append($ch)
+
+        if (-not [char]::IsWhiteSpace($ch)) {
+            $nonWhitespaceCount += 1
+
+            if (($nonWhitespaceCount % 5) -eq 0) {
+                [void]$sb.Append($punctuation[$punctuationIndex % $punctuation.Count])
+                [void]$sb.Append(" ")
+                $punctuationIndex += 1
+            }
+        }
+    }
+
+    Set-Content -LiteralPath (Join-Path $OutDir "control_mesu_udhr_punctuation_noise_every5.txt") `
+        -Value $sb.ToString() `
+        -Encoding UTF8
+
+    $rng = [System.Random]::new(1337)
+    $bits = New-Object System.Text.StringBuilder
+
+    for ($i = 0; $i -lt 12000; $i++) {
+        [void]$bits.Append($rng.Next(0, 2))
+        if ((($i + 1) % 80) -eq 0) {
+            [void]$bits.Append([Environment]::NewLine)
+        }
+    }
+
+    Set-Content -LiteralPath (Join-Path $OutDir "control_random_bits_seed1337_len12000.txt") `
+        -Value $bits.ToString() `
+        -Encoding UTF8
+}
+
+function Get-TrustedSurvivors {
+    param(
+        [Parameter(Mandatory=$true)][string]$CsvPath
+    )
+
+    if (-not (Test-Path -LiteralPath $CsvPath -PathType Leaf)) {
+        return @()
+    }
+
+    $rows = @(Import-Csv -LiteralPath $CsvPath)
+
+    $trusted = @(
+        $rows |
+            Where-Object {
+                $_.encoding -ne "utf8_bits" -and
+                $_.event -notin @("other", "digit", "whitespace") -and
+                $_.metric -ne "zeta_spectral_coherence"
+            } |
+            Sort-Object -Property @{
+                Expression = {
+                    try {
+                        [math]::Abs([double]$_.z)
+                    } catch {
+                        0.0
+                    }
+                }
+                Descending = $true
+            }
+    )
+
+    return $trusted
+}
+
+function Export-TrustedSurvivors {
+    param(
+        [Parameter(Mandatory=$true)][object[]]$Rows,
+        [Parameter(Mandatory=$true)][string]$OutCsv
+    )
+
+    $columns = @("language_guess", "encoding", "event", "metric", "z", "p_emp", "input")
+
+    if ($Rows.Count -eq 0) {
+        Set-Content -LiteralPath $OutCsv -Encoding UTF8 -Value (($columns -join ","))
+        return
+    }
+
+    $Rows |
+        Select-Object language_guess, encoding, event, metric, z, p_emp, input |
+        Export-Csv -LiteralPath $OutCsv -NoTypeInformation -Encoding UTF8
+}
+
+function Export-InputSummary {
+    param(
+        [Parameter(Mandatory=$true)][object[]]$Rows,
+        [Parameter(Mandatory=$true)][string]$OutCsv
+    )
+
+    if ($Rows.Count -eq 0) {
+        Set-Content -LiteralPath $OutCsv -Encoding UTF8 -Value "input,trusted_survivor_count,strongest_abs_z,strongest_event,strongest_metric"
+        return
+    }
+
+    $summaryRows = foreach ($group in ($Rows | Group-Object input)) {
+        $groupRows = @($group.Group)
+
+        $strongest = $groupRows |
+            Sort-Object -Property @{
+                Expression = {
+                    try {
+                        [math]::Abs([double]Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
+
+$RepoRoot = "D:\code\5hr-conlang\riemann_analysis\rrlang"
+Set-Location -LiteralPath $RepoRoot
+
+$RrlangExe = Join-Path $RepoRoot "target\release\rrlang.exe"
+$Summariser = Join-Path $RepoRoot "scripts\summarise_rrlang_reports_v3.py"
+
+$MesuUdhrSource = Join-Path $RepoRoot "testdata\datasets_canonical\parallel\udhr\mesu\udhr_mesu_canonical.txt"
+$ThomasMesuSource = Join-Path $RepoRoot "testdata\datasets\private_parallel\dylan_thomas\prepared\thomas_mesu_text_only.txt"
+$BashoMesuSource = Join-Path $RepoRoot "testdata\datasets\private_parallel\basho\prepared\basho_mesu_text_only.txt"
+
+$MesuRegisterRoot = Join-Path $RepoRoot "testdata\datasets_canonical\mesu_register"
+$ControlsRoot = Join-Path $RepoRoot "testdata\datasets_canonical\paper_minimum_controls"
+
+$MesuOut = Join-Path $RepoRoot "outputs\mesu_register_v0_3_nulls100"
+$MesuSummary = Join-Path $RepoRoot "outputs\summary_mesu_register_v0_3_nulls100"
+
+$ControlsOut = Join-Path $RepoRoot "outputs\controls_paper_minimum_v0_3_nulls100"
+$ControlsSummary = Join-Path $RepoRoot "outputs\summary_controls_paper_minimum_v0_3_nulls100"
+
+$PaperOut = Join-Path $RepoRoot "outputs\paper_minimum_results_20260707"
+
+function Assert-File {
+    param(
+        [Parameter(Mandatory=$true)][string]$Path,
+        [Parameter(Mandatory=$true)][string]$Purpose
+    )
+
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        throw "Missing $Purpose at: $Path"
+    }
+}
+
+function Assert-Dir {
+    param(
+        [Parameter(Mandatory=$true)][string]$Path,
+        [Parameter(Mandatory=$true)][string]$Purpose
+    )
+
+    if (-not (Test-Path -LiteralPath $Path -PathType Container)) {
+        throw "Missing $Purpose at: $Path"
+    }
+}
+
+function Invoke-Native {
+    param(
+        [Parameter(Mandatory=$true)][string]$Name,
+        [Parameter(Mandatory=$true)][string]$FilePath,
+        [Parameter(Mandatory=$true)][string[]]$Arguments
+    )
+
+    Write-Host ""
+    Write-Host "=== $Name ===" -ForegroundColor Cyan
+    Write-Host "> $FilePath $($Arguments -join ' ')" -ForegroundColor DarkGray
+
+    & $FilePath @Arguments
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "$Name failed with exit code $LASTEXITCODE"
+    }
+}
+
+function Get-PythonCommand {
+    & py -3 --version *> $null
+    if ($LASTEXITCODE -eq 0) {
+        return @{
+            Cmd = "py"
+            Prefix = @("-3")
+        }
+    }
+
+    & python --version *> $null
+    if ($LASTEXITCODE -eq 0) {
+        return @{
+            Cmd = "python"
+            Prefix = @()
+        }
+    }
+
+    throw "Could not find Python via 'py -3' or 'python'."
+}
+
+function New-DeterministicControlFiles {
+    param(
+        [Parameter(Mandatory=$true)][string]$SourceMesuUdhr,
+        [Parameter(Mandatory=$true)][string]$OutDir
+    )
+
+    New-Item -Force -ItemType Directory -Path $OutDir | Out-Null
+
+    $mesu = Get-Content -LiteralPath $SourceMesuUdhr -Raw -Encoding UTF8
+
+    $duplicated = @(
+        $mesu.Trim()
+        ""
+        $mesu.Trim()
+        ""
+        $mesu.Trim()
+        ""
+        $mesu.Trim()
+    ) -join [Environment]::NewLine
+
+    Set-Content -LiteralPath (Join-Path $OutDir "control_mesu_udhr_duplicated_x4.txt") `
+        -Value $duplicated `
+        -Encoding UTF8
+
+    $punctuation = @(".", ",", ";", ":", "!", "?")
+    $sb = New-Object System.Text.StringBuilder
+    $nonWhitespaceCount = 0
+    $punctuationIndex = 0
+
+    foreach ($ch in $mesu.ToCharArray()) {
+        [void]$sb.Append($ch)
+
+        if (-not [char]::IsWhiteSpace($ch)) {
+            $nonWhitespaceCount += 1
+
+            if (($nonWhitespaceCount % 5) -eq 0) {
+                [void]$sb.Append($punctuation[$punctuationIndex % $punctuation.Count])
+                [void]$sb.Append(" ")
+                $punctuationIndex += 1
+            }
+        }
+    }
+
+    Set-Content -LiteralPath (Join-Path $OutDir "control_mesu_udhr_punctuation_noise_every5.txt") `
+        -Value $sb.ToString() `
+        -Encoding UTF8
+
+    $rng = [System.Random]::new(1337)
+    $bits = New-Object System.Text.StringBuilder
+
+    for ($i = 0; $i -lt 12000; $i++) {
+        [void]$bits.Append($rng.Next(0, 2))
+        if ((($i + 1) % 80) -eq 0) {
+            [void]$bits.Append([Environment]::NewLine)
+        }
+    }
+
+    Set-Content -LiteralPath (Join-Path $OutDir "control_random_bits_seed1337_len12000.txt") `
+        -Value $bits.ToString() `
+        -Encoding UTF8
+}
+
+function Get-TrustedSurvivors {
+    param(
+        [Parameter(Mandatory=$true)][string]$CsvPath
+    )
+
+    if (-not (Test-Path -LiteralPath $CsvPath -PathType Leaf)) {
+        return @()
+    }
+
+    $rows = @(Import-Csv -LiteralPath $CsvPath)
+
+    $trusted = @(
+        $rows |
+            Where-Object {
+                $_.encoding -ne "utf8_bits" -and
+                $_.event -notin @("other", "digit", "whitespace") -and
+                $_.metric -ne "zeta_spectral_coherence"
+            } |
+            Sort-Object -Property @{
+                Expression = {
+                    try {
+                        [math]::Abs([double]$_.z)
+                    } catch {
+                        0.0
+                    }
+                }
+                Descending = $true
+            }
+    )
+
+    return $trusted
+}
+
+function Export-TrustedSurvivors {
+    param(
+        [Parameter(Mandatory=$true)][object[]]$Rows,
+        [Parameter(Mandatory=$true)][string]$OutCsv
+    )
+
+    $columns = @("language_guess", "encoding", "event", "metric", "z", "p_emp", "input")
+
+    if ($Rows.Count -eq 0) {
+        Set-Content -LiteralPath $OutCsv -Encoding UTF8 -Value (($columns -join ","))
+        return
+    }
+
+    $Rows |
+        Select-Object language_guess, encoding, event, metric, z, p_emp, input |
+        Export-Csv -LiteralPath $OutCsv -NoTypeInformation -Encoding UTF8
+}
+
+function Export-InputSummary {
+    param(
+        [Parameter(Mandatory=$true)][object[]]$Rows,
+        [Parameter(Mandatory=$true)][string]$OutCsv
+    )
+
+    if ($Rows.Count -eq 0) {
+        Set-Content -LiteralPath $OutCsv -Encoding UTF8 -Value "input,trusted_survivor_count,strongest_abs_z,strongest_event,strongest_metric"
+        return
+    }
+
+    $Rows |
+        Group-Object input |
+        ForEach-Object {
+            $groupRows = @($_.Group)
+            $strongest = $groupRows |
+                Sort-Object -Property @{
+                    Expression = {
+                        try {
+                            [math]::Abs([double]$_.z)
+                        } catch {
+                            0.0
+                        }
+                    }
+                    Descending = $true
+                } |
+                Select-Object -First 1
+
+            [pscustomobject]@{
+                input = $_.Name
+                trusted_survivor_count = $groupRows.Count
+                strongest_abs_z = try { [math]::Abs([double]$strongest.z) } catch { 0.0 }
+                strongest_event = $strongest.event
+                strongest_metric = $strongest.metric
+            }
+        } |
+        Sort-Object -Property trusted_survivor_count,strongest_abs_z -Descending |
+        Export-Csv -LiteralPath $OutCsv -NoTypeInformation -Encoding UTF8
+}
+
+function Convert-RowsToMarkdown {
+    param(
+        [Parameter(Mandatory=$true)][object[]]$Rows,
+        [Parameter(Mandatory=$true)][string[]]$Columns,
+        [int]$MaxRows = 20
+    )
+
+    if ($Rows.Count -eq 0) {
+        return "_No trusted survivors after filtering._"
+    }
+
+    $limited = @($Rows | Select-Object -First $MaxRows)
+
+    $header = "| " + ($Columns -join " | ") + " |"
+    $divider = "| " + (($Columns | ForEach-Object { "---" }) -join " | ") + " |"
+    $lines = New-Object System.Collections.Generic.List[string]
+    $lines.Add($header)
+    $lines.Add($divider)
+
+    foreach ($row in $limited) {
+        $cells = foreach ($col in $Columns) {
+            $value = [string]$row.$col
+            $value = $value.Replace("|", "\|")
+            if ($value.Length -gt 120) {
+                $value = $value.Substring(0, 117) + "..."
+            }
+            $value
+        }
+
+        $lines.Add("| " + ($cells -join " | ") + " |")
+    }
+
+    return ($lines -join [Environment]::NewLine)
+}
+
+Write-Host "RRLANG paper-minimum results pipeline" -ForegroundColor Green
+Write-Host "Repo: $RepoRoot"
+
+Assert-File -Path $RrlangExe -Purpose "RRLANG release binary"
+Assert-File -Path $Summariser -Purpose "RRLANG summary script"
+Assert-File -Path $MesuUdhrSource -Purpose "canonical Mesu UDHR source"
+Assert-File -Path $ThomasMesuSource -Purpose "Thomas Mesu text-only source"
+Assert-File -Path $BashoMesuSource -Purpose "Basho Mesu text-only source"
+
+$Python = Get-PythonCommand
+
+New-Item -Force -ItemType Directory -Path $MesuRegisterRoot | Out-Null
+New-Item -Force -ItemType Directory -Path $PaperOut | Out-Null
+
+Copy-Item -Force -LiteralPath $MesuUdhrSource -Destination (Join-Path $MesuRegisterRoot "mesu_udhr_canonical.txt")
+Copy-Item -Force -LiteralPath $ThomasMesuSource -Destination (Join-Path $MesuRegisterRoot "mesu_thomas_text_only.txt")
+Copy-Item -Force -LiteralPath $BashoMesuSource -Destination (Join-Path $MesuRegisterRoot "mesu_basho_text_only.txt")
+
+New-DeterministicControlFiles -SourceMesuUdhr $MesuUdhrSource -OutDir $ControlsRoot
+
+Invoke-Native `
+    -Name "Mesu register batch" `
+    -FilePath $RrlangExe `
+    -Arguments @(
+        "batch",
+        "--dataset-root", $MesuRegisterRoot,
+        "--out-dir", $MesuOut,
+        "--language", "MesuRegister",
+        "--linguistic-profile",
+        "--nulls", "100",
+        "--skip-existing"
+    )
+
+Invoke-Native `
+    -Name "Summarise Mesu register batch" `
+    -FilePath $Python.Cmd `
+    -Arguments @(
+        @($Python.Prefix) +
+        @(
+            $Summariser,
+            "--input", $MesuOut,
+            "--out", $MesuSummary
+        )
+    )
+
+Invoke-Native `
+    -Name "Paper-minimum controls batch" `
+    -FilePath $RrlangExe `
+    -Arguments @(
+        "batch",
+        "--dataset-root", $ControlsRoot,
+        "--out-dir", $ControlsOut,
+        "--language", "PaperMinimumControls",
+        "--linguistic-profile",
+        "--nulls", "100",
+        "--skip-existing"
+    )
+
+Invoke-Native `
+    -Name "Summarise paper-minimum controls batch" `
+    -FilePath $Python.Cmd `
+    -Arguments @(
+        @($Python.Prefix) +
+        @(
+            $Summariser,
+            "--input", $ControlsOut,
+            "--out", $ControlsSummary
+        )
+    )
+
+$MesuSurvivorCsv = Join-Path $MesuSummary "markov2_survivors.csv"
+$ControlsSurvivorCsv = Join-Path $ControlsSummary "markov2_survivors.csv"
+
+$MesuTrusted = @(Get-TrustedSurvivors -CsvPath $MesuSurvivorCsv)
+$ControlsTrusted = @(Get-TrustedSurvivors -CsvPath $ControlsSurvivorCsv)
+
+$MesuTrustedCsv = Join-Path $PaperOut "mesu_register_trusted_survivors.csv"
+$ControlsTrustedCsv = Join-Path $PaperOut "controls_trusted_survivors.csv"
+$MesuInputSummaryCsv = Join-Path $PaperOut "mesu_register_input_summary.csv"
+$ControlsInputSummaryCsv = Join-Path $PaperOut "controls_input_summary.csv"
+
+Export-TrustedSurvivors -Rows $MesuTrusted -OutCsv $MesuTrustedCsv
+Export-TrustedSurvivors -Rows $ControlsTrusted -OutCsv $ControlsTrustedCsv
+Export-InputSummary -Rows $MesuTrusted -OutCsv $MesuInputSummaryCsv
+Export-InputSummary -Rows $ControlsTrusted -OutCsv $ControlsInputSummaryCsv
+
+$CanonicalMainCsv = Join-Path $RepoRoot "outputs\final_tables\canonical_udhr_v0_3\final_comparison_table.csv"
+$CanonicalNoPuncCsv = Join-Path $RepoRoot "outputs\final_tables\canonical_udhr_v0_3_no_punctuation\final_comparison_table.csv"
+
+$CanonicalMesuMain = $null
+$CanonicalMesuNoPunc = $null
+
+if (Test-Path -LiteralPath $CanonicalMainCsv -PathType Leaf) {
+    Copy-Item -Force -LiteralPath $CanonicalMainCsv -Destination (Join-Path $PaperOut "canonical_udhr_final_comparison_table.csv")
+    $CanonicalMesuMain = @(Import-Csv -LiteralPath $CanonicalMainCsv | Where-Object { $_.language_guess -eq "mesu" }) | Select-Object -First 1
+}
+
+if (Test-Path -LiteralPath $CanonicalNoPuncCsv -PathType Leaf) {
+    Copy-Item -Force -LiteralPath $CanonicalNoPuncCsv -Destination (Join-Path $PaperOut "canonical_udhr_no_punctuation_final_comparison_table.csv")
+    $CanonicalMesuNoPunc = @(Import-Csv -LiteralPath $CanonicalNoPuncCsv | Where-Object { $_.language_guess -eq "mesu" }) | Select-Object -First 1
+}
+
+$MesuInputSummaryRows = @()
+if (Test-Path -LiteralPath $MesuInputSummaryCsv -PathType Leaf) {
+    $MesuInputSummaryRows = @(Import-Csv -LiteralPath $MesuInputSummaryCsv)
+}
+
+$ControlsInputSummaryRows = @()
+if (Test-Path -LiteralPath $ControlsInputSummaryCsv -PathType Leaf) {
+    $ControlsInputSummaryRows = @(Import-Csv -LiteralPath $ControlsInputSummaryCsv)
+}
+
+$ReportPath = Join-Path $PaperOut "paper_minimum_results_report.md"
+
+$report = New-Object System.Collections.Generic.List[string]
+
+$report.Add("# RRLANG Paper-Minimum Results Report")
+$report.Add("")
+$report.Add("Generated: 2026-07-07")
+$report.Add("")
+$report.Add("## Scope")
+$report.Add("")
+$report.Add("This report contains the minimum additional empirical outputs needed before drafting the RRLANG pilot/methods paper:")
+$report.Add("")
+$report.Add("1. Mesu register comparison: Mesu UDHR vs Thomas Mesu vs Basho Mesu.")
+$report.Add("2. Deterministic controls: duplicated Mesu UDHR, punctuation-noise Mesu UDHR, and random bits.")
+$report.Add("")
+$report.Add("All new runs use RRLANG v0.3, linguistic-profile mode, Markov-2 survivor summaries, and 100 null samples.")
+$report.Add("")
+$report.Add("## Canonical UDHR calibration")
+$report.Add("")
+
+if ($null -ne $CanonicalMesuMain) {
+    $report.Add("Canonical UDHR Mesu row, punctuation allowed:")
+    $report.Add("")
+    $report.Add("| language_guess | trusted_survivor_count | strongest_abs_z | strongest_event | strongest_metric | profile |")
+    $report.Add("| --- | ---: | ---: | --- | --- | --- |")
+    $report.Add("| $($CanonicalMesuMain.language_guess) | $($CanonicalMesuMain.trusted_survivor_count) | $($CanonicalMesuMain.strongest_abs_z) | $($CanonicalMesuMain.strongest_event) | $($CanonicalMesuMain.strongest_metric) | $($CanonicalMesuMain.profile) |")
+    $report.Add("")
+} else {
+    $report.Add("_Canonical punctuation-allowed Mesu row not found in copied final table._")
+    $report.Add("")
+}
+
+if ($null -ne $CanonicalMesuNoPunc) {
+    $report.Add("Canonical UDHR Mesu row, punctuation excluded:")
+    $report.Add("")
+    $report.Add("| language_guess | trusted_survivor_count | strongest_abs_z | strongest_event | strongest_metric | profile |")
+    $report.Add("| --- | ---: | ---: | --- | --- | --- |")
+    $report.Add("| $($CanonicalMesuNoPunc.language_guess) | $($CanonicalMesuNoPunc.trusted_survivor_count) | $($CanonicalMesuNoPunc.strongest_abs_z) | $($CanonicalMesuNoPunc.strongest_event) | $($CanonicalMesuNoPunc.strongest_metric) | $($CanonicalMesuNoPunc.profile) |")
+    $report.Add("")
+} else {
+    $report.Add("_Canonical no-punctuation Mesu row not found in copied final table._")
+    $report.Add("")
+}
+
+$report.Add("## Mesu register input summary")
+$report.Add("")
+$report.Add((Convert-RowsToMarkdown -Rows $MesuInputSummaryRows -Columns @("input", "trusted_survivor_count", "strongest_abs_z", "strongest_event", "strongest_metric") -MaxRows 20))
+$report.Add("")
+$report.Add("## Mesu register top trusted survivors")
+$report.Add("")
+$report.Add((Convert-RowsToMarkdown -Rows $MesuTrusted -Columns @("language_guess", "encoding", "event", "metric", "z", "p_emp", "input") -MaxRows 30))
+$report.Add("")
+$report.Add("## Controls input summary")
+$report.Add("")
+$report.Add((Convert-RowsToMarkdown -Rows $ControlsInputSummaryRows -Columns @("input", "trusted_survivor_count", "strongest_abs_z", "strongest_event", "strongest_metric") -MaxRows 20))
+$report.Add("")
+$report.Add("## Controls top trusted survivors")
+$report.Add("")
+$report.Add((Convert-RowsToMarkdown -Rows $ControlsTrusted -Columns @("language_guess", "encoding", "event", "metric", "z", "p_emp", "input") -MaxRows 30))
+$report.Add("")
+$report.Add("## Generated files")
+$report.Add("")
+$report.Add("- mesu_register_trusted_survivors.csv")
+$report.Add("- mesu_register_input_summary.csv")
+$report.Add("- controls_trusted_survivors.csv")
+$report.Add("- controls_input_summary.csv")
+$report.Add("- canonical_udhr_final_comparison_table.csv, if available")
+$report.Add("- canonical_udhr_no_punctuation_final_comparison_table.csv, if available")
+$report.Add("")
+$report.Add("## Paper-readiness interpretation rule")
+$report.Add("")
+$report.Add("Use the canonical UDHR result as calibration. Use Mesu register as the only Mesu-positive/negative register test. Use controls only as artefact sanity checks. Do not add more broad corpus results before drafting paper v0.1.")
+
+Set-Content -LiteralPath $ReportPath -Encoding UTF8 -Value ($report -join [Environment]::NewLine)
+
+Write-Host ""
+Write-Host "DONE: paper-minimum pipeline completed." -ForegroundColor Green
+Write-Host ""
+Write-Host "Key output folder:"
+Write-Host "  $PaperOut"
+Write-Host ""
+Write-Host "Main report:"
+Write-Host "  $ReportPath"
+Write-Host ""
+Write-Host "Paste this report back into the chat:"
+Write-Host "  Get-Content -LiteralPath `"$ReportPath`" -Raw"
+Write-Host ""
+Write-Host "Mesu trusted survivors:"
+Write-Host "  $MesuTrustedCsv"
+Write-Host ""
+Write-Host "Controls trusted survivors:"
+Write-Host "  $ControlsTrustedCsv"
+Write-Host ""
+Write-Host "Preview:"
+Write-Host ""
+
+Get-Content -LiteralPath $ReportPath -Raw
+.z)
+                    } catch {
+                        0.0
+                    }
+                }
+                Descending = $true
+            } |
+            Select-Object -First 1
+
+        $strongestAbsZ = 0.0
+        if ($null -ne $strongest -and $null -ne $strongest.z -and "$($strongest.z)" -ne "") {
+            try {
+                $strongestAbsZ = [math]::Abs([double]$strongest.z)
+            } catch {
+                $strongestAbsZ = 0.0
+            }
+        }
+
+        $strongestEvent = ""
+        $strongestMetric = ""
+
+        if ($null -ne $strongest) {
+            $strongestEvent = [string]$strongest.event
+            $strongestMetric = [string]$strongest.metric
+        }
+
+        [pscustomobject]@{
+            input = $group.Name
+            trusted_survivor_count = $groupRows.Count
+            strongest_abs_z = $strongestAbsZ
+            strongest_event = $strongestEvent
+            strongest_metric = $strongestMetric
+        }
+    }
+
+    $summaryRows |
+        Sort-Object -Property trusted_survivor_count,strongest_abs_z -Descending |
+        Export-Csv -LiteralPath $OutCsv -NoTypeInformation -Encoding UTF8
+}
+function Convert-RowsToMarkdown {
+    param(
+        [Parameter(Mandatory=$true)][object[]]$Rows,
+        [Parameter(Mandatory=$true)][string[]]$Columns,
+        [int]$MaxRows = 20
+    )
+
+    if ($Rows.Count -eq 0) {
+        return "_No trusted survivors after filtering._"
+    }
+
+    $limited = @($Rows | Select-Object -First $MaxRows)
+
+    $header = "| " + ($Columns -join " | ") + " |"
+    $divider = "| " + (($Columns | ForEach-Object { "---" }) -join " | ") + " |"
+    $lines = New-Object System.Collections.Generic.List[string]
+    $lines.Add($header)
+    $lines.Add($divider)
+
+    foreach ($row in $limited) {
+        $cells = foreach ($col in $Columns) {
+            $value = [string]$row.$col
+            $value = $value.Replace("|", "\|")
+            if ($value.Length -gt 120) {
+                $value = $value.Substring(0, 117) + "..."
+            }
+            $value
+        }
+
+        $lines.Add("| " + ($cells -join " | ") + " |")
+    }
+
+    return ($lines -join [Environment]::NewLine)
+}
+
+Write-Host "RRLANG paper-minimum results pipeline" -ForegroundColor Green
+Write-Host "Repo: $RepoRoot"
+
+Assert-File -Path $RrlangExe -Purpose "RRLANG release binary"
+Assert-File -Path $Summariser -Purpose "RRLANG summary script"
+Assert-File -Path $MesuUdhrSource -Purpose "canonical Mesu UDHR source"
+Assert-File -Path $ThomasMesuSource -Purpose "Thomas Mesu text-only source"
+Assert-File -Path $BashoMesuSource -Purpose "Basho Mesu text-only source"
+
+$Python = Get-PythonCommand
+
+New-Item -Force -ItemType Directory -Path $MesuRegisterRoot | Out-Null
+New-Item -Force -ItemType Directory -Path $PaperOut | Out-Null
+
+Copy-Item -Force -LiteralPath $MesuUdhrSource -Destination (Join-Path $MesuRegisterRoot "mesu_udhr_canonical.txt")
+Copy-Item -Force -LiteralPath $ThomasMesuSource -Destination (Join-Path $MesuRegisterRoot "mesu_thomas_text_only.txt")
+Copy-Item -Force -LiteralPath $BashoMesuSource -Destination (Join-Path $MesuRegisterRoot "mesu_basho_text_only.txt")
+
+New-DeterministicControlFiles -SourceMesuUdhr $MesuUdhrSource -OutDir $ControlsRoot
+
+Invoke-Native `
+    -Name "Mesu register batch" `
+    -FilePath $RrlangExe `
+    -Arguments @(
+        "batch",
+        "--dataset-root", $MesuRegisterRoot,
+        "--out-dir", $MesuOut,
+        "--language", "MesuRegister",
+        "--linguistic-profile",
+        "--nulls", "100",
+        "--skip-existing"
+    )
+
+Invoke-Native `
+    -Name "Summarise Mesu register batch" `
+    -FilePath $Python.Cmd `
+    -Arguments @(
+        @($Python.Prefix) +
+        @(
+            $Summariser,
+            "--input", $MesuOut,
+            "--out", $MesuSummary
+        )
+    )
+
+Invoke-Native `
+    -Name "Paper-minimum controls batch" `
+    -FilePath $RrlangExe `
+    -Arguments @(
+        "batch",
+        "--dataset-root", $ControlsRoot,
+        "--out-dir", $ControlsOut,
+        "--language", "PaperMinimumControls",
+        "--linguistic-profile",
+        "--nulls", "100",
+        "--skip-existing"
+    )
+
+Invoke-Native `
+    -Name "Summarise paper-minimum controls batch" `
+    -FilePath $Python.Cmd `
+    -Arguments @(
+        @($Python.Prefix) +
+        @(
+            $Summariser,
+            "--input", $ControlsOut,
+            "--out", $ControlsSummary
+        )
+    )
+
+$MesuSurvivorCsv = Join-Path $MesuSummary "markov2_survivors.csv"
+$ControlsSurvivorCsv = Join-Path $ControlsSummary "markov2_survivors.csv"
+
+$MesuTrusted = @(Get-TrustedSurvivors -CsvPath $MesuSurvivorCsv)
+$ControlsTrusted = @(Get-TrustedSurvivors -CsvPath $ControlsSurvivorCsv)
+
+$MesuTrustedCsv = Join-Path $PaperOut "mesu_register_trusted_survivors.csv"
+$ControlsTrustedCsv = Join-Path $PaperOut "controls_trusted_survivors.csv"
+$MesuInputSummaryCsv = Join-Path $PaperOut "mesu_register_input_summary.csv"
+$ControlsInputSummaryCsv = Join-Path $PaperOut "controls_input_summary.csv"
+
+Export-TrustedSurvivors -Rows $MesuTrusted -OutCsv $MesuTrustedCsv
+Export-TrustedSurvivors -Rows $ControlsTrusted -OutCsv $ControlsTrustedCsv
+Export-InputSummary -Rows $MesuTrusted -OutCsv $MesuInputSummaryCsv
+Export-InputSummary -Rows $ControlsTrusted -OutCsv $ControlsInputSummaryCsv
+
+$CanonicalMainCsv = Join-Path $RepoRoot "outputs\final_tables\canonical_udhr_v0_3\final_comparison_table.csv"
+$CanonicalNoPuncCsv = Join-Path $RepoRoot "outputs\final_tables\canonical_udhr_v0_3_no_punctuation\final_comparison_table.csv"
+
+$CanonicalMesuMain = $null
+$CanonicalMesuNoPunc = $null
+
+if (Test-Path -LiteralPath $CanonicalMainCsv -PathType Leaf) {
+    Copy-Item -Force -LiteralPath $CanonicalMainCsv -Destination (Join-Path $PaperOut "canonical_udhr_final_comparison_table.csv")
+    $CanonicalMesuMain = @(Import-Csv -LiteralPath $CanonicalMainCsv | Where-Object { $_.language_guess -eq "mesu" }) | Select-Object -First 1
+}
+
+if (Test-Path -LiteralPath $CanonicalNoPuncCsv -PathType Leaf) {
+    Copy-Item -Force -LiteralPath $CanonicalNoPuncCsv -Destination (Join-Path $PaperOut "canonical_udhr_no_punctuation_final_comparison_table.csv")
+    $CanonicalMesuNoPunc = @(Import-Csv -LiteralPath $CanonicalNoPuncCsv | Where-Object { $_.language_guess -eq "mesu" }) | Select-Object -First 1
+}
+
+$MesuInputSummaryRows = @()
+if (Test-Path -LiteralPath $MesuInputSummaryCsv -PathType Leaf) {
+    $MesuInputSummaryRows = @(Import-Csv -LiteralPath $MesuInputSummaryCsv)
+}
+
+$ControlsInputSummaryRows = @()
+if (Test-Path -LiteralPath $ControlsInputSummaryCsv -PathType Leaf) {
+    $ControlsInputSummaryRows = @(Import-Csv -LiteralPath $ControlsInputSummaryCsv)
+}
+
+$ReportPath = Join-Path $PaperOut "paper_minimum_results_report.md"
+
+$report = New-Object System.Collections.Generic.List[string]
+
+$report.Add("# RRLANG Paper-Minimum Results Report")
+$report.Add("")
+$report.Add("Generated: 2026-07-07")
+$report.Add("")
+$report.Add("## Scope")
+$report.Add("")
+$report.Add("This report contains the minimum additional empirical outputs needed before drafting the RRLANG pilot/methods paper:")
+$report.Add("")
+$report.Add("1. Mesu register comparison: Mesu UDHR vs Thomas Mesu vs Basho Mesu.")
+$report.Add("2. Deterministic controls: duplicated Mesu UDHR, punctuation-noise Mesu UDHR, and random bits.")
+$report.Add("")
+$report.Add("All new runs use RRLANG v0.3, linguistic-profile mode, Markov-2 survivor summaries, and 100 null samples.")
+$report.Add("")
+$report.Add("## Canonical UDHR calibration")
+$report.Add("")
+
+if ($null -ne $CanonicalMesuMain) {
+    $report.Add("Canonical UDHR Mesu row, punctuation allowed:")
+    $report.Add("")
+    $report.Add("| language_guess | trusted_survivor_count | strongest_abs_z | strongest_event | strongest_metric | profile |")
+    $report.Add("| --- | ---: | ---: | --- | --- | --- |")
+    $report.Add("| $($CanonicalMesuMain.language_guess) | $($CanonicalMesuMain.trusted_survivor_count) | $($CanonicalMesuMain.strongest_abs_z) | $($CanonicalMesuMain.strongest_event) | $($CanonicalMesuMain.strongest_metric) | $($CanonicalMesuMain.profile) |")
+    $report.Add("")
+} else {
+    $report.Add("_Canonical punctuation-allowed Mesu row not found in copied final table._")
+    $report.Add("")
+}
+
+if ($null -ne $CanonicalMesuNoPunc) {
+    $report.Add("Canonical UDHR Mesu row, punctuation excluded:")
+    $report.Add("")
+    $report.Add("| language_guess | trusted_survivor_count | strongest_abs_z | strongest_event | strongest_metric | profile |")
+    $report.Add("| --- | ---: | ---: | --- | --- | --- |")
+    $report.Add("| $($CanonicalMesuNoPunc.language_guess) | $($CanonicalMesuNoPunc.trusted_survivor_count) | $($CanonicalMesuNoPunc.strongest_abs_z) | $($CanonicalMesuNoPunc.strongest_event) | $($CanonicalMesuNoPunc.strongest_metric) | $($CanonicalMesuNoPunc.profile) |")
+    $report.Add("")
+} else {
+    $report.Add("_Canonical no-punctuation Mesu row not found in copied final table._")
+    $report.Add("")
+}
+
+$report.Add("## Mesu register input summary")
+$report.Add("")
+$report.Add((Convert-RowsToMarkdown -Rows $MesuInputSummaryRows -Columns @("input", "trusted_survivor_count", "strongest_abs_z", "strongest_event", "strongest_metric") -MaxRows 20))
+$report.Add("")
+$report.Add("## Mesu register top trusted survivors")
+$report.Add("")
+$report.Add((Convert-RowsToMarkdown -Rows $MesuTrusted -Columns @("language_guess", "encoding", "event", "metric", "z", "p_emp", "input") -MaxRows 30))
+$report.Add("")
+$report.Add("## Controls input summary")
+$report.Add("")
+$report.Add((Convert-RowsToMarkdown -Rows $ControlsInputSummaryRows -Columns @("input", "trusted_survivor_count", "strongest_abs_z", "strongest_event", "strongest_metric") -MaxRows 20))
+$report.Add("")
+$report.Add("## Controls top trusted survivors")
+$report.Add("")
+$report.Add((Convert-RowsToMarkdown -Rows $ControlsTrusted -Columns @("language_guess", "encoding", "event", "metric", "z", "p_emp", "input") -MaxRows 30))
+$report.Add("")
+$report.Add("## Generated files")
+$report.Add("")
+$report.Add("- mesu_register_trusted_survivors.csv")
+$report.Add("- mesu_register_input_summary.csv")
+$report.Add("- controls_trusted_survivors.csv")
+$report.Add("- controls_input_summary.csv")
+$report.Add("- canonical_udhr_final_comparison_table.csv, if available")
+$report.Add("- canonical_udhr_no_punctuation_final_comparison_table.csv, if available")
+$report.Add("")
+$report.Add("## Paper-readiness interpretation rule")
+$report.Add("")
+$report.Add("Use the canonical UDHR result as calibration. Use Mesu register as the only Mesu-positive/negative register test. Use controls only as artefact sanity checks. Do not add more broad corpus results before drafting paper v0.1.")
+
+Set-Content -LiteralPath $ReportPath -Encoding UTF8 -Value ($report -join [Environment]::NewLine)
+
+Write-Host ""
+Write-Host "DONE: paper-minimum pipeline completed." -ForegroundColor Green
+Write-Host ""
+Write-Host "Key output folder:"
+Write-Host "  $PaperOut"
+Write-Host ""
+Write-Host "Main report:"
+Write-Host "  $ReportPath"
+Write-Host ""
+Write-Host "Paste this report back into the chat:"
+Write-Host "  Get-Content -LiteralPath `"$ReportPath`" -Raw"
+Write-Host ""
+Write-Host "Mesu trusted survivors:"
+Write-Host "  $MesuTrustedCsv"
+Write-Host ""
+Write-Host "Controls trusted survivors:"
+Write-Host "  $ControlsTrustedCsv"
+Write-Host ""
+Write-Host "Preview:"
+Write-Host ""
+
+Get-Content -LiteralPath $ReportPath -Raw
+
